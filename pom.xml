@@ -7,33 +7,35 @@
     <packaging>jar</packaging>
     <dependencies>
 
- <dependency>
+        <dependency>
 
-  <groupId>com.oracle.database.jdbc</groupId>
+            <groupId>com.oracle.database.jdbc</groupId>
 
-  <artifactId>ojdbc10</artifactId>
+            <artifactId>ojdbc10</artifactId>
 
-  <version>19.13.0.0.1</version>
+            <version>19.13.0.0.1</version>
 
-</dependency>
+        </dependency>
 
 
 
-<dependency>
+        <dependency>
 
-  <groupId>mysql</groupId>
+            <groupId>mysql</groupId>
 
-   <artifactId>mysql-connector-java</artifactId>
-
+            <artifactId>mysql-connector-java</artifactId>
    <version>8.0.33</version>
 
- </dependency>
 
-</dependencies>
+        </dependency>
+
+    </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>18</maven.compiler.source>
-        <maven.compiler.target>18</maven.compiler.target>
+
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+
         <exec.mainClass>com.mycompany.coursemanager.CourseManager</exec.mainClass>
     </properties>
 </project>
