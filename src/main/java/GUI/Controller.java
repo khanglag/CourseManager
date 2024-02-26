@@ -1,6 +1,6 @@
 package GUI;
 
-import GUI.forms.course.Course;
+import GUI.forms.course.CourseOnline;
 import GUI.forms.course.CourseManager;
 import GUI.forms.department.Department;
 import java.awt.BorderLayout;
@@ -34,7 +34,7 @@ public class Controller {
         kindSelected = "ThongTinNhanVien";    
         root.removeAll();
         root.setLayout(new BorderLayout());
-        root.add(new Course());
+        root.add(new CourseOnline());
         root.validate();
         root.repaint();
         

@@ -4,7 +4,7 @@
  */
 package GUI;
 
-import GUI.forms.course.Course;
+import GUI.forms.course.CourseOnline;
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,7 +23,7 @@ public class TestMain {
         JTabbedPane tabbedPane = new JTabbedPane();
 
         // Tạo các panel con
-        JPanel panel1 = new Course();
+        JPanel panel1 = new CourseOnline();
         panel1.add(new JLabel("This is Panel 1"));
 
         JPanel panel2 = new JPanel();
