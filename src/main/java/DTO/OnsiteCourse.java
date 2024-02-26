@@ -1,17 +1,18 @@
 package DTO;
 
-import java.util.Timer;
+import java.time.LocalTime;
+
 
 public class OnsiteCourse {
     private int CourseID;
     private String Location;
     private String Days;
-    private Timer Time;
+    private  LocalTime Time;
 
     public OnsiteCourse() {
     }
 
-    public OnsiteCourse(int CourseID, String Location, String Days, Timer Time) {
+    public OnsiteCourse(int CourseID, String Location, String Days, LocalTime Time) {
         this.CourseID = CourseID;
         this.Location = Location;
         this.Days = Days;
@@ -42,11 +43,11 @@ public class OnsiteCourse {
         this.Days = Days;
     }
 
-    public Timer getTime() {
+    public LocalTime getTime() {
         return this.Time;
     }
 
-    public void setTime(Timer Time) {
+    public void setTime(LocalTime Time) {
         this.Time = Time;
     }
 
@@ -65,7 +66,7 @@ public class OnsiteCourse {
         return this;
     }
 
-    public OnsiteCourse Time(Timer Time) {
+    public OnsiteCourse Time(LocalTime Time) {
         setTime(Time);
         return this;
     }
