@@ -4,8 +4,8 @@
  */
 package GUI.forms.course;
 
-import GUI.forms.course.onsite.CourseOnsite;
-import GUI.forms.course.online.CourseOnline;
+import GUI.MainFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
@@ -20,9 +20,6 @@ public class CourseManager extends javax.swing.JPanel {
      */
     public CourseManager() {
         initComponents();
-        
-        JPanel course = new Course();
-        jTabbedPane1.addTab("Course",course);
         JPanel courseOnsite = new CourseOnsite();
         jTabbedPane1.addTab("Onsite", courseOnsite);
         JPanel courseOnline = new CourseOnline();
@@ -41,10 +38,18 @@ public class CourseManager extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        btnAdd = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Course");
+
+        btnAdd.setText("Add new");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -53,11 +58,15 @@ public class CourseManager extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(254, 254, 254)
                 .addComponent(jLabel1)
-                .addContainerGap(254, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
+                .addComponent(btnAdd)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel1)
+                .addComponent(btnAdd))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -87,8 +96,32 @@ public class CourseManager extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+         int result = JOptionPane.showOptionDialog(this,
+                    "Chọn tùy chọn:",
+                    "Lựa chọn",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    new String[]{"Course Onsite", "Course Online"},
+                    "Course Onsite");
+
+            // Xử lý dựa trên kết quả của dialog
+            if (result == JOptionPane.YES_OPTION) {
+                // Xử lý logic khi người dùng chọn "Mở A"
+                AddOnsite add = new AddOnsite(new MainFrame());
+                add.setVisible(true);
+            } else if (result == JOptionPane.NO_OPTION) {
+                // Xử lý logic khi người dùng chọn "Mở B" hoặc đóng dialog
+                AddOnline add = new AddOnline(new MainFrame());
+                add.setVisible(true);
+            }
+    }//GEN-LAST:event_btnAddActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdd;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
