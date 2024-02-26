@@ -4,6 +4,8 @@
  */
 package GUI.forms.course;
 
+import GUI.forms.course.onsite.CourseOnsite;
+import GUI.forms.course.online.CourseOnline;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
@@ -21,7 +23,10 @@ public class CourseManager extends javax.swing.JPanel {
         
         JPanel course = new Course();
         jTabbedPane1.addTab("Course",course);
-        
+        JPanel courseOnsite = new CourseOnsite();
+        jTabbedPane1.addTab("Onsite", courseOnsite);
+        JPanel courseOnline = new CourseOnline();
+        jTabbedPane1.addTab("Online", courseOnline);
     }
 
     /**
@@ -47,7 +52,7 @@ public class CourseManager extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(254, 254, 254)
                 .addComponent(jLabel1)
-                .addContainerGap(293, Short.MAX_VALUE))
+                .addContainerGap(254, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
