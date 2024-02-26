@@ -13,7 +13,7 @@ public class Edit extends javax.swing.JDialog {
     /**
      * Creates new form Edit
      */
-    public Edit(java.awt.Frame parent, Department de) {
+    public Edit(java.awt.Frame parent, int de) {
         super(parent, true);
         initComponents();
     }
