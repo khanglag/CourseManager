@@ -6,6 +6,10 @@ package GUI.forms.course;
 
 import BLL.CourseBLL;
 import DTO.Course;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 /**
  *
  * @author khang
@@ -180,8 +184,17 @@ public class AddOnline extends javax.swing.JDialog {
     }//GEN-LAST:event_jtfCreditsActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
-        Course course = new Course(0,jtfTitle.getText(),Integer.parseInt(jtfCredits.getText()),Integer.parseInt(jtfDepartmentID.getText()));
+        try {
+            // TODO add your handling code here:
+            if(courseBLL.addCourseOnline(jtfTitle.getText(), Integer.parseInt(jtfCredits.getText()), Integer.parseInt(jtfDepartmentID.getText()), jtfURL.getText())){
+                JOptionPane.showMessageDialog(rootPane, "Success");
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Fail");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AddOnline.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnAddActionPerformed
 
     /**
