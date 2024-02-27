@@ -1,7 +1,6 @@
 package DAL;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Date;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 
@@ -99,40 +98,40 @@ public class DepartmentDAL extends MyDatabaseManager {
 
     
 
-    public static void main(String[] args) {
-        DepartmentDAL d = new DepartmentDAL();
-        Department dal = new Department(5,"ABC",10000, new Date(),7);
-        // try {
-        //         int rowsAffected = d.deleteDepartment(5);
-        //         if (rowsAffected > 0) {
-        //             System.out.println("Course added successfully.");
-        //         } else {
-        //             System.out.println("Failed to add course.");
-        //         }
-        //     } catch (SQLException ex) {
-        //         ex.printStackTrace();
-        //     }
-        // try {
-        //     ArrayList<Department> courses = d.readDepartments();
-        //     for (Department course : courses) {
-        //     System.out.println(course.toString());
-        //     }
-        //     } catch (SQLException ex) {
-        //     ex.printStackTrace();
-        //     }
-        try {
-            ArrayList<Department> result = d.findDepartments(-1,"E",-1);
-            if (result != null) {
-                System.out.println("Number of courses found: " + result.size());
+    // public static void main(String[] args) {
+    //     DepartmentDAL d = new DepartmentDAL();
+    //     Department dal = new Department(5,"ABC",10000, new Date(),7);
+    //     // try {
+    //     //         int rowsAffected = d.deleteDepartment(5);
+    //     //         if (rowsAffected > 0) {
+    //     //             System.out.println("Course added successfully.");
+    //     //         } else {
+    //     //             System.out.println("Failed to add course.");
+    //     //         }
+    //     //     } catch (SQLException ex) {
+    //     //         ex.printStackTrace();
+    //     //     }
+    //     // try {
+    //     //     ArrayList<Department> courses = d.readDepartments();
+    //     //     for (Department course : courses) {
+    //     //     System.out.println(course.toString());
+    //     //     }
+    //     //     } catch (SQLException ex) {
+    //     //     ex.printStackTrace();
+    //     //     }
+    //     try {
+    //         ArrayList<Department> result = d.findDepartments(-1,"E",-1);
+    //         if (result != null) {
+    //             System.out.println("Number of courses found: " + result.size());
 
-                for (Department course : result) {
-                    System.out.println(course.toString());
-                }
-            } else {
-                System.out.println("No courses found.");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+    //             for (Department course : result) {
+    //                 System.out.println(course.toString());
+    //             }
+    //         } else {
+    //             System.out.println("No courses found.");
+    //         }
+    //     } catch (SQLException e) {
+    //         e.printStackTrace();
+    //     }
+    // }
 }

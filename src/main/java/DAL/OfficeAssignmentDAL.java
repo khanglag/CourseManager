@@ -5,9 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 
-import DTO.Department;
 import DTO.OfficeAssignment;
 
 public class OfficeAssignmentDAL  extends MyDatabaseManager{

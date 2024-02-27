@@ -4,8 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-import DTO.OfficeAssignment;
 import DTO.OnlineCourse;
 
 public class OnlineCourseDAL  extends MyDatabaseManager{
