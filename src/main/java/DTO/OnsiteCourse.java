@@ -3,13 +3,19 @@ package DTO;
 import java.time.LocalTime;
 
 
-public class OnsiteCourse {
+public class OnsiteCourse extends Course{
     private int CourseID;
     private String Location;
     private String Days;
     private  LocalTime Time;
 
     public OnsiteCourse() {
+    }
+    public OnsiteCourse(int CourseID, String Title, int Credits, int DepartmentId, String Location, String Days, LocalTime Time) {
+        super(CourseID,Title,Credits,DepartmentId);
+        this.Location = Location;
+        this.Days = Days;
+        this.Time = Time;
     }
 
     public OnsiteCourse(int CourseID, String Location, String Days, LocalTime Time) {
