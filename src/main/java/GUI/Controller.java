@@ -1,5 +1,7 @@
 package GUI;
 
+import GUI.OfficeAssignment.Assignment;
+import GUI.StudentGrade.ManageGrade;
 import GUI.forms.course.CourseOnline;
 import GUI.forms.course.CourseManager;
 import GUI.forms.department.Department;
@@ -68,17 +70,17 @@ public class Controller {
                 case "Course":
                     node = new CourseManager();
                     break;
-                case "Persion":
+                case "Person":
                     //node = new Persion();
                     break;
                 case "OfficeAssignment":
-                    //node = new OfficeAssignment();
+                    node = new Assignment();
                     break;
                 case "CourseInstructor":
                     //node =  new CourseInstructor();
                     break;
                 case "Grade":
-                    //node = new Grade();
+                    node = new ManageGrade();
                     break;
                 case "Department":
                     node = new Department();
