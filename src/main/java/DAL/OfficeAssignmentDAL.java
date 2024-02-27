@@ -102,20 +102,30 @@ public class OfficeAssignmentDAL  extends MyDatabaseManager{
         //     // TODO: handle exception
         //     e.printStackTrace();
         // }
-        try {
-            ArrayList<OfficeAssignment> result = dal.findAssignments("s");
-            if (result != null) {
-                System.out.println("Number of courses found: " + result.size());
+        // try {
+        //     ArrayList<OfficeAssignment> result = dal.findAssignments("s");
+        //     if (result != null) {
+        //         System.out.println("Number of courses found: " + result.size());
 
-                for (OfficeAssignment course : result) {
-                    System.out.println(course.toString());
-                }
-            } else {
-                System.out.println("No courses found.");
-            }
-        } catch (SQLException e) {
+        //         for (OfficeAssignment course : result) {
+        //             System.out.println(course.toString());
+        //         }
+        //     } else {
+        //         System.out.println("No courses found.");
+        //     }
+        // } catch (SQLException e) {
+        //     e.printStackTrace();
+        // }
+        try {
+            ArrayList<OfficeAssignment> result = dal.readAssignments();
+        for(OfficeAssignment assignment : result) {
+            System.out.println(assignment.toString());
+        }
+        } catch (Exception e) {
+            // TODO: handle exception
             e.printStackTrace();
         }
+        
         
     }
     
