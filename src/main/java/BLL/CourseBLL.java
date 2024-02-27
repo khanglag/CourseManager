@@ -35,6 +35,7 @@ public class CourseBLL {
         OnlineCourse onlineCourse=new OnlineCourse(0, url);
         if (dAL.addCourse(course)==0)
             return false;
+        onlineCourse.setCourseID(dAL.getID());
         if ( oDAL.addCourse(onlineCourse)==0) {
             return false;
         }
@@ -49,6 +50,7 @@ public class CourseBLL {
         OnsiteCourse onsiteCourse= new OnsiteCourse(credit, location, day, time);
         if (dAL.addCourse(course)==0)
             return false;
+        onsiteCourse.setCourseID(dAL.getID());
         if ( oDAL.addOnsite(onsiteCourse)==0) {
             return false;
         }
