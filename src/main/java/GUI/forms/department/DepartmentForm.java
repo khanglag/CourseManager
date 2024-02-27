@@ -4,21 +4,52 @@
  */
 package GUI.forms.department;
 
+import BLL.DepartmentBLL;
 import GUI.MainFrame;
+import java.util.ArrayList;
+import DTO.Department;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import GUI.Hander.StringToDateConverter;
+import java.text.ParseException;
+import java.util.Date;
 
 /**
  *
  * @author khang
  */
-public class Department extends javax.swing.JPanel {
+public class DepartmentForm extends javax.swing.JPanel {
 
     /**
-     * Creates new form Department
+     * Creates new form DepartmentForm
      */
-    public Department() {
+    DepartmentBLL departmentBLL = new DepartmentBLL();
+    DefaultTableModel model;
+    ArrayList<Department> list = new ArrayList<Department>();
+            
+    public DepartmentForm() throws SQLException {
         initComponents();
+        LoadData();
     }
+    
+    public void LoadData() throws SQLException {
+        model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        list = departmentBLL.getAllDepartments();
+        int i = 0;
+        while (i <= list.size() - 1) {
+            Department px = list.get(i);
+            model.addRow(new Object[] {
+                  px.getDepartmentId(),px.getName(),px.getBudget(),px.getStartDate(),px.getAdministrator()
+            });
+            jTable1.setModel(model);
+            ++i;
+        }
 
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -153,17 +184,49 @@ public class Department extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void refresh() throws SQLException{
+        departmentBLL = new DepartmentBLL();
+        LoadData();
+    }
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         
         Add add = new Add(new MainFrame());
+        add.setVisible(true);
+        try {
+            refresh();
+        } catch (SQLException ex) {
+            Logger.getLogger(DepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
-        int i = 0;
-        Edit edit = new Edit(new MainFrame(),i);
-        edit.setVisible(true);
+        int i = jTable1.getSelectedRow();
+        if(i>=0){
+            int id = Integer.parseInt(jTable1.getModel().getValueAt(i, 0).toString());
+            String name = jTable1.getModel().getValueAt(i, 1).toString();
+            double budget = Double.parseDouble(jTable1.getModel().getValueAt(i, 2).toString());
+            Date date = null;
+            try {
+                date = StringToDateConverter.stringToDate(jTable1.getModel().getValueAt(i, 3).toString());
+            } catch (ParseException ex) {
+                Logger.getLogger(DepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            int ad = Integer.parseInt(jTable1.getModel().getValueAt(i, 4).toString());
+            Department dpm = new Department(id, name, budget, date, ad);
+            Edit edit = new Edit(new MainFrame(),dpm);
+            edit.setVisible(true);
+            try {
+                refresh();
+            } catch (SQLException ex) {
+                Logger.getLogger(DepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            JOptionPane.showMessageDialog(btnEdit, "Please choose");
+        }
+        
     }//GEN-LAST:event_btnEditActionPerformed
 
 

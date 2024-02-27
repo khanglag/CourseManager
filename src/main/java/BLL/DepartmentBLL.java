@@ -17,7 +17,7 @@ import DTO.Department;
 public class DepartmentBLL {
     DepartmentDAL dpmDAL;
 
-    DepartmentBLL() {
+    public DepartmentBLL() {
         dpmDAL = new DepartmentDAL();
     }
 
@@ -31,6 +31,9 @@ public class DepartmentBLL {
 
     public int addDepartment(Department dpm) throws SQLException {
         return dpmDAL.addDepartment(dpm);
+    }
+    public int getN() throws SQLException{
+        return dpmDAL.getN();
     }
 
     public int updateDepartment(Department dpm) throws SQLException {

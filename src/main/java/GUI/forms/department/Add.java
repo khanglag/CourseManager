@@ -4,6 +4,16 @@
  */
 package GUI.forms.department;
 
+import BLL.DepartmentBLL;
+import DTO.Department;
+import GUI.Hander.StringToDateConverter;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author khang
@@ -13,6 +23,8 @@ public class Add extends javax.swing.JDialog {
     /**
      * Creates new form Add
      */
+    DepartmentBLL departmentBLL = new DepartmentBLL();
+    
     public Add(java.awt.Frame parent) {
         super(parent, true);
         initComponents();
@@ -58,8 +70,18 @@ public class Add extends javax.swing.JDialog {
         jLabel6.setText("Administartor");
 
         btnClose.setText("Close");
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
 
         btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -135,6 +157,48 @@ public class Add extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        if(jtfAd.getText().equals("")||jtfBudget.getText().equals("")||
+                jtfName.getText().equals("")|| jtfStartDate.getText().equals("")){
+            JOptionPane.showMessageDialog(rootPane, "Please input");
+        }else{
+            int n=0;
+        try {
+            n = departmentBLL.getN();
+            n++;
+        } catch (SQLException ex) {
+            Logger.getLogger(Add.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Date date = null;
+        try {
+            date = StringToDateConverter.stringToDate(jtfStartDate.getText());
+        } catch (ParseException ex) {
+            Logger.getLogger(Add.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Department department = new Department(n,jtfName.getText(),Double.parseDouble(jtfBudget.getText()),date,Integer.parseInt(jtfAd.getText()));
+        if(jtfAd.getText().equals("")|| jtfBudget.getText().equals("")||
+                jtfName.getText().equals("")||jtfStartDate.equals(""))
+            JOptionPane.showMessageDialog(rootPane, "Must be filled out");
+        else try {
+            if(departmentBLL.addDepartment(department)==1){
+                JOptionPane.showMessageDialog(rootPane, "Success");
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Fail");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Add.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+        
+    }//GEN-LAST:event_btnAddActionPerformed
 
     /**
      * @param args the command line arguments

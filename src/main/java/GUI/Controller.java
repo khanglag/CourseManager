@@ -5,12 +5,15 @@ import GUI.Person.AddUser;
 import GUI.StudentGrade.ManageGrade;
 import GUI.forms.course.CourseOnline;
 import GUI.forms.course.CourseManager;
-import GUI.forms.department.Department;
+import GUI.forms.department.DepartmentForm;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -84,8 +87,15 @@ public class Controller {
                     node = new ManageGrade();
                     break;
                 case "Department":
-                    node = new Department();
+                {
+                    try {
+                        node = new DepartmentForm();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                     break;
+
                 // more
                 default:
                     break;

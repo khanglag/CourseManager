@@ -96,11 +96,11 @@ public class Department {
     @Override
     public String toString() {
         return "{" +
-            " DepartmentId='" + getDepartmentId() + "'" +
-            ", Name='" + getName() + "'" +
-            ", Budget='" + getBudget() + "'" +
-            ", StartDate='" + getStartDate() + "'" +
-            ", Administrator='" + getAdministrator() + "'" +
-            "}";
+                " DepartmentId='" + getDepartmentId() + "'" +
+                ", Name='" + getName() + "'" +
+                ", Budget='" + getBudget() + "'" +
+                ", StartDate='" + getStartDate() + "'" +
+                ", Administrator='" + getAdministrator() + "'" +
+                "}";
     }
 }

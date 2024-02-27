@@ -76,6 +76,12 @@ public class DepartmentDAL extends MyDatabaseManager {
         p.setInt(1, DepartmentID);
         return p.executeUpdate();
     }
+    public int getN() throws SQLException {
+        
+        String sql = "Select departmentid from department order by departmentid desc limit 1";
+        PreparedStatement p = DepartmentDAL.getConnection().prepareStatement(sql);
+        return p.executeUpdate();
+    }
 
     public ArrayList<Department> findDepartments(int DepartmentID) throws SQLException {
         ArrayList<Department> list = new ArrayList<>();
