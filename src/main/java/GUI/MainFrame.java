@@ -124,7 +124,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabelPersion.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabelPersion.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelPersion.setText("Persion");
+        jLabelPersion.setText("Person");
 
         javax.swing.GroupLayout panelPersionLayout = new javax.swing.GroupLayout(panelPersion);
         panelPersion.setLayout(panelPersionLayout);
