@@ -79,55 +79,55 @@ public class CourseDAL extends MyDatabaseManager {
         p.setInt(4, course.getCourseID());
         return p.executeUpdate();
     }
-
+    
     public int deleteCourse(int CourseID) throws SQLException {
         String sql = "DELETE FROM course WHERE CourseID =?";
         PreparedStatement p = CourseDAL.getConnection().prepareStatement(sql);
         p.setInt(1, CourseID);
         return p.executeUpdate();
     }
-    // public ArrayList<Course> findCourse(int CourseID) throws SQLException{
-    //     ArrayList<Course> courseList = new ArrayList<>();
-    //     String sql = "SELECT * FROM course WHERE CourseID = ?";
-    //     PreparedStatement p = CourseDAL.getConnection().prepareStatement(sql);
-    //     p.setInt(1, CourseID);
-    //     ResultSet rs = p.executeQuery();
-    //     if(rs != null) {
-    //         while (rs.next()) {
-    //             Course c = new Course(
-    //                     rs.getInt("CourseID"),
-    //                     rs.getString("Title"),
-    //                     rs.getInt("Credits"),
-    //                     rs.getInt("DepartmentID"));
-    //             courseList.add(c);
+     public ArrayList<Course> findCourse(int CourseID) throws SQLException{
+         ArrayList<Course> courseList = new ArrayList<>();
+         String sql = "SELECT * FROM course WHERE CourseID = ?";
+         PreparedStatement p = CourseDAL.getConnection().prepareStatement(sql);
+         p.setInt(1, CourseID);
+         ResultSet rs = p.executeQuery();
+         if(rs != null) {
+             while (rs.next()) {
+                 Course c = new Course(
+                         rs.getInt("CourseID"),
+                         rs.getString("Title"),
+                         rs.getInt("Credits"),
+                         rs.getInt("DepartmentID"));
+                 courseList.add(c);
                 
-    //         }
-    //     }
-    //     closeConnect();
-    //     return courseList;
+             }
+         }
+         closeConnect();
+         return courseList;
 
-    // }
-    // public ArrayList<Course> findCourse(String Title) throws SQLException{
-    //     ArrayList<Course> courseList = new ArrayList<>();
-    //     String sql = "SELECT * FROM course WHERE Title LIKE ?";
-    //     PreparedStatement p = CourseDAL.getConnection().prepareStatement(sql);
-    //     p.setString(1, "%" + Title + "%");
-    //     ResultSet rs = p.executeQuery();
-    //     if(rs != null) {
-    //         while (rs.next()) {
-    //             Course c = new Course(
-    //                     rs.getInt("CourseID"),
-    //                     rs.getString("Title"),
-    //                     rs.getInt("Credits"),
-    //                     rs.getInt("DepartmentID"));
-    //             courseList.add(c);
+     }
+     public ArrayList<Course> findCourse(String Title) throws SQLException{
+         ArrayList<Course> courseList = new ArrayList<>();
+         String sql = "SELECT * FROM course WHERE Title LIKE ?";
+         PreparedStatement p = CourseDAL.getConnection().prepareStatement(sql);
+         p.setString(1, "%" + Title + "%");
+         ResultSet rs = p.executeQuery();
+         if(rs != null) {
+             while (rs.next()) {
+                 Course c = new Course(
+                         rs.getInt("CourseID"),
+                         rs.getString("Title"),
+                         rs.getInt("Credits"),
+                         rs.getInt("DepartmentID"));
+                 courseList.add(c);
                 
-    //         }
-    //     }
-    //     closeConnect();
-    //     return courseList;
+             }
+         }
+         closeConnect();
+         return courseList;
 
-    // }
+     }
 
     public ArrayList<Course> findCourse(int CourseID, String  Title) throws SQLException{
         ArrayList<Course> courseList = new ArrayList<>();
