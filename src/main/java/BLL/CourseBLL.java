@@ -29,12 +29,14 @@ public class CourseBLL {
     }
     //Thêm course online
     
-    public boolean addCourseOnline(int ID, String title, int credit,int department ,String url) throws SQLException{
+    public boolean addCourseOnline( String title, int credit,int department ,String url) throws SQLException{
         OnlineCourseDAL oDAL=new OnlineCourseDAL();
-        Course course=new Course(ID,title, credit, department);
-        OnlineCourse onlineCourse=new OnlineCourse(ID, url);
+        Course course=new Course(0,title, credit, department);
+        OnlineCourse onlineCourse=new OnlineCourse(0, url);
         if (dAL.addCourse(course)==0)
             return false;
+        onlineCourse.setCourseID(dAL.getID());
+        System.out.println(onlineCourse.toString());
         if ( oDAL.addCourse(onlineCourse)==0) {
             return false;
         }
@@ -43,12 +45,13 @@ public class CourseBLL {
     
     // Thêm course onsite 
     
-     public boolean addCourseOnsite(int ID, String title, int credit,int department ,String location,String day, LocalTime time) throws SQLException{
+     public boolean addCourseOnsite( String title, int credit,int department ,String location,String day, LocalTime time) throws SQLException{
         OnsiteCourseDAL oDAL=new OnsiteCourseDAL();
-        Course course=new Course(ID,title, credit, department);
+        Course course=new Course(0,title, credit, department);
         OnsiteCourse onsiteCourse= new OnsiteCourse(credit, location, day, time);
         if (dAL.addCourse(course)==0)
             return false;
+        onsiteCourse.setCourseID(dAL.getID());
         if ( oDAL.addOnsite(onsiteCourse)==0) {
             return false;
         }

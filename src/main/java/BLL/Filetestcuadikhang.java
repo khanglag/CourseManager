@@ -4,8 +4,10 @@
  */
 package BLL;
 
+import DAL.CourseDAL;
 import DTO.Course;
 import java.sql.SQLException;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 /**
@@ -15,11 +17,6 @@ import java.util.ArrayList;
 public class Filetestcuadikhang {
     public static void main(String[] args) throws SQLException {
         CourseBLL exBLL=new CourseBLL();
-        ArrayList<Course> tempArrayList=new ArrayList<>();
-        tempArrayList=exBLL.findCourse("literaturE");
-        for(Course iCourse:tempArrayList)
-        {
-            System.out.println(iCourse.toString());
-        }
+        exBLL.addCourseOnsite("eheee", 0, 0, "location", "day", LocalTime.now());
     }
 }
