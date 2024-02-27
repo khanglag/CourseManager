@@ -151,6 +151,18 @@ public class CourseDAL extends MyDatabaseManager {
         return courseList;
 
     }
+    public int getID() throws SQLException{
+        String sql = "SELECT CourseID FROM course ORDER BY CourseID DESC LIMIT 1";
+        PreparedStatement p = CourseDAL.getConnection().prepareStatement(sql);
+        int i=0;
+        ResultSet rs = p.executeQuery();
+        if(rs != null) {
+            while (rs.next()) {
+                i=rs.getInt("CourseID");
+            }
+        }
+        return i;
+    }
     // public static void main(String[] args) {
     //     CourseDAL courseDAL = new CourseDAL();
     //     int co = 4063;
