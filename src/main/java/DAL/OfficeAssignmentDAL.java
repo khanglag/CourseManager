@@ -5,9 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 
-import DTO.Department;
 import DTO.OfficeAssignment;
 
 public class OfficeAssignmentDAL  extends MyDatabaseManager{
@@ -16,7 +14,7 @@ public class OfficeAssignmentDAL  extends MyDatabaseManager{
     }
     public ArrayList<OfficeAssignment> readAssignments() throws SQLException {
         ArrayList<OfficeAssignment> assignments = new ArrayList<>();
-        String sql = "SELECT * FROM officeassignments ";
+        String sql = "SELECT * FROM officeassignment ";
         ResultSet rs = OfficeAssignmentDAL.doReadQuery(sql);
         if (rs != null) {
             while (rs.next()) {
@@ -104,20 +102,30 @@ public class OfficeAssignmentDAL  extends MyDatabaseManager{
         //     // TODO: handle exception
         //     e.printStackTrace();
         // }
-        try {
-            ArrayList<OfficeAssignment> result = dal.findAssignments("s");
-            if (result != null) {
-                System.out.println("Number of courses found: " + result.size());
+        // try {
+        //     ArrayList<OfficeAssignment> result = dal.findAssignments("s");
+        //     if (result != null) {
+        //         System.out.println("Number of courses found: " + result.size());
 
-                for (OfficeAssignment course : result) {
-                    System.out.println(course.toString());
-                }
-            } else {
-                System.out.println("No courses found.");
-            }
-        } catch (SQLException e) {
+        //         for (OfficeAssignment course : result) {
+        //             System.out.println(course.toString());
+        //         }
+        //     } else {
+        //         System.out.println("No courses found.");
+        //     }
+        // } catch (SQLException e) {
+        //     e.printStackTrace();
+        // }
+        try {
+            ArrayList<OfficeAssignment> result = dal.readAssignments();
+        for(OfficeAssignment assignment : result) {
+            System.out.println(assignment.toString());
+        }
+        } catch (Exception e) {
+            // TODO: handle exception
             e.printStackTrace();
         }
+        
         
     }
     
