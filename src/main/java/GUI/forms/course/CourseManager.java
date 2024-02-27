@@ -18,6 +18,7 @@ public class CourseManager extends javax.swing.JPanel {
     /**
      * Creates new form CourseManager
      */
+    
     public CourseManager() {
         initComponents();
         JPanel courseOnsite = new CourseOnsite();

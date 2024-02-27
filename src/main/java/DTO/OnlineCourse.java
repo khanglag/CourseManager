@@ -1,12 +1,17 @@
 package DTO;
 
-public class OnlineCourse {
+public class OnlineCourse extends Course{
     private int CourseID;
     private String Url;
 
     public OnlineCourse() {
     }
 
+    
+    public OnlineCourse(int CourseID, String Title, int Credits, int DepartmentId, String Url) {
+        super(CourseID,Title,Credits,DepartmentId);
+        this.Url = Url;
+    }
     public OnlineCourse(int CourseID, String Url) {
         this.CourseID = CourseID;
         this.Url = Url;

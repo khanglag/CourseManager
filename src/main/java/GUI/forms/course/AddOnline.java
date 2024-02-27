@@ -4,6 +4,8 @@
  */
 package GUI.forms.course;
 
+import BLL.CourseBLL;
+import DTO.Course;
 /**
  *
  * @author khang
@@ -13,6 +15,7 @@ public class AddOnline extends javax.swing.JDialog {
     /**
      * Creates new form Add
      */
+    CourseBLL courseBLL = new CourseBLL();
     public AddOnline(java.awt.Frame parent) {
         super(parent, true);
         initComponents();
@@ -58,6 +61,11 @@ public class AddOnline extends javax.swing.JDialog {
         jtfID.setEditable(false);
 
         btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Course Online ");
@@ -170,6 +178,11 @@ public class AddOnline extends javax.swing.JDialog {
     private void jtfCreditsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCreditsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfCreditsActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        Course course = new Course(0,jtfTitle.getText(),Integer.parseInt(jtfCredits.getText()),Integer.parseInt(jtfDepartmentID.getText()));
+    }//GEN-LAST:event_btnAddActionPerformed
 
     /**
      * @param args the command line arguments
