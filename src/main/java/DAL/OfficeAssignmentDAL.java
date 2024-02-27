@@ -14,7 +14,7 @@ public class OfficeAssignmentDAL  extends MyDatabaseManager{
     }
     public ArrayList<OfficeAssignment> readAssignments() throws SQLException {
         ArrayList<OfficeAssignment> assignments = new ArrayList<>();
-        String sql = "SELECT * FROM officeassignments ";
+        String sql = "SELECT * FROM officeassignment ";
         ResultSet rs = OfficeAssignmentDAL.doReadQuery(sql);
         if (rs != null) {
             while (rs.next()) {
