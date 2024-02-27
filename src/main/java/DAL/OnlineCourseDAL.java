@@ -60,6 +60,7 @@ public class OnlineCourseDAL  extends MyDatabaseManager{
         String sql = "DELETE FROM onlinecourse WHERE CourseID =?";
         PreparedStatement p = OnlineCourseDAL.getConnection().prepareStatement(sql);
         p.setInt(1, CourseID);
+        closeConnect();
         return p.executeUpdate();
     }
     public ArrayList<OnlineCourse> findCourses(int CourseID) throws SQLException{

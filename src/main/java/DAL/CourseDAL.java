@@ -158,15 +158,9 @@ public class CourseDAL extends MyDatabaseManager {
         ResultSet rs = p.executeQuery();
         if(rs != null) {
             while (rs.next()) {
-                Course c = new Course(
-                        rs.getInt("CourseID"),
-                        rs.getString("Title"),
-                        rs.getInt("Credits"),
-                        rs.getInt("DepartmentID"));
-                i=c.getCourseID();
+                i=rs.getInt("CourseID");
             }
         }
-        closeConnect();
         return i;
     }
     // public static void main(String[] args) {

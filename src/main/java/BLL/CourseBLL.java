@@ -36,6 +36,7 @@ public class CourseBLL {
         if (dAL.addCourse(course)==0)
             return false;
         onlineCourse.setCourseID(dAL.getID());
+        System.out.println(onlineCourse.toString());
         if ( oDAL.addCourse(onlineCourse)==0) {
             return false;
         }
