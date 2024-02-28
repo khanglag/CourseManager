@@ -78,7 +78,7 @@ public class JFrameOfMK extends javax.swing.JFrame {
                JFrameOfMK a = new JFrameOfMK();
                a.setVisible(true);
                a.setLayout(new BorderLayout());
-               a.add(new CourseManager());
+            //    a.add(new CourseManager());
             }
         });
     }
