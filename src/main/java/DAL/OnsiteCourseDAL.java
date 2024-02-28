@@ -11,29 +11,29 @@ import java.time.LocalTime;
 public class OnsiteCourseDAL extends MyDatabaseManager {
     public OnsiteCourseDAL() {
         OnsiteCourseDAL.connectDB();
+        // super();
     }
 
-    // public ArrayList<OnsiteCourse> readList() throws SQLException {
-    //     ArrayList<OnsiteCourse> onsiteList = new ArrayList<>();
-    //     String sql = "SELECT * FROM onsitecourse";
-    //     ResultSet rs = OnsiteCourse.doReadQuery(sql);
-    //     if (rs != null) {
-    //         while (rs.next()) {
-    //             OnsiteCourse onsite = new OnsiteCourse(
-    //                     rs.getInt("CourseID"),
-    //                     rs.getString("Location"),
-    //                     rs.getString("Days"),
-    //                     rs.getTime("Time").toLocalTime());
-    //             onsiteList.add(onsite);
+    public ArrayList<OnsiteCourse> readList() throws SQLException {
+        ArrayList<OnsiteCourse> onsiteList = new ArrayList<>();
+        String sql = "SELECT * FROM onsitecourse";
+        ResultSet rs = OnsiteCourseDAL.doReadQuery(sql);
+        if (rs != null) {
+            while (rs.next()) {
+                OnsiteCourse onsite = new OnsiteCourse(
+                        rs.getInt("CourseID"),
+                        rs.getString("Location"),
+                        rs.getString("Days"),
+                        rs.getTime("Time").toLocalTime());
+                onsiteList.add(onsite);
 
-    //         }
-    //     }
-    //     closeConnect();
-    //     return onsiteList;
-    // }
+            }
+        }
+        closeConnect();
+        return onsiteList;
+    }
 
     
-
     public OnsiteCourse getOnsiteCourse(int CourseID) throws SQLException {
         String sql = "SELECT * FROM onsitecourse WHERE CourseID = ? ";
         PreparedStatement p = OnsiteCourseDAL.getConnection().prepareStatement(sql);
@@ -102,4 +102,16 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
         closeConnect();
         return list;
     } 
+    public static void main(String[] args) {
+        OnsiteCourseDAL dal = new OnsiteCourseDAL();
+        try {
+            for(OnsiteCourse c : dal.readList()) 
+                System.out.println(c.toString());
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+        
+        
+    }
 }
