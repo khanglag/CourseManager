@@ -10,6 +10,7 @@ import DAL.OnsiteCourseDAL;
 import DTO.Course;
 import DTO.OnlineCourse;
 import DTO.OnsiteCourse;
+import GUI.forms.course.CourseOnline;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -101,6 +102,15 @@ public class CourseBLL {
         
     }
     
+    //
+    public ArrayList<OnlineCourse> getOnlineCourses() throws SQLException{
+        OnlineCourseDAL oDAL=new OnlineCourseDAL();
+        return oDAL.getOnlineCourses();
+    }
+    public ArrayList<OnsiteCourse> getOnsiteCourses() throws SQLException{
+        OnsiteCourseDAL oDAL=new OnsiteCourseDAL();
+        return oDAL.getOnsiteCourses();
+    }
     public static boolean isNumeric(String str) {
         if (str == null || str.length() == 0) {
             return false;
