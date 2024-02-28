@@ -8,9 +8,13 @@ import DTO.OfficeAssignment;
 import DTO.Person;
 import DTO.StudentGrade;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 public class t {
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws SQLException {
 //           CourseInstructorBLL bll = new CourseInstructorBLL();
 //            try {
 //            for(CourseInstructor d : bll.findByCourseID(4061)) {
@@ -30,6 +34,17 @@ public class t {
 //                "    onsitecourse.Time = ?\n" +
 //                "WHERE onsitecourse.CourseID = ?;";
 //            System.out.println(sql);
-
+  LocalDateTime currentDateTime = LocalDateTime.now();
+        Date date = java.sql.Timestamp.valueOf(currentDateTime);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formattedDate = dateFormat.format(date);  
+        
+        ArrayList<Person> person = new ArrayList<Person>();
+        PersonBLL oa = new PersonBLL();
+       
+        person = oa.findPerson("1131");
+        System.out.println(person);
+//          CourseInstructorBLL xx = new CourseInstructorBLL();
+//             System.out.println(xx.findByPersonID(1));
     }
 }
