@@ -1,16 +1,21 @@
 package BLL;
 
 import java.util.ArrayList;
-
+import BLL.PersonBLL;
+import DTO.CourseInstructor;
 import DTO.Department;
+import DTO.OfficeAssignment;
+import DTO.Person;
+import DTO.StudentGrade;
+import java.sql.SQLException;
 
 public class t {
     public static void main(String[] args) {
-            DepartmentBLL bll = new DepartmentBLL();
+           CourseInstructorBLL bll = new CourseInstructorBLL();
             try {
-                ArrayList<Department> ls = bll.finDepartments("Eco");
-            for(Department d : ls)
+            for(CourseInstructor d : bll.findByCourseID(4061)) {
                 System.out.println(d.toString());
+
             } catch (Exception e) {
                 // TODO: handle exception
                 e.printStackTrace();
@@ -25,5 +30,6 @@ public class t {
                 "    onsitecourse.Time = ?\n" +
                 "WHERE onsitecourse.CourseID = ?;";
             System.out.println(sql);
+
     }
 }

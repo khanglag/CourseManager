@@ -140,6 +140,7 @@ public class OnlineCourseDAL  extends MyDatabaseManager{
         return courses;
     }
      public int editOnlineCourse(OnlineCourse online) throws SQLException {
+
         String sql = "UPDATE course\n" +
                 "LEFT JOIN onlinecourse ON course.CourseID = onlinecourse.CourseID\n" +
                 "SET course.Title = ?,\n" +
@@ -156,7 +157,7 @@ public class OnlineCourseDAL  extends MyDatabaseManager{
         System.out.println(p.toString());
         return p.executeUpdate();
     }
-//    
+
     public static void main(String[] args) {
         OnlineCourse c = new OnlineCourse(4064,"htttttp");
         OnlineCourseDAL dal = new OnlineCourseDAL();

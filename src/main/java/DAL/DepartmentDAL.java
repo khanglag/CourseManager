@@ -102,6 +102,7 @@ public class DepartmentDAL extends MyDatabaseManager {
         }
         return list;
     }
+    
 
     public ArrayList<Department> findDepartments(String Name) throws SQLException {
         ArrayList<Department> list = new ArrayList<>();

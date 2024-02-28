@@ -12,12 +12,13 @@ import java.time.LocalTime;
 public class OnsiteCourseDAL extends MyDatabaseManager {
     public OnsiteCourseDAL() {
         OnsiteCourseDAL.connectDB();
+        // super();
     }
 
     public ArrayList<OnsiteCourse> readList() throws SQLException {
         ArrayList<OnsiteCourse> onsiteList = new ArrayList<>();
         String sql = "SELECT * FROM onsitecourse";
-        ResultSet rs = OnlineCourseDAL.doReadQuery(sql);
+        ResultSet rs = OnsiteCourseDAL.doReadQuery(sql);
         if (rs != null) {
             while (rs.next()) {
                 OnsiteCourse onsite = new OnsiteCourse(
@@ -33,6 +34,7 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
         return onsiteList;
     }
 
+    
     public OnsiteCourse getOnsiteCourse(int CourseID) throws SQLException {
         String sql = "SELECT * FROM onsitecourse WHERE CourseID = ? ";
         PreparedStatement p = OnsiteCourseDAL.getConnection().prepareStatement(sql);
@@ -100,9 +102,11 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
         }
 
         return list;
+
     }
 
     public ArrayList<OnsiteCourse> getOnsiteCourses() throws SQLException {
+
         ArrayList<OnsiteCourse> courses = new ArrayList<>();
         String sql = "SELECT course.CourseID,course.Title,course.Credits,course.DepartmentID,onsitecourse.location, onsitecourse.Days, onsitecourse.time FROM onsitecourse\n"
                 +
@@ -129,9 +133,11 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
     // Tìm
     public ArrayList<OnsiteCourse> findOnsiteCourses(int ID) throws SQLException {
         ArrayList<OnsiteCourse> courses = new ArrayList<>();
+
         String sql = "SELECT course.CourseID,course.Title,course.Credits,course.DepartmentID,onsitecourse.location, onsitecourse.Days, onsitecourse.time FROM onsitecourse\n"
                 +
                 "LEFT JOIN course ON onsitecourse.CourseID = course.CourseID WHERE onsitecourse.CourseID =?";
+
         PreparedStatement p = OnlineCourseDAL.getConnection().prepareStatement(sql);
         p.setInt(1, ID);
         ResultSet rs = p.executeQuery();
@@ -154,6 +160,7 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
     }
 
     public ArrayList<OnsiteCourse> findOnsiteCourses(String title) throws SQLException {
+
         ArrayList<OnsiteCourse> courses = new ArrayList<>();
         String sql = "SELECT course.CourseID,course.Title,course.Credits,course.DepartmentID,onsitecourse.location, onsitecourse.Days, onsitecourse.time FROM onsitecourse\n"
                 +
@@ -179,6 +186,7 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
 
     }
 
+
     // Sửa course onsites
     public int editOnsiteCourse(OnsiteCourse onsite) throws SQLException {
         String sql = "UPDATE course\n" +
@@ -202,5 +210,6 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
         System.out.println(p.toString());
         return p.executeUpdate();
     }
+
 
 }
