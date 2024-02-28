@@ -1,22 +1,23 @@
 package BLL;
 
 import java.util.ArrayList;
-
+import BLL.PersonBLL;
+import DTO.CourseInstructor;
 import DTO.Department;
+import DTO.OfficeAssignment;
+import DTO.Person;
 import DTO.StudentGrade;
 import java.sql.SQLException;
 
 public class t {
     public static void main(String[] args) {
-            DepartmentBLL bll = new DepartmentBLL();
-            StudentGradeBLL b = new StudentGradeBLL();
+           CourseInstructorBLL bll = new CourseInstructorBLL();
             try {
-//                ArrayList<StudentGrade> ls =
-            for(StudentGrade d : b.findGrades(4041))
+            for(CourseInstructor d : bll.findByCourseID(4061)) {
                 System.out.println(d.toString());
-            } catch (SQLException e) {
-                // TODO: handle exception
-                e.printStackTrace();
-            }
+    }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

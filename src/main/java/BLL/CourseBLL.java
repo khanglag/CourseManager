@@ -10,9 +10,7 @@ import DAL.OnsiteCourseDAL;
 import DTO.Course;
 import DTO.OnlineCourse;
 import DTO.OnsiteCourse;
-import GUI.forms.course.CourseOnline;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 

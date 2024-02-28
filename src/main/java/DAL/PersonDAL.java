@@ -76,7 +76,25 @@ public class PersonDAL extends MyDatabaseManager {
         p.setInt(1, PersonID);
         return p.executeUpdate();
     }
-
+    public ArrayList<Person> findPerson(int PersonID) throws SQLException{
+        ArrayList<Person> list = new ArrayList<>();
+        String sql = "SELECT * FROM person WHERE PersonID = ?";
+        PreparedStatement p = PersonDAL.getConnection().prepareStatement(sql);
+        p.setInt(1, PersonID);
+        ResultSet rs = p.executeQuery();
+        if(rs != null){
+            while(rs.next()) {
+                Person person = new Person(
+                rs.getInt("PersonID"),
+                        rs.getString("LastName"),
+                        rs.getString("FirstName"),
+                        rs.getDate("HireDate"),
+                        rs.getDate("EnrollmentDate"));
+                    list.add(person);
+            }
+        }
+        return list;
+    }
     public ArrayList<Person> findPerson(String fullName) throws SQLException {
         ArrayList<Person> list = new ArrayList<>();
         String query = "SELECT * FROM person WHERE concat(FirstName, ' ', LastName)  LIKE ?";
@@ -97,4 +115,5 @@ public class PersonDAL extends MyDatabaseManager {
         closeConnect();
         return list;
     }
+   
 }
