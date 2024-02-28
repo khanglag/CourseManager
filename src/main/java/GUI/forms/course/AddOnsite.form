@@ -110,13 +110,6 @@
                   </Group>
                   <EmptySpace pref="16" max="32767" attributes="0"/>
               </Group>
-              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="140" max="-2" attributes="0"/>
-                      <Component id="btnChoose" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="141" max="32767" attributes="0"/>
-                  </Group>
-              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -168,13 +161,6 @@
                       <Component id="btnClose" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-              </Group>
-              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="167" max="-2" attributes="0"/>
-                      <Component id="btnChoose" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="167" max="32767" attributes="0"/>
-                  </Group>
               </Group>
           </Group>
         </DimensionLayout>
@@ -258,14 +244,6 @@
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnChoose">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Choose"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChooseActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnChoose1">
           <Properties>

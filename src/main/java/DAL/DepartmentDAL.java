@@ -46,7 +46,6 @@ public class DepartmentDAL extends MyDatabaseManager {
                 department.setAdministrator(rs.getInt("Administrator"));
             }
         }
-        closeConnect();
         return department;
     }
 
@@ -101,7 +100,6 @@ public class DepartmentDAL extends MyDatabaseManager {
                 list.add(department);
             }
         }
-        closeConnect();
         return list;
     }
 
@@ -145,7 +143,6 @@ public class DepartmentDAL extends MyDatabaseManager {
             }
 
         }
-       closeConnect();
         return list;
     }
 

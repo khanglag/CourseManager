@@ -27,7 +27,7 @@ public class MainFrame extends javax.swing.JFrame {
         //listItem.add(new DanhMucBean("TrangChinh",jpnTrangChu,jlbTrangChu));
         //listItem.add(new DanhMucBean("PhieuNhapHang",panelPhieuNhap,jLabelPhieuNhap));
         listItem.add(new DanhMucBean("Course",panelCourse,jLabelCourse));
-        listItem.add(new DanhMucBean("Persion",panelPersion,jLabelPersion));
+        listItem.add(new DanhMucBean("Person",panelPersion,jLabelPersion));
         listItem.add(new DanhMucBean("Department",panelDepartment,jLabelDepartment));
         listItem.add(new DanhMucBean("Grade",panelGrade,jLabelGrade));
         listItem.add(new DanhMucBean("CourseInstructor",panelCourseInstructor,jLabelCourseInstructor));

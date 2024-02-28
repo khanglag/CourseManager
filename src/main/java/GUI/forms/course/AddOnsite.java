@@ -59,7 +59,6 @@ public class AddOnsite extends javax.swing.JDialog {
         jtfCredits = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jtfDepartmentID = new javax.swing.JTextField();
-        btnChoose = new javax.swing.JButton();
         btnChoose1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -98,13 +97,6 @@ public class AddOnsite extends javax.swing.JDialog {
         jLabel8.setText("Department ID");
 
         jtfDepartmentID.setEditable(false);
-
-        btnChoose.setText("Choose");
-        btnChoose.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChooseActionPerformed(evt);
-            }
-        });
 
         btnChoose1.setText("Choose");
         btnChoose1.addActionListener(new java.awt.event.ActionListener() {
@@ -165,11 +157,6 @@ public class AddOnsite extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnChoose1)))))
                 .addContainerGap(16, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(140, 140, 140)
-                    .addComponent(btnChoose)
-                    .addContainerGap(141, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,11 +198,6 @@ public class AddOnsite extends javax.swing.JDialog {
                     .addComponent(btnAdd)
                     .addComponent(btnClose))
                 .addGap(26, 26, 26))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(167, 167, 167)
-                    .addComponent(btnChoose)
-                    .addContainerGap(167, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -235,23 +217,6 @@ public class AddOnsite extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnChooseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseActionPerformed
-        // TODO add your handling code here:
-        DepartmentChoose de;
-        try {
-            de = new DepartmentChoose(new MainFrame(),true);
-            de.setVisible(true);
-            Department dep = de.getSelectedDepartment();
-            System.out.println(dep);
-            if(dep!=null){
-                jtfDepartmentID.setText(String.valueOf(dep.getDepartmentId()));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(AddOnline.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }//GEN-LAST:event_btnChooseActionPerformed
 
     private void btnChoose1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChoose1ActionPerformed
         // TODO add your handling code here:
@@ -284,7 +249,6 @@ public class AddOnsite extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnChoose;
     private javax.swing.JButton btnChoose1;
     private javax.swing.JButton btnClose;
     private javax.swing.JLabel jLabel1;

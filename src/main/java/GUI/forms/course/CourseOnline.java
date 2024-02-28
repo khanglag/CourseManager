@@ -4,7 +4,12 @@
  */
 package GUI.forms.course;
 
+import BLL.CourseBLL;
+import DTO.OnlineCourse;
 import GUI.MainFrame;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,10 +20,26 @@ public class CourseOnline extends javax.swing.JPanel {
     /**
      * Creates new form Course
      */
-    public CourseOnline() {
+    CourseBLL courseBLL = new CourseBLL();
+    DefaultTableModel model;
+    ArrayList<OnlineCourse> list = new ArrayList<OnlineCourse>();
+    public CourseOnline() throws SQLException {
         initComponents();
+        LoadData();
     }
-    
+    public void LoadData() throws SQLException {
+        model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        list = courseBLL.getOnlineCourses();
+
+        for (OnlineCourse on : list) {
+            model.addRow(new Object[] {
+                      on.getCourseID(),on.getTitle(),on.getCredits(),on.getDepartmentId(),on.getUrl()
+                });
+                jTable1.setModel(model);
+        }
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -5,6 +5,7 @@
 package GUI.forms.course;
 
 import GUI.MainFrame;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -19,7 +20,7 @@ public class CourseManager extends javax.swing.JPanel {
      * Creates new form CourseManager
      */
     
-    public CourseManager() {
+    public CourseManager() throws SQLException {
         initComponents();
         JPanel courseOnsite = new CourseOnsite();
         jTabbedPane1.addTab("Onsite", courseOnsite);
