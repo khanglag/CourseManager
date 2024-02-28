@@ -15,5 +15,15 @@ public class t {
                 // TODO: handle exception
                 e.printStackTrace();
             }
+            String sql = "UPDATE course\n" +
+                "LEFT JOIN onsitecourse ON course.CourseID = onsitecourse.CourseID\n" +
+                "SET course.Title = ?,\n" +
+                "    course.Credits = ?,\n" +
+                "    course.DepartmentID = ?,\n" +
+                "    onsitecourse.Location = ?,\n" +
+                "    onsitecourse.Days = ?,\n" +
+                "    onsitecourse.Time = ?\n" +
+                "WHERE onsitecourse.CourseID = ?;";
+            System.out.println(sql);
     }
 }

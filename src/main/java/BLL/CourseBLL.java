@@ -97,11 +97,8 @@ public class CourseBLL {
     public boolean editCourseOnsite(int ID, String title, int credit, int department, String location, String day,
             LocalTime time) throws SQLException {
         OnsiteCourseDAL oDAL = new OnsiteCourseDAL();
-        Course course = new Course(ID, title, credit, department);
-        OnsiteCourse onsiteCourse = new OnsiteCourse(credit, location, day, time);
-        if (dAL.updateCourse(course) == 0)
-            return false;
-        if (oDAL.updateOnsite(onsiteCourse) == 0) {
+        OnsiteCourse onsiteCourse = new OnsiteCourse(ID,title,credit,department, location, day, time);
+        if(oDAL.editOnsiteCourse(onsiteCourse)==0){
             return false;
         }
         return true;
@@ -137,6 +134,19 @@ public class CourseBLL {
             tempList = onlDal.findOnlineCourses(searchTerm);
 
         return tempList;
+    }
+
+    public int editOnsiteCourse(int ID, String title, int credit, int department, String location, String day,
+            LocalTime time) throws SQLException {
+        OnsiteCourse onsiteCourse = new OnsiteCourse(ID, title, credit, department, location, day, time);
+        OnsiteCourseDAL oDAL = new OnsiteCourseDAL();
+        return oDAL.editOnsiteCourse(onsiteCourse);
+    }
+
+    public int editOnlineCourse(int ID, String title, int credit, int department, String url) throws SQLException {
+        OnlineCourse onlineCourse = new OnlineCourse(ID, title, credit, department, url);
+        OnlineCourseDAL oDAL = new OnlineCourseDAL();
+        return oDAL.editOnlineCourse(onlineCourse);
     }
 
     public static boolean isNumeric(String str) {

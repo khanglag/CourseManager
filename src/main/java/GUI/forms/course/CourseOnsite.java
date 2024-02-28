@@ -5,14 +5,15 @@
 package GUI.forms.course;
 
 import BLL.CourseBLL;
-import DTO.Department;
 import DTO.OnsiteCourse;
-import GUI.JFrameOfMK;
+import GUI.Hander.StringToLocalTimeConverter;
 import GUI.MainFrame;
 import java.sql.SQLException;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -153,9 +154,31 @@ public class CourseOnsite extends javax.swing.JPanel {
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
-        int i = 0; // sửa sau
-        EditOnsite edit = new EditOnsite(new MainFrame(), i);
-        edit.setVisible(true);
+        int i = jTable1.getSelectedRow();
+        if(i>=0){
+            int id = Integer.parseInt(jTable1.getModel().getValueAt(i, 0).toString());
+            String title = jTable1.getModel().getValueAt(i, 1).toString();
+            int credit = Integer.parseInt(jTable1.getModel().getValueAt(i, 2).toString());
+            int deid = Integer.parseInt(jTable1.getModel().getValueAt(i, 3).toString());
+            String location = jTable1.getModel().getValueAt(i, 4).toString();
+            String day = jTable1.getModel().getValueAt(i, 5).toString();
+ 
+            LocalTime t = StringToLocalTimeConverter.stringToLocalTime(jTable1.getModel().getValueAt(i, 6).toString()+":00");
+            
+            OnsiteCourse o = new OnsiteCourse(id,title,credit,deid,location,day,t);
+            System.out.print(o);
+            EditOnsite edit = new EditOnsite(new MainFrame(),o);
+            edit.setVisible(true);
+            courseBLL = new CourseBLL();
+            try {
+                LoadData();
+            } catch (SQLException ex) {
+                Logger.getLogger(CourseOnline.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(btnEdit, "Please choose");
+        }
     }// GEN-LAST:event_btnEditActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

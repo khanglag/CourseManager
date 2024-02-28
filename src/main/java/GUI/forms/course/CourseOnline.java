@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,6 +23,7 @@ public class CourseOnline extends javax.swing.JPanel {
     /**
      * Creates new form Course
      */
+    
     CourseBLL courseBLL = new CourseBLL();
     DefaultTableModel model;
     ArrayList<OnlineCourse> list = new ArrayList<OnlineCourse>();
@@ -135,9 +137,28 @@ public class CourseOnline extends javax.swing.JPanel {
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
-        int i = 0;
-        EditOnline edit = new EditOnline(new MainFrame(),i);
-        edit.setVisible(true);
+        int i = jTable1.getSelectedRow();
+        if(i>=0){
+            int id = Integer.parseInt(jTable1.getModel().getValueAt(i, 0).toString());
+            String title = jTable1.getModel().getValueAt(i, 1).toString();
+            int credit = Integer.parseInt(jTable1.getModel().getValueAt(i, 2).toString());
+            int deid = Integer.parseInt(jTable1.getModel().getValueAt(i, 3).toString());
+            String url = jTable1.getModel().getValueAt(i, 4).toString();
+            OnlineCourse onlCo = new OnlineCourse(id,title,credit,deid,url);
+            EditOnline edit = new EditOnline(new MainFrame(),onlCo);
+            edit.setVisible(true);
+            courseBLL = new CourseBLL();
+            try {
+                LoadData();
+            } catch (SQLException ex) {
+                Logger.getLogger(CourseOnline.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(btnEdit, "Please choose");
+        }
+        
+        
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
