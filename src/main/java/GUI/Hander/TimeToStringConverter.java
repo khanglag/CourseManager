@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class TimeToStringConverter {
     public static String timeToString(LocalTime time) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         String timeString = time.format((formatter));
 
         return timeString;
