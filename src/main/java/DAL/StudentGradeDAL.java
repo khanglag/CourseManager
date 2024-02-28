@@ -73,13 +73,11 @@ public class StudentGradeDAL extends MyDatabaseManager {
         return p.executeUpdate();
     }
 
-    public ArrayList<StudentGrade> findStudentGrade(int CourseID, int StudentID, double Grade) throws SQLException {
+    public ArrayList<StudentGrade> findStudentGrade(int CourseID) throws SQLException {
         ArrayList<StudentGrade> list = new ArrayList<>();
-        String sql = "SELECT * FROM studentgrade WHERE CourseID =? OR StudentID =? OR Grade =?";
+        String sql = "SELECT * FROM studentgrade WHERE CourseID =? ";
         PreparedStatement p = StudentGradeDAL.getConnection().prepareStatement(sql);
         p.setInt(1, CourseID);
-        p.setInt(2, StudentID);
-        p.setDouble(3, Grade);
         ResultSet rs = p.executeQuery();
         if (rs != null) {
             while (rs.next()) {
@@ -94,4 +92,5 @@ public class StudentGradeDAL extends MyDatabaseManager {
         closeConnect();
         return list;
     }
+   
 }
