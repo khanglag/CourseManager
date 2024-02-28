@@ -163,7 +163,7 @@ public class CourseOnsite extends javax.swing.JPanel {
             String location = jTable1.getModel().getValueAt(i, 4).toString();
             String day = jTable1.getModel().getValueAt(i, 5).toString();
  
-            LocalTime t = StringToLocalTimeConverter.stringToLocalTime(jTable1.getModel().getValueAt(i, 6).toString()+":00");
+            LocalTime t = StringToLocalTimeConverter.stringToLocalTime(jTable1.getModel().getValueAt(i, 6).toString());
             
             OnsiteCourse o = new OnsiteCourse(id,title,credit,deid,location,day,t);
             System.out.print(o);

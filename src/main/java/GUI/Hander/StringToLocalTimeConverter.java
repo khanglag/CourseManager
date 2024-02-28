@@ -16,7 +16,7 @@ import java.time.format.DateTimeFormatter;
 public class StringToLocalTimeConverter {
      public static LocalTime stringToLocalTime(String timeString) {
         // Định dạng cho chuỗi thời gian
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
         // Chuyển đổi chuỗi thành LocalTime
         return LocalTime.parse(timeString, formatter);
