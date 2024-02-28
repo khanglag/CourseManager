@@ -1,5 +1,6 @@
 package DAL;
 
+import DTO.OnlineCourse;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,7 +30,7 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
 
             }
         }
-        
+
         return onsiteList;
     }
 
@@ -49,7 +50,7 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
 
             }
         }
-        
+
         return onsite;
     }
 
@@ -99,11 +100,12 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
 
             }
         }
-        
+
         return list;
 
+    }
 
-    public ArrayList<OnsiteCourse> getOnsiteCourses() throws SQLException{
+    public ArrayList<OnsiteCourse> getOnsiteCourses() throws SQLException {
 
         ArrayList<OnsiteCourse> courses = new ArrayList<>();
         String sql = "SELECT course.CourseID,course.Title,course.Credits,course.DepartmentID,onsitecourse.location, onsitecourse.Days, onsitecourse.time FROM onsitecourse\n"
@@ -123,7 +125,7 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
                 courses.add(course);
             }
         }
-        
+
         return courses;
 
     }
@@ -132,8 +134,9 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
     public ArrayList<OnsiteCourse> findOnsiteCourses(int ID) throws SQLException {
         ArrayList<OnsiteCourse> courses = new ArrayList<>();
 
-         String sql = "SELECT course.CourseID,course.Title,course.Credits,course.DepartmentID,onsitecourse.location, onsitecourse.Days, onsitecourse.time FROM onsitecourse\n" +
-"LEFT JOIN course ON onsitecourse.CourseID = course.CourseID WHERE onsitecourse.CourseID =?";
+        String sql = "SELECT course.CourseID,course.Title,course.Credits,course.DepartmentID,onsitecourse.location, onsitecourse.Days, onsitecourse.time FROM onsitecourse\n"
+                +
+                "LEFT JOIN course ON onsitecourse.CourseID = course.CourseID WHERE onsitecourse.CourseID =?";
 
         PreparedStatement p = OnlineCourseDAL.getConnection().prepareStatement(sql);
         p.setInt(1, ID);
@@ -151,7 +154,34 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
                 courses.add(course);
             }
         }
-        
+
+        return courses;
+
+    }
+
+    public ArrayList<OnsiteCourse> findOnsiteCourses(String title) throws SQLException {
+
+        ArrayList<OnsiteCourse> courses = new ArrayList<>();
+        String sql = "SELECT course.CourseID,course.Title,course.Credits,course.DepartmentID,onsitecourse.location, onsitecourse.Days, onsitecourse.time FROM onsitecourse\n"
+                +
+                "LEFT JOIN course ON onsitecourse.CourseID = course.CourseID WHERE Title like ?";
+        PreparedStatement p = OnlineCourseDAL.getConnection().prepareStatement(sql);
+        p.setString(1, "%" + title + "%");
+        ResultSet rs = p.executeQuery();
+        if (rs != null) {
+            while (rs.next()) {
+                OnsiteCourse course = new OnsiteCourse(
+                        rs.getInt("CourseID"),
+                        rs.getString("Title"),
+                        rs.getInt("Credits"),
+                        rs.getInt("DepartmentID"),
+                        rs.getString("Location"),
+                        rs.getString("Days"),
+                        rs.getTime("Time").toLocalTime());
+                courses.add(course);
+            }
+        }
+
         return courses;
 
     }
@@ -167,7 +197,8 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
                 "    onsitecourse.Location = ?,\n" +
                 "    onsitecourse.Days = ?,\n" +
                 "    onsitecourse.Time = ?\n" +
-                "WHERE onsitecourse.CourseID = ?;";
+                "WHERE course.CourseID = ?;";
+        System.out.println(sql);
         PreparedStatement p = OnsiteCourseDAL.getConnection().prepareStatement(sql);
         p.setString(1, onsite.getTitle());
         p.setInt(2, onsite.getCredits());
@@ -178,30 +209,7 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
         p.setInt(7, onsite.getCourseID());
         System.out.println(p.toString());
         return p.executeUpdate();
-}
-    public ArrayList<OnsiteCourse> findOnsiteCourses(String title) throws SQLException{
-        ArrayList<OnsiteCourse> courses = new ArrayList<>();
-         String sql = "SELECT course.CourseID,course.Title,course.Credits,course.DepartmentID,onsitecourse.location, onsitecourse.Days, onsitecourse.time FROM onsitecourse\n" +
-"LEFT JOIN course ON onsitecourse.CourseID = course.CourseID WHERE Title like ?";
-        PreparedStatement p = OnlineCourseDAL.getConnection().prepareStatement(sql);
-        p.setString(1, "%"+title+"%");
-        ResultSet rs = p.executeQuery();
-        if (rs!= null) {
-            while (rs.next()) {
-                OnsiteCourse course = new OnsiteCourse(
-                        rs.getInt("CourseID"),
-                        rs.getString("Title"),
-                        rs.getInt("Credits"),
-                        rs.getInt("DepartmentID"),
-                        rs.getString("Location"),
-                        rs.getString("Days"),
-                        rs.getTime("Time").toLocalTime());
-                courses.add(course);
-            }
-        }
-        
-        return courses;
-
     }
+
 
 }

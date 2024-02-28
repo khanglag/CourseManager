@@ -220,6 +220,20 @@ public class AddOnsite extends javax.swing.JDialog {
 
     private void btnChoose1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChoose1ActionPerformed
         // TODO add your handling code here:
+          // TODO add your handling code here:
+        DepartmentChoose de;
+        try {
+            de = new DepartmentChoose(new MainFrame(),true);
+            de.setVisible(true);
+            Department dep = de.getSelectedDepartment();
+            System.out.println(dep);
+            if(dep!=null){
+                jtfDepartmentID.setText(String.valueOf(dep.getDepartmentId()));
+        }
+        } catch (SQLException ex) {
+            Logger.getLogger(AddOnline.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_btnChoose1ActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCloseActionPerformed

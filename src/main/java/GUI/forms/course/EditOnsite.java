@@ -4,6 +4,16 @@
  */
 package GUI.forms.course;
 
+import BLL.CourseBLL;
+import DTO.OnsiteCourse;
+import GUI.Hander.StringToLocalTimeConverter;
+import GUI.Hander.TimeToStringConverter;
+import java.sql.SQLException;
+import java.time.LocalTime;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author khang
@@ -13,9 +23,19 @@ public class EditOnsite extends javax.swing.JDialog {
     /**
      * Creates new form Edit
      */
-    public EditOnsite(java.awt.Frame parent, int co) {
+    OnsiteCourse o = new OnsiteCourse();
+    CourseBLL coBLL = new CourseBLL();
+    public EditOnsite(java.awt.Frame parent, OnsiteCourse o) {
         super(parent, true);
         initComponents();
+        jtfID.setText(String.valueOf(o.getCourseID()));
+        jtfCredits.setText(String.valueOf(o.getCredits()));
+        jtfDepartmentID.setText(String.valueOf(o.getDepartmentId()));
+        jtfTitle.setText(o.getTitle());
+        jtfLocation.setText(o.getLocation());
+        jtfDay.setText(o.getDays());
+        jtfTime.setText(TimeToStringConverter.timeToString(o.getTime()));
+        
     }
 
     /**
@@ -56,6 +76,11 @@ public class EditOnsite extends javax.swing.JDialog {
         });
 
         btnEdit.setText("Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Course Onsite");
@@ -183,6 +208,26 @@ public class EditOnsite extends javax.swing.JDialog {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+        int id = Integer.parseInt(jtfID.getText());
+        int credit = Integer.parseInt(jtfCredits.getText());
+        int de = Integer.parseInt(jtfDepartmentID.getText());
+        String title = jtfTitle.getText();
+        String location = jtfLocation.getText();
+        String day = jtfDay.getText();
+        LocalTime t = StringToLocalTimeConverter.stringToLocalTime(jtfTime.getText());
+        try {
+            //System.err.println(coBLL.editCourseOnsite(id, title, credit, de, location,day,t));
+            if(coBLL.editCourseOnsite(id, title, credit, de, location,day,t)){
+                JOptionPane.showMessageDialog(rootPane, "Success");
+                this.dispose();
+            }else JOptionPane.showMessageDialog(rootPane, "Fail");
+        } catch (SQLException ex) {
+            Logger.getLogger(EditOnline.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnEditActionPerformed
 
     /**
      * @param args the command line arguments

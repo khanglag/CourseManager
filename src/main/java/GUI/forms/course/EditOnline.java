@@ -4,6 +4,13 @@
  */
 package GUI.forms.course;
 
+import BLL.CourseBLL;
+import DTO.OnlineCourse;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author khang
@@ -13,9 +20,16 @@ public class EditOnline extends javax.swing.JDialog {
     /**
      * Creates new form Edit
      */
-    public EditOnline(java.awt.Frame parent, int id) {
+    OnlineCourse onl = new OnlineCourse();
+    CourseBLL coBLL = new CourseBLL();
+    public EditOnline(java.awt.Frame parent, OnlineCourse onl) {
         super(parent, true);
         initComponents();
+        jtfID.setText(String.valueOf(onl.getCourseID()));
+        jtfCredits.setText(String.valueOf(onl.getCredits()));
+        jtfDepartmentID.setText(String.valueOf(onl.getDepartmentId()));
+        jtfTitle.setText(onl.getTitle());
+        jtfURL.setText(onl.getUrl());
     }
 
     /**
@@ -163,6 +177,21 @@ public class EditOnline extends javax.swing.JDialog {
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
+        int id = Integer.parseInt(jtfID.getText());
+        int credit = Integer.parseInt(jtfCredits.getText());
+        int de = Integer.parseInt(jtfDepartmentID.getText());
+        String title = jtfTitle.getText();
+        String url = jtfURL.getText();
+        try {
+            if(coBLL.editCourseOnline(id, title, credit, de, url)){
+                JOptionPane.showMessageDialog(rootPane, "Success");
+                this.dispose();
+            }else JOptionPane.showMessageDialog(rootPane, "Fail");
+        } catch (SQLException ex) {
+            Logger.getLogger(EditOnline.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
     }//GEN-LAST:event_btnEditActionPerformed
 
     /**
