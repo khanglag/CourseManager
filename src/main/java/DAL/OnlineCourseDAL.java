@@ -22,7 +22,8 @@ public class OnlineCourseDAL  extends MyDatabaseManager{
                 courses.add(course);
             }
         }
-        closeConnect();
+        
+        
         return courses;
     }
     public OnlineCourse getOnlineCourse(int CourseID) throws Exception{
@@ -37,7 +38,6 @@ public class OnlineCourseDAL  extends MyDatabaseManager{
                 course.setUrl(rs.getString("url"));
             }
         }
-        closeConnect();
         return course;
     }
     public int addCourse(OnlineCourse course)  throws SQLException{
@@ -58,7 +58,6 @@ public class OnlineCourseDAL  extends MyDatabaseManager{
         String sql = "DELETE FROM onlinecourse WHERE CourseID =?";
         PreparedStatement p = OnlineCourseDAL.getConnection().prepareStatement(sql);
         p.setInt(1, CourseID);
-        closeConnect();
         return p.executeUpdate();
     }
     public ArrayList<OnlineCourse> findCourses(int CourseID) throws SQLException{
@@ -75,9 +74,72 @@ public class OnlineCourseDAL  extends MyDatabaseManager{
                         courses.add(course);
             }
         }
-        closeConnect();
         return courses;
     }
+    public ArrayList<OnlineCourse> getOnlineCourses() throws SQLException{
+        ArrayList<OnlineCourse> courses = new ArrayList<>();
+         String sql = "SELECT Course.CourseID, Course.Title, Course.Credits, Course.DepartmentId, OnlineCourse.Url " +
+                     "FROM OnlineCourse " +
+                     "LEFT JOIN Course ON OnlineCourse.CourseID = Course.CourseID";
+         ResultSet rs = OnlineCourseDAL.doReadQuery(sql);
+        if (rs!= null) {
+            while (rs.next()) {
+                OnlineCourse course = new OnlineCourse(
+                        rs.getInt("CourseID"),
+                        rs.getString("Title"),
+                        rs.getInt("Credits"),
+                        rs.getInt("DepartmentID"),
+                        rs.getString("url"));
+                courses.add(course);
+            }
+        }
+        return courses;
+         
+    }
+//    Tìm 
+    public ArrayList<OnlineCourse> findOnlineCourses(int ID) throws SQLException{
+        ArrayList<OnlineCourse> courses = new ArrayList<>();
+         String sql = "SELECT Course.CourseID, Course.Title, Course.Credits, Course.DepartmentId, OnlineCourse.Url " +
+                     "FROM OnlineCourse " +
+                     "LEFT JOIN Course ON OnlineCourse.CourseID = Course.CourseID WHERE OnlineCourse.CourseID =?";
+        PreparedStatement p = OnlineCourseDAL.getConnection().prepareStatement(sql);
+        p.setInt(1, ID);
+        ResultSet rs = p.executeQuery();
+        if (rs!= null) {
+            while (rs.next()) {
+                OnlineCourse course = new OnlineCourse(
+                        rs.getInt("CourseID"),
+                        rs.getString("Title"),
+                        rs.getInt("Credits"),
+                        rs.getInt("DepartmentID"),
+                        rs.getString("url"));
+                courses.add(course);
+            }
+        }
+        return courses;
+    }
+    public ArrayList<OnlineCourse> findOnlineCourses(String title) throws SQLException{
+        ArrayList<OnlineCourse> courses = new ArrayList<>();
+         String sql = "SELECT Course.CourseID, Course.Title, Course.Credits, Course.DepartmentId, OnlineCourse.Url " +
+                     "FROM OnlineCourse " +
+                     "LEFT JOIN Course ON OnlineCourse.CourseID = Course.CourseID WHERE title like ?";
+        PreparedStatement p = OnlineCourseDAL.getConnection().prepareStatement(sql);
+        p.setString(1, "%"+ title + "%");
+        ResultSet rs = p.executeQuery();
+        if (rs!= null) {
+            while (rs.next()) {
+                OnlineCourse course = new OnlineCourse(
+                        rs.getInt("CourseID"),
+                        rs.getString("Title"),
+                        rs.getInt("Credits"),
+                        rs.getInt("DepartmentID"),
+                        rs.getString("url"));
+                courses.add(course);
+            }
+        }
+        return courses;
+    }
+//    
     public static void main(String[] args) {
         OnlineCourse c = new OnlineCourse(4064,"htttttp");
         OnlineCourseDAL dal = new OnlineCourseDAL();

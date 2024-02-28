@@ -25,6 +25,7 @@ public class MainFrame extends javax.swing.JFrame {
         Controller controller = new Controller(jpnView);
 
         List<DanhMucBean> listItem = new ArrayList<>();
+
         // listItem.add(new DanhMucBean("TrangChinh",jpnTrangChu,jlbTrangChu));
         // listItem.add(new
         // DanhMucBean("PhieuNhapHang",panelPhieuNhap,jLabelPhieuNhap));
@@ -34,7 +35,9 @@ public class MainFrame extends javax.swing.JFrame {
         listItem.add(new DanhMucBean("Grade", panelGrade, jLabelGrade));
         listItem.add(new DanhMucBean("CourseInstructor", panelCourseInstructor, jLabelCourseInstructor));
         listItem.add(new DanhMucBean("OfficeAssignment", panelOfficeAssignment, jLabelOfficeAssignment));
+
         controller.setEvent(listItem);
+        //controller.setView(p, jLabelGrade);t
     }
 
     /**

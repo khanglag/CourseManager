@@ -29,7 +29,7 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
 
             }
         }
-        closeConnect();
+        
         return onsiteList;
     }
 
@@ -49,7 +49,7 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
 
             }
         }
-        closeConnect();
+        
         return onsite;
     }
 
@@ -99,19 +99,80 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
 
             }
         }
-        closeConnect();
+        
         return list;
     } 
-    public static void main(String[] args) {
-        OnsiteCourseDAL dal = new OnsiteCourseDAL();
-        try {
-            for(OnsiteCourse c : dal.readList()) 
-                System.out.println(c.toString());
-        } catch (Exception e) {
-            // TODO: handle exception
-            e.printStackTrace();
+
+    public ArrayList<OnsiteCourse> getOnsiteCourses() throws SQLException{
+        ArrayList<OnsiteCourse> courses = new ArrayList<>();
+         String sql = "SELECT course.CourseID,course.Title,course.Credits,course.DepartmentID,onsitecourse.location, onsitecourse.Days, onsitecourse.time FROM onsitecourse\n" +
+"LEFT JOIN course ON onsitecourse.CourseID = course.CourseID";
+         ResultSet rs = OnsiteCourseDAL.doReadQuery(sql);
+        if (rs!= null) {
+            while (rs.next()) {
+                OnsiteCourse course = new OnsiteCourse(
+                        rs.getInt("CourseID"),
+                        rs.getString("Title"),
+                        rs.getInt("Credits"),
+                        rs.getInt("DepartmentID"),
+                        rs.getString("Location"),
+                        rs.getString("Days"),
+                        rs.getTime("Time").toLocalTime());
+                courses.add(course);
+            }
         }
         
-        
+        return courses;
+         
     }
+    //Tìm 
+    public ArrayList<OnsiteCourse> findOnsiteCourses(int ID) throws SQLException{
+        ArrayList<OnsiteCourse> courses = new ArrayList<>();
+         String sql = "SELECT course.CourseID,course.Title,course.Credits,course.DepartmentID,onsitecourse.location, onsitecourse.Days, onsitecourse.time FROM onsitecourse\n" +
+"LEFT JOIN course ON onsitecourse.CourseID = course.CourseID WHERE onsitecourse.CourseID =?";
+        PreparedStatement p = OnlineCourseDAL.getConnection().prepareStatement(sql);
+        p.setInt(1, ID);
+        ResultSet rs = p.executeQuery();
+        if (rs!= null) {
+            while (rs.next()) {
+                OnsiteCourse course = new OnsiteCourse(
+                        rs.getInt("CourseID"),
+                        rs.getString("Title"),
+                        rs.getInt("Credits"),
+                        rs.getInt("DepartmentID"),
+                        rs.getString("Location"),
+                        rs.getString("Days"),
+                        rs.getTime("Time").toLocalTime());
+                courses.add(course);
+            }
+        }
+        
+        return courses;
+         
+    }
+    public ArrayList<OnsiteCourse> findOnsiteCourses(String title) throws SQLException{
+        ArrayList<OnsiteCourse> courses = new ArrayList<>();
+         String sql = "SELECT course.CourseID,course.Title,course.Credits,course.DepartmentID,onsitecourse.location, onsitecourse.Days, onsitecourse.time FROM onsitecourse\n" +
+"LEFT JOIN course ON onsitecourse.CourseID = course.CourseID WHERE Title like ?";
+        PreparedStatement p = OnlineCourseDAL.getConnection().prepareStatement(sql);
+        p.setString(1, "%"+title+"%");
+        ResultSet rs = p.executeQuery();
+        if (rs!= null) {
+            while (rs.next()) {
+                OnsiteCourse course = new OnsiteCourse(
+                        rs.getInt("CourseID"),
+                        rs.getString("Title"),
+                        rs.getInt("Credits"),
+                        rs.getInt("DepartmentID"),
+                        rs.getString("Location"),
+                        rs.getString("Days"),
+                        rs.getTime("Time").toLocalTime());
+                courses.add(course);
+            }
+        }
+        
+        return courses;
+         
+    }
+
 }
