@@ -78,6 +78,27 @@ public class OnlineCourseDAL  extends MyDatabaseManager{
         closeConnect();
         return courses;
     }
+    public ArrayList<OnlineCourse> getOnlineCourses() throws SQLException{
+        ArrayList<OnlineCourse> courses = new ArrayList<>();
+         String sql = "SELECT Course.CourseID, Course.Title, Course.Credits, Course.DepartmentId, OnlineCourse.Url " +
+                     "FROM OnlineCourse " +
+                     "LEFT JOIN Course ON OnlineCourse.CourseID = Course.CourseID";
+         ResultSet rs = OnlineCourseDAL.doReadQuery(sql);
+        if (rs!= null) {
+            while (rs.next()) {
+                OnlineCourse course = new OnlineCourse(
+                        rs.getInt("CourseID"),
+                        rs.getString("Title"),
+                        rs.getInt("Credits"),
+                        rs.getInt("DepartmentID"),
+                        rs.getString("url"));
+                courses.add(course);
+            }
+        }
+        closeConnect();
+        return courses;
+         
+    }
     public static void main(String[] args) {
         OnlineCourse c = new OnlineCourse(4064,"htttttp");
         OnlineCourseDAL dal = new OnlineCourseDAL();

@@ -144,7 +144,6 @@ public class CourseDAL extends MyDatabaseManager {
                         rs.getInt("Credits"),
                         rs.getInt("DepartmentID"));
                 courseList.add(c);
-                
             }
         }
         closeConnect();

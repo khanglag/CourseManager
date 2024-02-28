@@ -5,7 +5,11 @@
 package BLL;
 
 import DAL.CourseDAL;
+import DAL.OnlineCourseDAL;
+import DAL.OnsiteCourseDAL;
 import DTO.Course;
+import DTO.OnlineCourse;
+import DTO.OnsiteCourse;
 import java.sql.SQLException;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -16,7 +20,9 @@ import java.util.ArrayList;
  */
 public class Filetestcuadikhang {
     public static void main(String[] args) throws SQLException {
-        CourseBLL exBLL=new CourseBLL();
-        exBLL.addCourseOnsite("eheee", 0, 0, "location", "day", LocalTime.now());
+        OnsiteCourseDAL dAL=new OnsiteCourseDAL();
+        for(OnsiteCourse temp: dAL.getOnsiteCourses()){
+            System.out.println(temp.toString());
+        }
     }
 }

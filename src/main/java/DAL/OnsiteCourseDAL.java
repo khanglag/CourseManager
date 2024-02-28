@@ -100,4 +100,26 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
         closeConnect();
         return list;
     } 
+    public ArrayList<OnsiteCourse> getOnsiteCourses() throws SQLException{
+        ArrayList<OnsiteCourse> courses = new ArrayList<>();
+         String sql = "SELECT course.CourseID,course.Title,course.Credits,course.DepartmentID,onsitecourse.location, onsitecourse.Days, onsitecourse.time FROM onsitecourse\n" +
+"LEFT JOIN course ON onsitecourse.CourseID = course.CourseID";
+         ResultSet rs = OnsiteCourseDAL.doReadQuery(sql);
+        if (rs!= null) {
+            while (rs.next()) {
+                OnsiteCourse course = new OnsiteCourse(
+                        rs.getInt("CourseID"),
+                        rs.getString("Title"),
+                        rs.getInt("Credits"),
+                        rs.getInt("DepartmentID"),
+                        rs.getString("Location"),
+                        rs.getString("Days"),
+                        rs.getTime("Time").toLocalTime());
+                courses.add(course);
+            }
+        }
+        closeConnect();
+        return courses;
+         
+    }
 }

@@ -4,7 +4,7 @@ import java.time.LocalTime;
 
 
 public class OnsiteCourse extends Course{
-    private int CourseID;
+
     private String Location;
     private String Days;
     private  LocalTime Time;
@@ -19,18 +19,10 @@ public class OnsiteCourse extends Course{
     }
 
     public OnsiteCourse(int CourseID, String Location, String Days, LocalTime Time) {
-        this.CourseID = CourseID;
+        super(CourseID);
         this.Location = Location;
         this.Days = Days;
         this.Time = Time;
-    }
-
-    public int getCourseID() {
-        return this.CourseID;
-    }
-
-    public void setCourseID(int CourseID) {
-        this.CourseID = CourseID;
     }
 
     public String getLocation() {
@@ -79,7 +71,7 @@ public class OnsiteCourse extends Course{
 
     @Override
     public String toString() {
-        return "{" +
+        return super.toString()+ "{" +
             " CourseID='" + getCourseID() + "'" +
             ", Location='" + getLocation() + "'" +
             ", Days='" + getDays() + "'" +
