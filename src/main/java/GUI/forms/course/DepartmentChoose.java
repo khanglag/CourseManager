@@ -25,16 +25,32 @@ public class DepartmentChoose extends javax.swing.JDialog {
     DefaultTableModel model;
     ArrayList<Department> list = new ArrayList<Department>();
     
-    private Department chonHangHoa;
-    public Department getSelectedHangHoa(){
-        return chonHangHoa;
+    private Department chooseDepartment;
+    public Department getSelectedDepartment(){
+        return chooseDepartment;
     }
         
-    public DepartmentChoose(java.awt.Frame parent, boolean modal) {
+    public DepartmentChoose(java.awt.Frame parent, boolean modal) throws SQLException {
         super(parent, modal);
         initComponents();
+        LoadData();
     }
 
+    public void LoadData() throws SQLException {
+        model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        list = departmentBLL.getAllDepartments();
+        int i = 0;
+        while (i <= list.size() - 1) {
+            Department px = list.get(i);
+            model.addRow(new Object[] {
+                  px.getDepartmentId(),px.getName(),px.getBudget(),px.getStartDate(),px.getAdministrator()
+            });
+            jTable1.setModel(model);
+            ++i;
+        }
+
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -231,7 +247,8 @@ public class DepartmentChoose extends javax.swing.JDialog {
         if (i >= 0) {
             int id = Integer.parseInt(jTable1.getModel().getValueAt(i, 0).toString());
             
-            Department de = new Department(id);
+            chooseDepartment = new Department(id);
+            
             this.dispose();
         }else{
             JOptionPane.showMessageDialog(null, "Bạn chưa chọn sản phẩm!");
@@ -241,44 +258,7 @@ public class DepartmentChoose extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DepartmentChoose.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DepartmentChoose.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DepartmentChoose.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DepartmentChoose.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                DepartmentChoose dialog = new DepartmentChoose(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChoose;

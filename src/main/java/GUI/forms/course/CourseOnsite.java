@@ -5,6 +5,7 @@
 package GUI.forms.course;
 
 import BLL.CourseBLL;
+import DTO.Department;
 import GUI.JFrameOfMK;
 import GUI.MainFrame;
 import java.sql.SQLException;
@@ -28,18 +29,18 @@ public class CourseOnsite extends javax.swing.JPanel {
     }
 
     public void LoadData() throws SQLException {
-        model = (DefaultTableModel) jTable1.getModel();
-        model.setRowCount(0);
-        list = courseBLL.get;
-        int i = 0;
-        while (i <= list.size() - 1) {
-            Department px = list.get(i);
-            model.addRow(new Object[] {
-                  px.getDepartmentId(),px.getName(),px.getBudget(),px.getStartDate(),px.getAdministrator()
-            });
-            jTable1.setModel(model);
-            ++i;
-        }
+//        model = (DefaultTableModel) jTable1.getModel();
+//        model.setRowCount(0);
+//        list = courseBLL.get;
+//        int i = 0;
+//        while (i <= list.size() - 1) {
+//            Department px = list.get(i);
+//            model.addRow(new Object[] {
+//                  px.getDepartmentId(),px.getName(),px.getBudget(),px.getStartDate(),px.getAdministrator()
+//            });
+//            jTable1.setModel(model);
+//            ++i;
+//        }
 
     }
     /**
