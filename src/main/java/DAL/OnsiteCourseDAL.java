@@ -152,7 +152,7 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
          String sql = "SELECT course.CourseID,course.Title,course.Credits,course.DepartmentID,onsitecourse.location, onsitecourse.Days, onsitecourse.time FROM onsitecourse\n" +
 "LEFT JOIN course ON onsitecourse.CourseID = course.CourseID WHERE Title like ?";
         PreparedStatement p = OnlineCourseDAL.getConnection().prepareStatement(sql);
-        p.setString(1, title);
+        p.setString(1, "%"+title+"%");
         ResultSet rs = p.executeQuery();
         if (rs!= null) {
             while (rs.next()) {

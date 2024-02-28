@@ -101,9 +101,30 @@ public class OnlineCourseDAL  extends MyDatabaseManager{
         ArrayList<OnlineCourse> courses = new ArrayList<>();
          String sql = "SELECT Course.CourseID, Course.Title, Course.Credits, Course.DepartmentId, OnlineCourse.Url " +
                      "FROM OnlineCourse " +
-                     "LEFT JOIN Course ON OnlineCourse.CourseID = Course.CourseID WHERE CourseID =?";
+                     "LEFT JOIN Course ON OnlineCourse.CourseID = Course.CourseID WHERE OnlineCourse.CourseID =?";
         PreparedStatement p = OnlineCourseDAL.getConnection().prepareStatement(sql);
         p.setInt(1, ID);
+        ResultSet rs = p.executeQuery();
+        if (rs!= null) {
+            while (rs.next()) {
+                OnlineCourse course = new OnlineCourse(
+                        rs.getInt("CourseID"),
+                        rs.getString("Title"),
+                        rs.getInt("Credits"),
+                        rs.getInt("DepartmentID"),
+                        rs.getString("url"));
+                courses.add(course);
+            }
+        }
+        return courses;
+    }
+    public ArrayList<OnlineCourse> findOnlineCourses(String title) throws SQLException{
+        ArrayList<OnlineCourse> courses = new ArrayList<>();
+         String sql = "SELECT Course.CourseID, Course.Title, Course.Credits, Course.DepartmentId, OnlineCourse.Url " +
+                     "FROM OnlineCourse " +
+                     "LEFT JOIN Course ON OnlineCourse.CourseID = Course.CourseID WHERE title like ?";
+        PreparedStatement p = OnlineCourseDAL.getConnection().prepareStatement(sql);
+        p.setString(1, "%"+ title + "%");
         ResultSet rs = p.executeQuery();
         if (rs!= null) {
             while (rs.next()) {

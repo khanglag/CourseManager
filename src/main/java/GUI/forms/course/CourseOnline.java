@@ -9,6 +9,8 @@ import DTO.OnlineCourse;
 import GUI.MainFrame;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -80,6 +82,11 @@ public class CourseOnline extends javax.swing.JPanel {
         jtfFind.setBorder(javax.swing.BorderFactory.createTitledBorder("Find:"));
 
         btnFind.setText("Find");
+        btnFind.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFindActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -132,6 +139,25 @@ public class CourseOnline extends javax.swing.JPanel {
         EditOnline edit = new EditOnline(new MainFrame(),i);
         edit.setVisible(true);
     }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
+        // TODO add your handling code here:
+        model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        try {
+            list = courseBLL.findCourseOnline(jtfFind.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(CourseOnsite.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        for (OnlineCourse on : list) {
+           model.addRow(new Object[] {
+                      on.getCourseID(),on.getTitle(),on.getCredits(),on.getDepartmentId(),on.getUrl()
+                });
+                jTable1.setModel(model);
+        }
+
+    }//GEN-LAST:event_btnFindActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
