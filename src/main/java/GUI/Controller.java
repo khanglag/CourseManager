@@ -5,12 +5,15 @@ import GUI.Person.AddUser;
 import GUI.StudentGrade.ManageGrade;
 import GUI.forms.course.CourseOnline;
 import GUI.forms.course.CourseManager;
-import GUI.forms.department.Department;
+import GUI.forms.department.DepartmentForm;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -33,8 +36,8 @@ public class Controller {
         this.root = jpnRoot;
     }
 
-    public void setView(JPanel jpnItem, JLabel jlbItem){
-        kindSelected = "ThongTinNhanVien";    
+    public void setView(JPanel jpnItem, JLabel jlbItem) throws SQLException{
+        kindSelected = "Course";    
         root.removeAll();
         root.setLayout(new BorderLayout());
         root.add(new CourseOnline());
@@ -69,8 +72,15 @@ public class Controller {
             
             switch (kind) {
                 case "Course":
-                    node = new CourseManager();
+                {
+                    try {
+                        node = new CourseManager();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                     break;
+
                 case "Person":
                     node = new AddUser();
                     break;
@@ -84,8 +94,15 @@ public class Controller {
                     node = new ManageGrade();
                     break;
                 case "Department":
-                    node = new Department();
+                {
+                    try {
+                        node = new DepartmentForm();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                     break;
+
                 // more
                 default:
                     break;

@@ -37,7 +37,7 @@ public class CourseDAL extends MyDatabaseManager {
             }
 
         }
-        closeConnect();
+        
         return courseList;
 
     }
@@ -57,7 +57,7 @@ public class CourseDAL extends MyDatabaseManager {
 
             }
         }
-        closeConnect();
+        
         return course;
     }
 
@@ -103,7 +103,7 @@ public class CourseDAL extends MyDatabaseManager {
                 
              }
          }
-         closeConnect();
+         
          return courseList;
 
      }
@@ -124,7 +124,7 @@ public class CourseDAL extends MyDatabaseManager {
                 
              }
          }
-         closeConnect();
+        
          return courseList;
 
      }
@@ -146,7 +146,6 @@ public class CourseDAL extends MyDatabaseManager {
                 courseList.add(c);
             }
         }
-        closeConnect();
         return courseList;
 
     }

@@ -28,6 +28,10 @@ public class Department {
         this.Administrator = Administrator;
     }
 
+    public Department(int DepartmentId) {
+        this.DepartmentId = DepartmentId;
+    }
+
     public int getDepartmentId() {
         return this.DepartmentId;
     }
@@ -96,11 +100,11 @@ public class Department {
     @Override
     public String toString() {
         return "{" +
-            " DepartmentId='" + getDepartmentId() + "'" +
-            ", Name='" + getName() + "'" +
-            ", Budget='" + getBudget() + "'" +
-            ", StartDate='" + getStartDate() + "'" +
-            ", Administrator='" + getAdministrator() + "'" +
-            "}";
+                " DepartmentId='" + getDepartmentId() + "'" +
+                ", Name='" + getName() + "'" +
+                ", Budget='" + getBudget() + "'" +
+                ", StartDate='" + getStartDate() + "'" +
+                ", Administrator='" + getAdministrator() + "'" +
+                "}";
     }
 }
