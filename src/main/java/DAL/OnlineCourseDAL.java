@@ -139,7 +139,25 @@ public class OnlineCourseDAL  extends MyDatabaseManager{
         }
         return courses;
     }
-//    
+//    Sửa
+    public int editOnlineCourse(OnlineCourse online) throws SQLException {
+        String sql = "UPDATE course\n" +
+                "LEFT JOIN onlinecourse ON course.CourseID = onlinecourse.CourseID\n" +
+                "SET course.Title = ?,\n" +
+                "    course.Credits = ?,\n" +
+                "    course.DepartmentID = ?,\n" +
+                "    onlinecourse.url = ?\n" +
+                "WHERE onlinecourse.CourseID = ?";
+        PreparedStatement p = OnlineCourseDAL.getConnection().prepareStatement(sql);
+        p.setString(1, online.getTitle());
+        p.setInt(2, online.getCredits());
+        p.setInt(3, online.getDepartmentId());
+        p.setString(4, online.getUrl());
+        p.setInt(5, online.getCourseID());
+        System.out.println(p.toString());
+        return p.executeUpdate();
+    }
+//
     public static void main(String[] args) {
         OnlineCourse c = new OnlineCourse(4064,"htttttp");
         OnlineCourseDAL dal = new OnlineCourseDAL();

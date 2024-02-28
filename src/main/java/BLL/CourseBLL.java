@@ -118,6 +118,17 @@ public class CourseBLL {
         OnsiteCourseDAL oDAL = new OnsiteCourseDAL();
         return oDAL.getOnsiteCourses();
     }
+    public int editOnsiteCourse(int ID, String title, int credit,int department ,String location,String day, LocalTime time) throws SQLException{
+        OnsiteCourse onsiteCourse=new OnsiteCourse(ID, title, credit, department, location, day, time);
+         OnsiteCourseDAL oDAL=new OnsiteCourseDAL();
+         return oDAL.editOnsiteCourse(onsiteCourse);
+    }
+    public int editOnlineCourse(int ID, String title, int credit,int department ,String url) throws SQLException{
+        OnlineCourse onlineCourse=new OnlineCourse(ID, title, credit, department, url);
+        OnlineCourseDAL oDAL=new OnlineCourseDAL();
+        return oDAL.editOnlineCourse(onlineCourse);
+    }
+
 
     public ArrayList<OnsiteCourse> findCourseOnsite(String searchTerm) throws SQLException {
         ArrayList<OnsiteCourse> tempList = new ArrayList<>();

@@ -20,9 +20,8 @@ import java.util.ArrayList;
  */
 public class Filetestcuadikhang {
     public static void main(String[] args) throws SQLException {
-        OnsiteCourseDAL dAL=new OnsiteCourseDAL();
-        for(OnsiteCourse temp: dAL.getOnsiteCourses()){
-            System.out.println(temp.toString());
-        }
+        OnlineCourseDAL dAL=new OnlineCourseDAL();
+        OnlineCourse course=new OnlineCourse(2021, "Title", 0, 0, "Url");
+        dAL.editOnlineCourse(course);
     }
 }
