@@ -8,6 +8,11 @@ public class Course {
     public Course() {
     }
 
+    public Course(int CourseID) {
+        this.CourseID=CourseID;
+    }
+
+
     public Course(int CourseID, String Title, int Credits, int DepartmentId) {
         this.CourseID = CourseID;
         this.Title = Title;

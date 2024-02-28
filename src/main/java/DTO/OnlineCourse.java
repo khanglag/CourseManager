@@ -1,7 +1,7 @@
 package DTO;
 
 public class OnlineCourse extends Course{
-    private int CourseID;
+    
     private String Url;
 
     public OnlineCourse() {
@@ -13,17 +13,10 @@ public class OnlineCourse extends Course{
         this.Url = Url;
     }
     public OnlineCourse(int CourseID, String Url) {
-        this.CourseID = CourseID;
+        super(CourseID);
         this.Url = Url;
     }
-
-    public int getCourseID() {
-        return this.CourseID;
-    }
-
-    public void setCourseID(int CourseID) {
-        this.CourseID = CourseID;
-    }
+  
 
     public String getUrl() {
         return this.Url;
@@ -45,7 +38,7 @@ public class OnlineCourse extends Course{
 
     @Override
     public String toString() {
-        return "{" +
+        return super.toString()+ "{" +
             " CourseID='" + getCourseID() + "'" +
             ", Url='" + getUrl() + "'" +
             "}";
