@@ -13,24 +13,26 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
         OnsiteCourseDAL.connectDB();
     }
 
-    public ArrayList<OnsiteCourse> readList() throws SQLException {
-        ArrayList<OnsiteCourse> onsiteList = new ArrayList<>();
-        String sql = "SELECT * FROM onsitecourse";
-        ResultSet rs = OnlineCourseDAL.doReadQuery(sql);
-        if (rs != null) {
-            while (rs.next()) {
-                OnsiteCourse onsite = new OnsiteCourse(
-                        rs.getInt("CourseID"),
-                        rs.getString("Location"),
-                        rs.getString("Days"),
-                        rs.getTime("Time").toLocalTime());
-                onsiteList.add(onsite);
+    // public ArrayList<OnsiteCourse> readList() throws SQLException {
+    //     ArrayList<OnsiteCourse> onsiteList = new ArrayList<>();
+    //     String sql = "SELECT * FROM onsitecourse";
+    //     ResultSet rs = OnsiteCourse.doReadQuery(sql);
+    //     if (rs != null) {
+    //         while (rs.next()) {
+    //             OnsiteCourse onsite = new OnsiteCourse(
+    //                     rs.getInt("CourseID"),
+    //                     rs.getString("Location"),
+    //                     rs.getString("Days"),
+    //                     rs.getTime("Time").toLocalTime());
+    //             onsiteList.add(onsite);
 
-            }
-        }
-        closeConnect();
-        return onsiteList;
-    }
+    //         }
+    //     }
+    //     closeConnect();
+    //     return onsiteList;
+    // }
+
+    
 
     public OnsiteCourse getOnsiteCourse(int CourseID) throws SQLException {
         String sql = "SELECT * FROM onsitecourse WHERE CourseID = ? ";

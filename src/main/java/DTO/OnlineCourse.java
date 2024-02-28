@@ -45,8 +45,7 @@ public class OnlineCourse extends Course{
 
     @Override
     public String toString() {
-        return "{" +
-            " CourseID='" + getCourseID() + "'" +
+        return super.toString() + 
             ", Url='" + getUrl() + "'" +
             "}";
     }
