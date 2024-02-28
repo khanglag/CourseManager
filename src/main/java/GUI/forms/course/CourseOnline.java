@@ -18,6 +18,7 @@ public class CourseOnline extends javax.swing.JPanel {
     public CourseOnline() {
         initComponents();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

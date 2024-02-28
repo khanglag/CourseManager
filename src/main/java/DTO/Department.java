@@ -28,6 +28,10 @@ public class Department {
         this.Administrator = Administrator;
     }
 
+    public Department(int id) {
+       this.DepartmentId = DepartmentId;
+    }
+
     public int getDepartmentId() {
         return this.DepartmentId;
     }

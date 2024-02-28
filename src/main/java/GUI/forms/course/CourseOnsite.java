@@ -4,8 +4,12 @@
  */
 package GUI.forms.course;
 
+import BLL.CourseBLL;
 import GUI.JFrameOfMK;
 import GUI.MainFrame;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,10 +20,28 @@ public class CourseOnsite extends javax.swing.JPanel {
     /**
      * Creates new form CourseOnsite
      */
+    CourseBLL courseBLL = new CourseBLL();
+    DefaultTableModel model;
+    ArrayList<CourseOnsite> list = new ArrayList<CourseOnsite>();
     public CourseOnsite() {
         initComponents();
     }
 
+    public void LoadData() throws SQLException {
+        model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        list = courseBLL.get;
+        int i = 0;
+        while (i <= list.size() - 1) {
+            Department px = list.get(i);
+            model.addRow(new Object[] {
+                  px.getDepartmentId(),px.getName(),px.getBudget(),px.getStartDate(),px.getAdministrator()
+            });
+            jTable1.setModel(model);
+            ++i;
+        }
+
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
