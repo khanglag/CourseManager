@@ -27,7 +27,7 @@ public class DepartmentDAL extends MyDatabaseManager {
                 departmentList.add(d);
             }
         }
-        closeConnect();
+       // closeConnect();
         return departmentList;
     }
 
@@ -80,6 +80,7 @@ public class DepartmentDAL extends MyDatabaseManager {
         
         String sql = "Select departmentid from department order by departmentid desc limit 1";
         PreparedStatement p = DepartmentDAL.getConnection().prepareStatement(sql);
+     
         return p.executeUpdate();
     }
 
@@ -100,6 +101,7 @@ public class DepartmentDAL extends MyDatabaseManager {
                 list.add(department);
             }
         }
+        closeConnect();
         return list;
     }
 
@@ -143,7 +145,7 @@ public class DepartmentDAL extends MyDatabaseManager {
             }
 
         }
-        closeConnect();
+       closeConnect();
         return list;
     }
 

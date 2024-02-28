@@ -61,6 +61,8 @@ public class Add extends javax.swing.JDialog {
 
         jLabel2.setText("Department ID");
 
+        jtfID.setEditable(false);
+
         jLabel3.setText("Name");
 
         Budget.setText("Budget");

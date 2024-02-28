@@ -133,6 +133,11 @@ public class DepartmentForm extends javax.swing.JPanel {
         jtfFind.setBorder(javax.swing.BorderFactory.createTitledBorder("Find: "));
 
         btnFind.setText("Find");
+        btnFind.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFindActionPerformed(evt);
+            }
+        });
 
         btnEdit.setText("Edit");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
@@ -228,6 +233,27 @@ public class DepartmentForm extends javax.swing.JPanel {
         }
         
     }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
+        
+        try {
+            // TODO add your handling code here:
+            model = (DefaultTableModel) jTable1.getModel();
+            model.setRowCount(0);
+            ArrayList<Department> ls = departmentBLL.finDepartments(jtfFind.getText());
+            
+            for(Department px : ls){
+                model.addRow(new Object[] {
+                      px.getDepartmentId(),px.getName(),px.getBudget(),px.getStartDate(),px.getAdministrator()
+                });
+                jTable1.setModel(model);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DepartmentForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     
+    }//GEN-LAST:event_btnFindActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
