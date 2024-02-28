@@ -36,8 +36,8 @@ public class Controller {
         this.root = jpnRoot;
     }
 
-    public void setView(JPanel jpnItem, JLabel jlbItem){
-        kindSelected = "ThongTinNhanVien";    
+    public void setView(JPanel jpnItem, JLabel jlbItem) throws SQLException{
+        kindSelected = "Course";    
         root.removeAll();
         root.setLayout(new BorderLayout());
         root.add(new CourseOnline());
@@ -72,8 +72,15 @@ public class Controller {
             
             switch (kind) {
                 case "Course":
-                    node = new CourseManager();
+                {
+                    try {
+                        node = new CourseManager();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                     break;
+
                 case "Person":
                     node = new AddUser();
                     break;

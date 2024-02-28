@@ -33,6 +33,7 @@ public class MainFrame extends javax.swing.JFrame {
         listItem.add(new DanhMucBean("CourseInstructor",panelCourseInstructor,jLabelCourseInstructor));
         listItem.add(new DanhMucBean("OfficeAssignment",panelOfficeAssignment,jLabelOfficeAssignment));
         controller.setEvent(listItem);
+        //controller.setView(p, jLabelGrade);t
     }
 
     /**

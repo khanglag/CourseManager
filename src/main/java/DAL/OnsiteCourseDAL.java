@@ -28,7 +28,7 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
 
             }
         }
-        closeConnect();
+        
         return onsiteList;
     }
 
@@ -47,7 +47,7 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
 
             }
         }
-        closeConnect();
+        
         return onsite;
     }
 
@@ -97,7 +97,7 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
 
             }
         }
-        closeConnect();
+        
         return list;
     } 
     public ArrayList<OnsiteCourse> getOnsiteCourses() throws SQLException{
@@ -118,7 +118,7 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
                 courses.add(course);
             }
         }
-        closeConnect();
+        
         return courses;
          
     }
@@ -126,7 +126,7 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
     public ArrayList<OnsiteCourse> findOnsiteCourses(int ID) throws SQLException{
         ArrayList<OnsiteCourse> courses = new ArrayList<>();
          String sql = "SELECT course.CourseID,course.Title,course.Credits,course.DepartmentID,onsitecourse.location, onsitecourse.Days, onsitecourse.time FROM onsitecourse\n" +
-"LEFT JOIN course ON onsitecourse.CourseID = course.CourseIDWHERE CourseID =?";
+"LEFT JOIN course ON onsitecourse.CourseID = course.CourseID WHERE onsitecourse.CourseID =?";
         PreparedStatement p = OnlineCourseDAL.getConnection().prepareStatement(sql);
         p.setInt(1, ID);
         ResultSet rs = p.executeQuery();
@@ -143,7 +143,31 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
                 courses.add(course);
             }
         }
-        closeConnect();
+        
+        return courses;
+         
+    }
+    public ArrayList<OnsiteCourse> findOnsiteCourses(String title) throws SQLException{
+        ArrayList<OnsiteCourse> courses = new ArrayList<>();
+         String sql = "SELECT course.CourseID,course.Title,course.Credits,course.DepartmentID,onsitecourse.location, onsitecourse.Days, onsitecourse.time FROM onsitecourse\n" +
+"LEFT JOIN course ON onsitecourse.CourseID = course.CourseID WHERE Title like ?";
+        PreparedStatement p = OnlineCourseDAL.getConnection().prepareStatement(sql);
+        p.setString(1, title);
+        ResultSet rs = p.executeQuery();
+        if (rs!= null) {
+            while (rs.next()) {
+                OnsiteCourse course = new OnsiteCourse(
+                        rs.getInt("CourseID"),
+                        rs.getString("Title"),
+                        rs.getInt("Credits"),
+                        rs.getInt("DepartmentID"),
+                        rs.getString("Location"),
+                        rs.getString("Days"),
+                        rs.getTime("Time").toLocalTime());
+                courses.add(course);
+            }
+        }
+        
         return courses;
          
     }

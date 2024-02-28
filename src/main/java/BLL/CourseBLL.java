@@ -25,6 +25,8 @@ public class CourseBLL {
         
     }
     CourseDAL dAL=new CourseDAL();
+    OnlineCourseDAL onlDal = new OnlineCourseDAL();
+    OnsiteCourseDAL onsiteDal = new OnsiteCourseDAL();
     public ArrayList<Course> getCourses() throws SQLException{
         return dAL.readCourses();
     }
@@ -111,6 +113,17 @@ public class CourseBLL {
         OnsiteCourseDAL oDAL=new OnsiteCourseDAL();
         return oDAL.getOnsiteCourses();
     }
+    public ArrayList<OnsiteCourse> findCourseOnsite(String searchTerm) throws SQLException{
+        ArrayList<OnsiteCourse> tempList =new ArrayList<>();
+        if(isNumeric(searchTerm)) {
+            tempList= onsiteDal.findOnsiteCourses(Integer.parseInt(searchTerm));
+        }
+        else tempList= onsiteDal.findOnsiteCourses(searchTerm);
+        
+        return tempList;
+    }
+    
+    
     public static boolean isNumeric(String str) {
         if (str == null || str.length() == 0) {
             return false;

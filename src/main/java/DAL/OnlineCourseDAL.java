@@ -22,7 +22,8 @@ public class OnlineCourseDAL  extends MyDatabaseManager{
                 courses.add(course);
             }
         }
-        closeConnect();
+        
+        
         return courses;
     }
     public OnlineCourse getOnlineCourse(int CourseID) throws Exception{
@@ -37,7 +38,6 @@ public class OnlineCourseDAL  extends MyDatabaseManager{
                 course.setUrl(rs.getString("url"));
             }
         }
-        closeConnect();
         return course;
     }
     public int addCourse(OnlineCourse course)  throws SQLException{
@@ -58,7 +58,6 @@ public class OnlineCourseDAL  extends MyDatabaseManager{
         String sql = "DELETE FROM onlinecourse WHERE CourseID =?";
         PreparedStatement p = OnlineCourseDAL.getConnection().prepareStatement(sql);
         p.setInt(1, CourseID);
-        closeConnect();
         return p.executeUpdate();
     }
     public ArrayList<OnlineCourse> findCourses(int CourseID) throws SQLException{
@@ -75,7 +74,6 @@ public class OnlineCourseDAL  extends MyDatabaseManager{
                         courses.add(course);
             }
         }
-        closeConnect();
         return courses;
     }
     public ArrayList<OnlineCourse> getOnlineCourses() throws SQLException{
@@ -95,7 +93,6 @@ public class OnlineCourseDAL  extends MyDatabaseManager{
                 courses.add(course);
             }
         }
-        closeConnect();
         return courses;
          
     }
@@ -119,7 +116,6 @@ public class OnlineCourseDAL  extends MyDatabaseManager{
                 courses.add(course);
             }
         }
-        closeConnect();
         return courses;
     }
 //    

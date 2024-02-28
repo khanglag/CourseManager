@@ -11,6 +11,8 @@ import GUI.JFrameOfMK;
 import GUI.MainFrame;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -131,17 +133,21 @@ public class CourseOnsite extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
-//        // TODO add your handling code here:
-//        model = (DefaultTableModel) jTable1.getModel();
-//        model.setRowCount(0);
-//        list = courseBLL.findCourseO( jtfFind.getText());
-//
-//        for (OnsiteCourse on : list) {
-//            model.addRow(new Object[] {
-//                      on.getCourseID(),on.getTitle(),on.getCredits(),on.getDepartmentId(),on.getLocation(),on.getDays(),on.getTime()
-//                });
-//                jTable1.setModel(model);
-//        }
+        // TODO add your handling code here:
+        model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        try {
+            list = courseBLL.findCourseOnsite(jtfFind.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(CourseOnsite.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        for (OnsiteCourse on : list) {
+            model.addRow(new Object[] {
+                      on.getCourseID(),on.getTitle(),on.getCredits(),on.getDepartmentId(),on.getLocation(),on.getDays(),on.getTime()
+                });
+                jTable1.setModel(model);
+        }
 
     }//GEN-LAST:event_btnFindActionPerformed
 
