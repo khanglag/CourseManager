@@ -27,7 +27,7 @@ public class DepartmentDAL extends MyDatabaseManager {
                 departmentList.add(d);
             }
         }
-        closeConnect();
+       // closeConnect();
         return departmentList;
     }
 
@@ -46,7 +46,6 @@ public class DepartmentDAL extends MyDatabaseManager {
                 department.setAdministrator(rs.getInt("Administrator"));
             }
         }
-        closeConnect();
         return department;
     }
 
@@ -74,6 +73,13 @@ public class DepartmentDAL extends MyDatabaseManager {
         String sql = "DELETE FROM department WHERE DepartmentID = ?";
         PreparedStatement p = DepartmentDAL.getConnection().prepareStatement(sql);
         p.setInt(1, DepartmentID);
+        return p.executeUpdate();
+    }
+    public int getN() throws SQLException {
+        
+        String sql = "Select departmentid from department order by departmentid desc limit 1";
+        PreparedStatement p = DepartmentDAL.getConnection().prepareStatement(sql);
+     
         return p.executeUpdate();
     }
 
@@ -137,7 +143,6 @@ public class DepartmentDAL extends MyDatabaseManager {
             }
 
         }
-        closeConnect();
         return list;
     }
 

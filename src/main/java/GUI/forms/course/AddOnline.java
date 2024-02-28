@@ -5,7 +5,15 @@
 package GUI.forms.course;
 
 import BLL.CourseBLL;
+import BLL.DepartmentBLL;
 import DTO.Course;
+import DTO.Department;
+import GUI.MainFrame;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 /**
  *
  * @author khang
@@ -19,6 +27,14 @@ public class AddOnline extends javax.swing.JDialog {
     public AddOnline(java.awt.Frame parent) {
         super(parent, true);
         initComponents();
+    }
+    public void addC() throws SQLException{
+        ArrayList<Department> list = new ArrayList<>();
+        DepartmentBLL deBLL = new DepartmentBLL();
+        list = deBLL.getAllDepartments();
+//        for(Department de : list)
+//            jComboBox1.add(1,String.valueOf(de.getDepartmentId()));
+            //jComboBox1.add(String.valueOf(de.getDepartmentId()));
     }
 
     /**
@@ -44,6 +60,7 @@ public class AddOnline extends javax.swing.JDialog {
         jtfDepartmentID = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jtfURL = new javax.swing.JTextField();
+        btnChoose = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -82,6 +99,13 @@ public class AddOnline extends javax.swing.JDialog {
 
         jLabel6.setText("URL");
 
+        btnChoose.setText("Choose");
+        btnChoose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChooseActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -118,8 +142,10 @@ public class AddOnline extends javax.swing.JDialog {
                                         .addComponent(jLabel1)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(jtfID, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jtfTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
-                .addContainerGap(73, Short.MAX_VALUE))
+                                            .addComponent(jtfTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnChoose)))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,7 +166,9 @@ public class AddOnline extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(jtfDepartmentID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jtfDepartmentID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnChoose)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
@@ -180,9 +208,35 @@ public class AddOnline extends javax.swing.JDialog {
     }//GEN-LAST:event_jtfCreditsActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
-        Course course = new Course(0,jtfTitle.getText(),Integer.parseInt(jtfCredits.getText()),Integer.parseInt(jtfDepartmentID.getText()));
+        try {
+            // TODO add your handling code here:
+            if(courseBLL.addCourseOnline(jtfTitle.getText(), Integer.parseInt(jtfCredits.getText()), Integer.parseInt(jtfDepartmentID.getText()), jtfURL.getText())){
+                JOptionPane.showMessageDialog(rootPane, "Success");
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Fail");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AddOnline.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnChooseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseActionPerformed
+        // TODO add your handling code here:
+        DepartmentChoose de;
+        try {
+            de = new DepartmentChoose(new MainFrame(),true);
+            de.setVisible(true);
+            Department dep = de.getSelectedDepartment();
+            System.out.println(dep);
+            if(dep!=null){
+                jtfDepartmentID.setText(String.valueOf(dep.getDepartmentId()));
+        }
+        } catch (SQLException ex) {
+            Logger.getLogger(AddOnline.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnChooseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,6 +245,7 @@ public class AddOnline extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnChoose;
     private javax.swing.JButton btnClose;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

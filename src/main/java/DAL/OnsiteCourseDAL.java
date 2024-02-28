@@ -11,12 +11,13 @@ import java.time.LocalTime;
 public class OnsiteCourseDAL extends MyDatabaseManager {
     public OnsiteCourseDAL() {
         OnsiteCourseDAL.connectDB();
+        // super();
     }
 
     public ArrayList<OnsiteCourse> readList() throws SQLException {
         ArrayList<OnsiteCourse> onsiteList = new ArrayList<>();
         String sql = "SELECT * FROM onsitecourse";
-        ResultSet rs = OnlineCourseDAL.doReadQuery(sql);
+        ResultSet rs = OnsiteCourseDAL.doReadQuery(sql);
         if (rs != null) {
             while (rs.next()) {
                 OnsiteCourse onsite = new OnsiteCourse(
@@ -28,10 +29,11 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
 
             }
         }
-        closeConnect();
+        
         return onsiteList;
     }
 
+    
     public OnsiteCourse getOnsiteCourse(int CourseID) throws SQLException {
         String sql = "SELECT * FROM onsitecourse WHERE CourseID = ? ";
         PreparedStatement p = OnsiteCourseDAL.getConnection().prepareStatement(sql);
@@ -47,7 +49,7 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
 
             }
         }
-        closeConnect();
+        
         return onsite;
     }
 
@@ -97,11 +99,12 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
 
             }
         }
-        closeConnect();
+        
         return list;
-    }
 
-    public ArrayList<OnsiteCourse> getOnsiteCourses() throws SQLException {
+
+    public ArrayList<OnsiteCourse> getOnsiteCourses() throws SQLException{
+
         ArrayList<OnsiteCourse> courses = new ArrayList<>();
         String sql = "SELECT course.CourseID,course.Title,course.Credits,course.DepartmentID,onsitecourse.location, onsitecourse.Days, onsitecourse.time FROM onsitecourse\n"
                 +
@@ -120,7 +123,7 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
                 courses.add(course);
             }
         }
-        closeConnect();
+        
         return courses;
 
     }
@@ -128,9 +131,10 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
     // Tìm
     public ArrayList<OnsiteCourse> findOnsiteCourses(int ID) throws SQLException {
         ArrayList<OnsiteCourse> courses = new ArrayList<>();
-        String sql = "SELECT course.CourseID,course.Title,course.Credits,course.DepartmentID,onsitecourse.location, onsitecourse.Days, onsitecourse.time FROM onsitecourse\n"
-                +
-                "LEFT JOIN course ON onsitecourse.CourseID = course.CourseID WHERE CourseID =?";
+
+         String sql = "SELECT course.CourseID,course.Title,course.Credits,course.DepartmentID,onsitecourse.location, onsitecourse.Days, onsitecourse.time FROM onsitecourse\n" +
+"LEFT JOIN course ON onsitecourse.CourseID = course.CourseID WHERE onsitecourse.CourseID =?";
+
         PreparedStatement p = OnlineCourseDAL.getConnection().prepareStatement(sql);
         p.setInt(1, ID);
         ResultSet rs = p.executeQuery();
@@ -147,10 +151,11 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
                 courses.add(course);
             }
         }
-        closeConnect();
+        
         return courses;
 
     }
+
 
     // Sửa course onsites
     public int editOnsiteCourse(OnsiteCourse onsite) throws SQLException {
@@ -173,6 +178,30 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
         p.setInt(7, onsite.getCourseID());
         System.out.println(p.toString());
         return p.executeUpdate();
+}
+    public ArrayList<OnsiteCourse> findOnsiteCourses(String title) throws SQLException{
+        ArrayList<OnsiteCourse> courses = new ArrayList<>();
+         String sql = "SELECT course.CourseID,course.Title,course.Credits,course.DepartmentID,onsitecourse.location, onsitecourse.Days, onsitecourse.time FROM onsitecourse\n" +
+"LEFT JOIN course ON onsitecourse.CourseID = course.CourseID WHERE Title like ?";
+        PreparedStatement p = OnlineCourseDAL.getConnection().prepareStatement(sql);
+        p.setString(1, "%"+title+"%");
+        ResultSet rs = p.executeQuery();
+        if (rs!= null) {
+            while (rs.next()) {
+                OnsiteCourse course = new OnsiteCourse(
+                        rs.getInt("CourseID"),
+                        rs.getString("Title"),
+                        rs.getInt("Credits"),
+                        rs.getInt("DepartmentID"),
+                        rs.getString("Location"),
+                        rs.getString("Days"),
+                        rs.getTime("Time").toLocalTime());
+                courses.add(course);
+            }
+        }
+        
+        return courses;
+
     }
 
 }

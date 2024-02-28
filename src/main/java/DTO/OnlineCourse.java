@@ -38,8 +38,9 @@ public class OnlineCourse extends Course{
 
     @Override
     public String toString() {
-        return super.toString()+ "{" +
-            " CourseID='" + getCourseID() + "'" +
+
+        return super.toString() + 
+
             ", Url='" + getUrl() + "'" +
             "}";
     }
