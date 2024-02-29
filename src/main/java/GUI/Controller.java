@@ -82,11 +82,25 @@ public class Controller {
                     break;
 
                 case "Person":
-                    node = new AddUser();
+                {
+                    try {
+                        node = new AddUser();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                     break;
+
                 case "OfficeAssignment":
-                    node = new Assignment();
+                {
+                    try {
+                        node = new Assignment();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                     break;
+
                 case "CourseInstructor":
                     //node =  new CourseInstructor();
                     break;

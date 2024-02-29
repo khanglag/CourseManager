@@ -28,7 +28,7 @@ public class OfficeAssignmentDAL extends MyDatabaseManager {
 
             }
         }
-        closeConnect();
+      //  closeConnect();
         return assignments;
     }
 
@@ -46,7 +46,7 @@ public class OfficeAssignmentDAL extends MyDatabaseManager {
 
             }
         }
-        closeConnect();
+   //     closeConnect();
         return assignment;
     }
 

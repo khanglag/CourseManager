@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import DTO.Person;
 
 public class PersonDAL extends MyDatabaseManager {
+
     public PersonDAL() {
         PersonDAL.connectDB();
     }
@@ -26,7 +27,7 @@ public class PersonDAL extends MyDatabaseManager {
                 persons.add(person);
             }
         }
-        closeConnect();
+        //  closeConnect();
         return persons;
     }
 
@@ -45,7 +46,7 @@ public class PersonDAL extends MyDatabaseManager {
                 person.setEnrollmentDate(rs.getDate("EnrollmentDate"));
             }
         }
-        closeConnect();
+        // closeConnect();
         return person;
     }
 
@@ -54,8 +55,18 @@ public class PersonDAL extends MyDatabaseManager {
         PreparedStatement p = PersonDAL.getConnection().prepareStatement(sql);
         p.setString(1, person.getLastName());
         p.setString(2, person.getFirstName());
-        p.setDate(3, new java.sql.Date(person.getHireDate().getTime()));
-        p.setDate(4, new java.sql.Date(person.getEnrollmentDate().getTime()));
+//        p.setDate(3, new java.sql.Date(person.getHireDate().getTime()));
+//        p.setDate(4, new java.sql.Date(person.getEnrollmentDate().getTime()));
+        if (person.getHireDate() == null) {
+            p.setNull(3, java.sql.Types.DATE);
+        } else {
+            p.setDate(3, new java.sql.Date(person.getHireDate().getTime()));
+        }
+        if (person.getEnrollmentDate() == null) {
+            p.setNull(4, java.sql.Types.DATE);
+        } else {
+            p.setDate(4, new java.sql.Date(person.getEnrollmentDate().getTime()));
+        }
         return p.executeUpdate();
     }
 
@@ -76,25 +87,27 @@ public class PersonDAL extends MyDatabaseManager {
         p.setInt(1, PersonID);
         return p.executeUpdate();
     }
-    public ArrayList<Person> findPerson(int PersonID) throws SQLException{
+
+    public ArrayList<Person> findPerson(int PersonID) throws SQLException {
         ArrayList<Person> list = new ArrayList<>();
         String sql = "SELECT * FROM person WHERE PersonID = ?";
         PreparedStatement p = PersonDAL.getConnection().prepareStatement(sql);
         p.setInt(1, PersonID);
         ResultSet rs = p.executeQuery();
-        if(rs != null){
-            while(rs.next()) {
+        if (rs != null) {
+            while (rs.next()) {
                 Person person = new Person(
-                rs.getInt("PersonID"),
+                        rs.getInt("PersonID"),
                         rs.getString("LastName"),
                         rs.getString("FirstName"),
                         rs.getDate("HireDate"),
                         rs.getDate("EnrollmentDate"));
-                    list.add(person);
+                list.add(person);
             }
         }
         return list;
     }
+
     public ArrayList<Person> findPerson(String fullName) throws SQLException {
         ArrayList<Person> list = new ArrayList<>();
         String query = "SELECT * FROM person WHERE concat(FirstName, ' ', LastName)  LIKE ?";
@@ -104,16 +117,16 @@ public class PersonDAL extends MyDatabaseManager {
         if (rs != null) {
             while (rs.next()) {
                 Person person = new Person(
-                    rs.getInt("PersonID"),
+                        rs.getInt("PersonID"),
                         rs.getString("LastName"),
                         rs.getString("FirstName"),
                         rs.getDate("HireDate"),
                         rs.getDate("EnrollmentDate"));
-                    list.add(person);
+                list.add(person);
             }
         }
-        closeConnect();
+        //    closeConnect();
         return list;
     }
-   
+
 }

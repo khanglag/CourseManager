@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import DTO.CourseInstructor;
 
 public class CourseInstructorDAL extends MyDatabaseManager {
+
     public CourseInstructorDAL() {
         CourseInstructorDAL.connectDB();
     }
@@ -39,7 +40,7 @@ public class CourseInstructorDAL extends MyDatabaseManager {
                 instructor.setPersonID(rs.getInt("PersonID"));
             }
         }
-        closeConnect();
+        // closeConnect();
         return instructor;
     }
 
@@ -71,23 +72,23 @@ public class CourseInstructorDAL extends MyDatabaseManager {
     }
 
     public ArrayList<CourseInstructor> findByCourseID(int CourseID) throws
-    SQLException {
-    ArrayList<CourseInstructor> list = new ArrayList<>();
-    String sql = "SELECT * FROM courseinstructor WHERE CourseID = ?";
-    PreparedStatement p =
-    CourseInstructorDAL.getConnection().prepareStatement(sql);
-    p.setInt(1, CourseID);
-    ResultSet rs = p.executeQuery();
-    if (rs != null) {
-    while (rs.next()) {
-    CourseInstructor instructor = new CourseInstructor(
-    rs.getInt("CourseID"),
-    rs.getInt("PersonID"));
-    list.add(instructor);
-    }
-    }
-    closeConnect();
-    return list;
+            SQLException {
+        ArrayList<CourseInstructor> list = new ArrayList<>();
+        String sql = "SELECT * FROM courseinstructor WHERE CourseID = ?";
+        PreparedStatement p
+                = CourseInstructorDAL.getConnection().prepareStatement(sql);
+        p.setInt(1, CourseID);
+        ResultSet rs = p.executeQuery();
+        if (rs != null) {
+            while (rs.next()) {
+                CourseInstructor instructor = new CourseInstructor(
+                        rs.getInt("CourseID"),
+                        rs.getInt("PersonID"));
+                list.add(instructor);
+            }
+        }
+        //closeConnect();
+        return list;
     }
 
     public ArrayList<CourseInstructor> findByPersonID(int PersonID) throws SQLException {
@@ -104,7 +105,7 @@ public class CourseInstructorDAL extends MyDatabaseManager {
                 list.add(instructor);
             }
         }
-        closeConnect();
+        //closeConnect();
         return list;
     }
 
