@@ -127,13 +127,11 @@ public class Controller {
            root.validate();
            root.repaint();
            setChangeBackGround(kind);
-            System.out.println("chay mouseClicked");
         }
 
 
          @Override
       public void mousePressed(MouseEvent e) {
-          System.out.println("chay mousePressed");
            kindSelected = kind;
 //           jpnItem.setBackground(new Color(0,0,0));
 //           jlbItem.setBackground(new Color(0,0,0));
@@ -141,20 +139,17 @@ public class Controller {
 
       @Override
       public void mouseReleased(MouseEvent e) {
-          System.out.println("chay mouseReleased");
          
       }
 
       @Override
       public void mouseEntered(MouseEvent e) {
-          System.out.println("chay mouseEntered");
 //          jpnItem.setBackground(new Color(38,84,108));
 //          jlbItem.setBackground(new Color(38,84,108));
       }
 
       @Override
       public void mouseExited(MouseEvent e) {
-          System.out.println("chay mouseExited");
           if (!kindSelected.equalsIgnoreCase(kind)) {
 //                jpnItem.setBackground(new Color(67,138,174));
 //                jlbItem.setBackground(new Color(67,138,174));
