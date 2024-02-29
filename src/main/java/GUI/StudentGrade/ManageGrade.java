@@ -5,8 +5,8 @@
 package GUI.StudentGrade;
 
 import BLL.StudentGradeBLL;
-import DTO.Person;
-import DTO.StudentGrade;
+import BLL.DTO.StudentGrade;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
