@@ -2,11 +2,11 @@ package BLL;
 
 import java.util.ArrayList;
 import BLL.PersonBLL;
-import DTO.CourseInstructor;
-import DTO.Department;
-import DTO.OfficeAssignment;
-import DTO.Person;
-import DTO.StudentGrade;
+import BLL.DTO.CourseInstructor;
+import BLL.DTO.Department;
+import BLL.DTO.OfficeAssignment;
+import BLL.DTO.Person;
+import BLL.DTO.StudentGrade;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;

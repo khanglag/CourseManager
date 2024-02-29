@@ -4,7 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import DTO.OnlineCourse;
+import BLL.DTO.OnlineCourse;
 
 public class OnlineCourseDAL  extends MyDatabaseManager{
     public OnlineCourseDAL() {

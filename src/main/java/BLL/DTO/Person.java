@@ -1,4 +1,4 @@
-package DTO;
+package BLL.DTO;
 
 import java.util.Date;
 

@@ -1,12 +1,12 @@
 package DAL;
 
-import DTO.OnlineCourse;
+import BLL.DTO.OnlineCourse;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import DTO.OnsiteCourse;
+import BLL.DTO.OnsiteCourse;
 import java.time.LocalTime;
 
 public class OnsiteCourseDAL extends MyDatabaseManager {

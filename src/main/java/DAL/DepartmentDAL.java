@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 
-import DTO.Department;
+import BLL.DTO.Department;
 
 public class DepartmentDAL extends MyDatabaseManager {
     public DepartmentDAL() {

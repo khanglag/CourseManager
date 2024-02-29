@@ -5,8 +5,8 @@
 package GUI.Person;
 
 import BLL.PersonBLL;
-import DTO.OnlineCourse;
-import DTO.Person;
+import BLL.DTO.OnlineCourse;
+import BLL.DTO.Person;
 import GUI.forms.course.CourseOnsite;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
