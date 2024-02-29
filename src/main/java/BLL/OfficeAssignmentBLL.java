@@ -5,7 +5,7 @@
 package BLL;
 
 import DAL.OfficeAssignmentDAL;
-import DTO.OfficeAssignment;
+import BLL.DTO.OfficeAssignment;
 import java.sql.SQLException;
 import java.util.ArrayList;
 

@@ -5,7 +5,7 @@
 package GUI.forms.course;
 
 import BLL.CourseBLL;
-import DTO.OnlineCourse;
+import BLL.DTO.OnlineCourse;
 import GUI.MainFrame;
 import java.sql.SQLException;
 import java.util.ArrayList;

@@ -5,7 +5,7 @@
 package GUI.OfficeAssignment;
 
 import BLL.CourseBLL;
-import DTO.Course;
+import BLL.DTO.Course;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;

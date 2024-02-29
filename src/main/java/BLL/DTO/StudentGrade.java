@@ -1,4 +1,4 @@
-package DTO;
+package BLL.DTO;
 
 public class StudentGrade {
     private int EnrollmentID, CourseID, StudentID;

@@ -5,7 +5,7 @@
 package GUI.forms.course;
 
 import BLL.CourseBLL;
-import DTO.Department;
+import BLL.DTO.Department;
 import GUI.Hander.StringToLocalTimeConverter;
 import GUI.MainFrame;
 import java.awt.Frame;
@@ -48,7 +48,6 @@ public class AddOnsite extends javax.swing.JDialog {
         jtfID = new javax.swing.JTextField();
         jtfLocation = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jtfDay = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -60,6 +59,8 @@ public class AddOnsite extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         jtfDepartmentID = new javax.swing.JTextField();
         btnChoose1 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -83,9 +84,6 @@ public class AddOnsite extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Course Onsite");
-
         jLabel4.setText("Days");
 
         jLabel5.setText("Time");
@@ -105,20 +103,16 @@ public class AddOnsite extends javax.swing.JDialog {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setText("Course Onsite");
+        jPanel2.add(jLabel1);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnClose)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnAdd))
-                            .addComponent(jLabel1)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,14 +149,19 @@ public class AddOnsite extends javax.swing.JDialog {
                                         .addGap(51, 51, 51)
                                         .addComponent(jtfID, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnChoose1)))))
-                .addContainerGap(16, Short.MAX_VALUE))
+                                .addComponent(btnChoose1))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(114, 114, 114)
+                        .addComponent(btnClose)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAdd))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jLabel1)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -274,6 +273,7 @@ public class AddOnsite extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jtfCredits;
     private javax.swing.JTextField jtfDay;
     private javax.swing.JTextField jtfDepartmentID;

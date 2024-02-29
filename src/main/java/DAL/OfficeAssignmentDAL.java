@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-import DTO.OfficeAssignment;
+import BLL.DTO.OfficeAssignment;
 
 public class OfficeAssignmentDAL extends MyDatabaseManager {
     public OfficeAssignmentDAL() {

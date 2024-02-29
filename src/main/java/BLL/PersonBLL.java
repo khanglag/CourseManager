@@ -5,7 +5,7 @@
 package BLL;
 
 import DAL.PersonDAL;
-import DTO.Person;
+import BLL.DTO.Person;
 import java.sql.SQLException;
 import java.util.ArrayList;
 

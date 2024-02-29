@@ -5,7 +5,7 @@
 package GUI.forms.course;
 
 import BLL.DepartmentBLL;
-import DTO.Department;
+import BLL.DTO.Department;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;

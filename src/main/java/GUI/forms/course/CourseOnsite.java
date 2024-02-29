@@ -5,7 +5,7 @@
 package GUI.forms.course;
 
 import BLL.CourseBLL;
-import DTO.OnsiteCourse;
+import BLL.DTO.OnsiteCourse;
 import GUI.Hander.StringToLocalTimeConverter;
 import GUI.MainFrame;
 import java.sql.SQLException;
