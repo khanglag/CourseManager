@@ -30,7 +30,44 @@ public class CourseOnline extends javax.swing.JPanel {
     public CourseOnline() throws SQLException {
         initComponents();
         LoadData();
+        button();
     }
+    
+    public void button(){
+        TableActionEvent event = new TableActionEvent() {
+            @Override
+            public void onEdit(int i) {
+                int id = Integer.parseInt(jTable1.getModel().getValueAt(i, 0).toString());
+                String title = jTable1.getModel().getValueAt(i, 1).toString();
+                int credit = Integer.parseInt(jTable1.getModel().getValueAt(i, 2).toString());
+                int deid = Integer.parseInt(jTable1.getModel().getValueAt(i, 3).toString());
+                String url = jTable1.getModel().getValueAt(i, 4).toString();
+                OnlineCourse onlCo = new OnlineCourse(id,title,credit,deid,url);
+                EditOnline edit = new EditOnline(new MainFrame(),onlCo);
+                edit.setVisible(true);
+                courseBLL = new CourseBLL();
+                try {
+                    LoadData();
+                } catch (SQLException ex) {
+                    Logger.getLogger(CourseOnline.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            @Override
+            public void onDelete(int row) {
+               System.out.println("Delete");
+            }
+
+            @Override
+            public void onView(int row) {
+                 System.out.println("View");
+            }
+        };
+        jTable1.getColumnModel().getColumn(5).setCellRenderer(new TableActionCellRender());
+        jTable1.getColumnModel().getColumn(5).setCellEditor(new TableActionCellEditor(event));
+        
+    }
+    
     public void LoadData() throws SQLException {
         model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
@@ -57,29 +94,34 @@ public class CourseOnline extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        btnEdit = new javax.swing.JButton();
         jtfFind = new javax.swing.JTextField();
         btnFind = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Course ID", "Title ", "Credits", "Department ID", "URL"
+                "Course ID", "Title ", "Credits", "Department ID", "URL", "Action"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, true
+            };
 
-        btnEdit.setText("Edit");
-        btnEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditActionPerformed(evt);
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
+        jTable1.setRowHeight(40);
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(5).setMinWidth(120);
+            jTable1.getColumnModel().getColumn(5).setPreferredWidth(120);
+        }
 
         jtfFind.setBorder(javax.swing.BorderFactory.createTitledBorder("Find:"));
 
@@ -100,19 +142,15 @@ public class CourseOnline extends javax.swing.JPanel {
                 .addComponent(jtfFind, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnFind)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jtfFind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnFind))
-                    .addComponent(btnEdit))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfFind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFind))
                 .addGap(38, 38, 38)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE))
         );
@@ -135,32 +173,6 @@ public class CourseOnline extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // TODO add your handling code here:
-        int i = jTable1.getSelectedRow();
-        if(i>=0){
-            int id = Integer.parseInt(jTable1.getModel().getValueAt(i, 0).toString());
-            String title = jTable1.getModel().getValueAt(i, 1).toString();
-            int credit = Integer.parseInt(jTable1.getModel().getValueAt(i, 2).toString());
-            int deid = Integer.parseInt(jTable1.getModel().getValueAt(i, 3).toString());
-            String url = jTable1.getModel().getValueAt(i, 4).toString();
-            OnlineCourse onlCo = new OnlineCourse(id,title,credit,deid,url);
-            EditOnline edit = new EditOnline(new MainFrame(),onlCo);
-            edit.setVisible(true);
-            courseBLL = new CourseBLL();
-            try {
-                LoadData();
-            } catch (SQLException ex) {
-                Logger.getLogger(CourseOnline.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-        }else{
-            JOptionPane.showMessageDialog(btnEdit, "Please choose");
-        }
-        
-        
-    }//GEN-LAST:event_btnEditActionPerformed
-
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
         // TODO add your handling code here:
         model = (DefaultTableModel) jTable1.getModel();
@@ -182,7 +194,6 @@ public class CourseOnline extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnFind;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
