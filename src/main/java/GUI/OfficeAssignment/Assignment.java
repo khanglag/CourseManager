@@ -116,6 +116,7 @@ public class Assignment extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableListCourse = new javax.swing.JTable();
         btnChooseCourseID = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
 
         jtableAssignment.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -345,6 +346,13 @@ public class Assignment extends javax.swing.JPanel {
                 .addGap(0, 0, 0))
         );
 
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -362,6 +370,8 @@ public class Assignment extends javax.swing.JPanel {
                 .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
@@ -374,9 +384,11 @@ public class Assignment extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
         );
@@ -473,9 +485,14 @@ public class Assignment extends javax.swing.JPanel {
                 Timestamp timestamp = new Timestamp(parsedDate.getTime());
                 OfficeAssignment oa = new OfficeAssignment(instructorID, location, timestamp);
                 CourseInstructor ci = new CourseInstructor(courseID, instructorID);
+                officeAssignments=  OAbll.findAssignments(instructorID);
+                if(ci.getPersonID() == officeAssignments.get(0).getInstructorID()){
+                     JOptionPane.showMessageDialog(null, "Fail! Instructor assigned before");
+                     return;
+                }
                 OAbll.addAssignment(oa);
                 CIbll.addInstructor(ci);
-
+                
                 JOptionPane.showMessageDialog(null, "Success!");
                 loadDataAssignment();
             } catch (NumberFormatException e) {
@@ -517,6 +534,48 @@ public class Assignment extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jtableAssignmentMouseClicked
 
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+         String courseIDStr = txtCourseID.getText();
+        String instructorIDStr = txtInstructorID.getText();
+        String location = txtLocation.getText();
+        String ts = txtTimestamp.getText();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            // Cố gắng chuyển đổi chuỗi thành đối tượng Date
+            dateFormat.parse(ts);
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(null, "Please fill yyyy-MM-dd HH:mm:ss");
+            return;
+        }
+        if (courseIDStr.isEmpty() || instructorIDStr.isEmpty() || location.isEmpty() || ts.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please fill in all information");
+            return;
+        } else {
+            try {
+                int courseID = Integer.parseInt(courseIDStr);
+                int instructorID = Integer.parseInt(instructorIDStr);
+                Date parsedDate = dateFormat.parse(ts);
+                Timestamp timestamp = new Timestamp(parsedDate.getTime());
+                OfficeAssignment oa = new OfficeAssignment(instructorID, location, timestamp);
+                CourseInstructor ci = new CourseInstructor(courseID, instructorID);
+                
+                OAbll.updateAssignment(oa);
+//                CIbll.up(ci);
+                
+                JOptionPane.showMessageDialog(null, "Success!");
+                loadDataAssignment();
+            } catch (NumberFormatException e) {
+                // Handle the case when parsing fails
+                System.out.println("Invalid input for Course ID or Instructor ID. Please enter valid integers.");
+            } catch (SQLException ex) {
+                Logger.getLogger(Assignment.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
+                Logger.getLogger(Assignment.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
@@ -524,6 +583,7 @@ public class Assignment extends javax.swing.JPanel {
     private javax.swing.JButton btnChooseInstructorID;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnReset;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
