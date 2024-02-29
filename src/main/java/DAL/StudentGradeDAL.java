@@ -25,7 +25,7 @@ public class StudentGradeDAL extends MyDatabaseManager {
                 list.add(grade);
             }
         }
-        closeConnect();
+        //closeConnect();
         return list;
     }
 
@@ -43,7 +43,7 @@ public class StudentGradeDAL extends MyDatabaseManager {
                 studentGrade.setGrade(rs.getDouble("Grade"));
             }
         }
-        closeConnect();
+       // closeConnect();
         return studentGrade;
     }
 
@@ -89,7 +89,7 @@ public class StudentGradeDAL extends MyDatabaseManager {
                 list.add(grade);
             }
         }
-        closeConnect();
+       // closeConnect();
         return list;
     }
    

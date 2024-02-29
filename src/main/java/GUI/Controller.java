@@ -105,8 +105,15 @@ public class Controller {
                     //node =  new CourseInstructor();
                     break;
                 case "Grade":
-                    node = new ManageGrade();
+                {
+                    try {
+                        node = new ManageGrade();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                     break;
+
                 case "Department":
                 {
                     try {

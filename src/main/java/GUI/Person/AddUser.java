@@ -164,6 +164,11 @@ public class AddUser extends javax.swing.JPanel {
         });
 
         jButton3.setText("Onsite course");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -220,8 +225,7 @@ public class AddUser extends javax.swing.JPanel {
                             .addComponent(txtFind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnFind))
                         .addGap(98, 98, 98)))
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -295,6 +299,20 @@ public class AddUser extends javax.swing.JPanel {
            
         }
     }//GEN-LAST:event_btnFindActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        JFrame chooseCourseOnline = new JFrame("Onsite Courses");
+        chooseCourseOnline.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Đóng cửa sổ khi thoát
+        try {
+            chooseCourseOnline.getContentPane().add(new ChooseOnsiteCourse()); // Thêm ListCourses vào JFrame
+        } catch (SQLException ex) {
+            Logger.getLogger(AddUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        chooseCourseOnline.pack();
+        chooseCourseOnline.setLocationRelativeTo(null); // Hiển thị JFrame ở giữa màn hình
+        chooseCourseOnline.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
