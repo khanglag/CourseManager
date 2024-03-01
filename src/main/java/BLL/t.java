@@ -67,7 +67,10 @@ public class t {
 //OfficeAssignmentBLL OAbll = new OfficeAssignmentBLL();
 //  OfficeAssignment oa = new OfficeAssignment(5, "ABCCCCC", timestamp);
 //OAbll.updateAssignment(oa);
-        StudentGradeBLL sg = new StudentGradeBLL();
-        System.out.println(sg.findGradesByStudentID(2));
+//        StudentGradeBLL sg = new StudentGradeBLL();
+//        System.out.println(sg.findGradesByStudentID(2));
+CourseBLL c = new CourseBLL();
+c.findCourse("courseID");
+        System.out.println(c.findCourse("1045"));
     }
 }
