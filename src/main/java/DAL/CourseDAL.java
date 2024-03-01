@@ -87,14 +87,6 @@ public class CourseDAL extends MyDatabaseManager {
         return p.executeUpdate();
     }
 
-    public int delete(int CourseID) throws SQLException {
-        String sql = "DELETE FROM course WHERE CourseID = ? AND CourseID NOT IN (SELECT CourseID FROM studentgrade) AND CourseID NOT IN (SELECT CourseID FROM courseinstructor)";
-        PreparedStatement p = CourseDAL.getConnection().prepareStatement(sql);
-        p.setInt(1, CourseID);
-        return p.executeUpdate();
-    }
-    
-
     public ArrayList<Course> findCourse(int CourseID) throws SQLException {
         ArrayList<Course> courseList = new ArrayList<>();
         String sql = "SELECT * FROM course WHERE CourseID = ?";
@@ -174,8 +166,9 @@ public class CourseDAL extends MyDatabaseManager {
     }
     public static void main(String[] args) {
         CourseDAL dal = new CourseDAL();
-            try {
-        int rowsAffected = dal.delete(4064);
+        Course  c = new Course(0,"Math",3,7);
+        try {
+        int rowsAffected = dal.addCourse(c);
         if (rowsAffected > 0) {
         System.out.println("Course added successfully.");
         } else {
