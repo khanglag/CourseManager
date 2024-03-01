@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
@@ -399,16 +400,16 @@ public class Assignment extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimestampActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        if(txtInstructorID.getText().equals("")){
+        if (txtInstructorID.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Please select row to delete assignment");
             return;
         }
         try {
             // TODO add your handling code here:
-            CourseInstructor CI = new CourseInstructor(Integer.parseInt(txtCourseID.getText()),Integer.parseInt(txtInstructorID.getText()));
+            CourseInstructor CI = new CourseInstructor(Integer.parseInt(txtCourseID.getText()), Integer.parseInt(txtInstructorID.getText()));
             OAbll.deleteAssignment(Integer.parseInt(txtInstructorID.getText()));
             CIbll.deleteInstructor(CI);
-            JOptionPane.showMessageDialog(null, "Delete success instructor id = "+txtInstructorID.getText());
+            JOptionPane.showMessageDialog(null, "Delete success instructor id = " + txtInstructorID.getText());
             loadDataAssignment();
             return;
         } catch (SQLException ex) {
@@ -467,43 +468,42 @@ public class Assignment extends javax.swing.JPanel {
         String location = txtLocation.getText();
         String ts = txtTimestamp.getText();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        try {
-            // Cố gắng chuyển đổi chuỗi thành đối tượng Date
-            dateFormat.parse(ts);
-        } catch (ParseException e) {
-            JOptionPane.showMessageDialog(null, "Please fill yyyy-MM-dd HH:mm:ss");
-            return;
-        }
+
         if (courseIDStr.isEmpty() || instructorIDStr.isEmpty() || location.isEmpty() || ts.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please fill in all information");
             return;
-        } else {
+        }
+        try {
+            Date date = dateFormat.parse(ts);
+            Timestamp timestamp = new Timestamp(date.getTime());
             try {
                 int courseID = Integer.parseInt(courseIDStr);
                 int instructorID = Integer.parseInt(instructorIDStr);
-                Date parsedDate = dateFormat.parse(ts);
-                Timestamp timestamp = new Timestamp(parsedDate.getTime());
                 OfficeAssignment oa = new OfficeAssignment(instructorID, location, timestamp);
                 CourseInstructor ci = new CourseInstructor(courseID, instructorID);
-                officeAssignments=  OAbll.findAssignments(instructorID);
-                if(ci.getPersonID() == officeAssignments.get(0).getInstructorID()){
-                     JOptionPane.showMessageDialog(null, "Fail! Instructor assigned before");
-                     return;
+                System.out.println("Du lieu moi:   " + oa);
+                officeAssignments = OAbll.findAssignments(instructorID);
+                if (officeAssignments.isEmpty()) {
+                    OAbll.addAssignment(oa);
+                    CIbll.addInstructor(ci);
+                    JOptionPane.showMessageDialog(null, "Success!");
+                    loadDataAssignment();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Fail! Instructor assigned before");
+                    return;
                 }
-                OAbll.addAssignment(oa);
-                CIbll.addInstructor(ci);
-                
-                JOptionPane.showMessageDialog(null, "Success!");
-                loadDataAssignment();
+
             } catch (NumberFormatException e) {
                 // Handle the case when parsing fails
                 System.out.println("Invalid input for Course ID or Instructor ID. Please enter valid integers.");
             } catch (SQLException ex) {
                 Logger.getLogger(Assignment.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ParseException ex) {
-                Logger.getLogger(Assignment.class.getName()).log(Level.SEVERE, null, ex);
             }
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(null, "Please fill yyyy-MM-dd HH:mm:ss");
+            return;
         }
+
 
     }//GEN-LAST:event_btnAddActionPerformed
 
@@ -518,60 +518,58 @@ public class Assignment extends javax.swing.JPanel {
 
     private void jtableAssignmentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtableAssignmentMouseClicked
         // TODO add your handling code here:
-         if (evt.getClickCount() == 1) { // Đảm bảo rằng đó là một lần click đơn, bạn có thể thay đổi số click cần thiết
+        if (evt.getClickCount() == 1) { // Đảm bảo rằng đó là một lần click đơn, bạn có thể thay đổi số click cần thiết
             int selectedRow = jtableAssignment.getSelectedRow();
             if (selectedRow != -1) {
-                Object  courseID = jtableAssignment.getValueAt(selectedRow, 0);
-                Object  instructorID = jtableAssignment.getValueAt(selectedRow, 2);
-                Object  location = jtableAssignment.getValueAt(selectedRow, 4);
-                Object  timestamp = jtableAssignment.getValueAt(selectedRow, 5);
+                Object courseID = jtableAssignment.getValueAt(selectedRow, 0);
+                Object instructorID = jtableAssignment.getValueAt(selectedRow, 2);
+                Object location = jtableAssignment.getValueAt(selectedRow, 4);
+                Object timestamp = jtableAssignment.getValueAt(selectedRow, 5);
                 txtInstructorID.setText(String.valueOf(instructorID));
                 txtCourseID.setText(String.valueOf(courseID));
                 txtLocation.setText(String.valueOf(location));
                 txtTimestamp.setText(String.valueOf(timestamp));
-              
+
             }
         }
     }//GEN-LAST:event_jtableAssignmentMouseClicked
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-         String courseIDStr = txtCourseID.getText();
+        String courseIDStr = txtCourseID.getText();
         String instructorIDStr = txtInstructorID.getText();
         String location = txtLocation.getText();
         String ts = txtTimestamp.getText();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        try {
-            // Cố gắng chuyển đổi chuỗi thành đối tượng Date
-            dateFormat.parse(ts);
-        } catch (ParseException e) {
-            JOptionPane.showMessageDialog(null, "Please fill yyyy-MM-dd HH:mm:ss");
-            return;
-        }
         if (courseIDStr.isEmpty() || instructorIDStr.isEmpty() || location.isEmpty() || ts.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please fill in all information");
             return;
-        } else {
+        }
+        try {
+            Date date = dateFormat.parse(ts);
+            Timestamp timestamp = new Timestamp(date.getTime());
+            System.out.println(timestamp);
             try {
                 int courseID = Integer.parseInt(courseIDStr);
                 int instructorID = Integer.parseInt(instructorIDStr);
-                Date parsedDate = dateFormat.parse(ts);
-                Timestamp timestamp = new Timestamp(parsedDate.getTime());
+               
                 OfficeAssignment oa = new OfficeAssignment(instructorID, location, timestamp);
                 CourseInstructor ci = new CourseInstructor(courseID, instructorID);
-                
+                    
+                System.out.println(oa);
                 OAbll.updateAssignment(oa);
 //                CIbll.up(ci);
-                
+
                 JOptionPane.showMessageDialog(null, "Success!");
                 loadDataAssignment();
             } catch (NumberFormatException e) {
                 // Handle the case when parsing fails
                 System.out.println("Invalid input for Course ID or Instructor ID. Please enter valid integers.");
-            } catch (SQLException ex) {
-                Logger.getLogger(Assignment.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ParseException ex) {
-                Logger.getLogger(Assignment.class.getName()).log(Level.SEVERE, null, ex);
             }
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(null, "Please fill yyyy-MM-dd HH:mm:ss");
+            return;
+        } catch (SQLException ex) {
+            Logger.getLogger(Assignment.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_btnUpdateActionPerformed

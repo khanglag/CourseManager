@@ -92,5 +92,24 @@ public class StudentGradeDAL extends MyDatabaseManager {
        // closeConnect();
         return list;
     }
+     public ArrayList<StudentGrade> findStudentGradeByStudentID(int StudentID) throws SQLException {
+        ArrayList<StudentGrade> list = new ArrayList<>();
+        String sql = "SELECT * FROM studentgrade WHERE StudentID =? ";
+        PreparedStatement p = StudentGradeDAL.getConnection().prepareStatement(sql);
+        p.setInt(1, StudentID);
+        ResultSet rs = p.executeQuery();
+        if (rs != null) {
+            while (rs.next()) {
+                StudentGrade grade = new StudentGrade(
+                        rs.getInt("EnrollmentID"),
+                        rs.getInt("CourseID"),
+                        rs.getInt("StudentID"),
+                        rs.getDouble("Grade"));
+                list.add(grade);
+            }
+        }
+       // closeConnect();
+        return list;
+    }
    
 }
