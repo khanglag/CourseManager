@@ -53,19 +53,21 @@ public class t {
 //        System.out.println(sg.findGrades(4041));
 //            OfficeAssignmentBLL oa = new OfficeAssignmentBLL();
 //            System.out.println(oa.findAssignments(5));
- String ts = "2022-02-24 00:19:22";
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        try {
-            // Cố gắng chuyển đổi chuỗi thành đối tượng Date
-            dateFormat.parse(ts);
-        } catch (ParseException e) {
-            JOptionPane.showMessageDialog(null, "Please fill yyyy-MM-dd HH:mm:ss");
-            return;
-        }
-Date parsedDate = dateFormat.parse(ts);
-  Timestamp timestamp = new Timestamp(parsedDate.getTime());
-OfficeAssignmentBLL OAbll = new OfficeAssignmentBLL();
-  OfficeAssignment oa = new OfficeAssignment(5, "ABCCCCC", timestamp);
-OAbll.updateAssignment(oa);
+// String ts = "2022-02-24 00:19:22";
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        try {
+//            // Cố gắng chuyển đổi chuỗi thành đối tượng Date
+//            dateFormat.parse(ts);
+//        } catch (ParseException e) {
+//            JOptionPane.showMessageDialog(null, "Please fill yyyy-MM-dd HH:mm:ss");
+//            return;
+//        }
+//Date parsedDate = dateFormat.parse(ts);
+//  Timestamp timestamp = new Timestamp(parsedDate.getTime());
+//OfficeAssignmentBLL OAbll = new OfficeAssignmentBLL();
+//  OfficeAssignment oa = new OfficeAssignment(5, "ABCCCCC", timestamp);
+//OAbll.updateAssignment(oa);
+        StudentGradeBLL sg = new StudentGradeBLL();
+        System.out.println(sg.findGradesByStudentID(2));
     }
 }

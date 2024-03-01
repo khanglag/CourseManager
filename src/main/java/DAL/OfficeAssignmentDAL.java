@@ -91,7 +91,7 @@ public class OfficeAssignmentDAL extends MyDatabaseManager {
 
             }
         }
-        closeConnect();
+        //closeConnect();
         return assignments;
 
     }

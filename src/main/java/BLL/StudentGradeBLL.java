@@ -38,7 +38,9 @@ public class StudentGradeBLL {
     public ArrayList<StudentGrade> findGrades(int EnrollmentID) throws SQLException {
         return dal.findStudentGrade(EnrollmentID);
     }
-    
+    public ArrayList<StudentGrade> findGradesByStudentID(int StudentID) throws SQLException {
+        return dal.findStudentGradeByStudentID(StudentID);
+    }
     
     
 }
