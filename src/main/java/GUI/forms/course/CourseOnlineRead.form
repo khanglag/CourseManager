@@ -28,10 +28,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
+          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -67,38 +64,29 @@
                               <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel4" alignment="0" min="-2" pref="51" max="-2" attributes="0"/>
                                       <Component id="jLabel3" alignment="0" min="-2" pref="51" max="-2" attributes="0"/>
                                       <Component id="jLabel13" alignment="0" min="-2" pref="43" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jtfDay" alignment="0" pref="135" max="32767" attributes="0"/>
-                                      <Component id="jtfLocation" alignment="0" pref="135" max="32767" attributes="0"/>
+                                      <Component id="jtfURL" alignment="0" pref="135" max="32767" attributes="0"/>
                                       <Component id="jtfIDP" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jtfNameP" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="btnClose" min="-2" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
-                                  <Component id="jLabel5" min="-2" pref="51" max="-2" attributes="0"/>
-                                  <EmptySpace pref="34" max="32767" attributes="0"/>
-                                  <Component id="jtfTime" min="-2" pref="135" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="btnClose" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                                          <Component id="Name" min="-2" pref="37" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jtfDepartmentID" pref="135" max="32767" attributes="0"/>
-                                          <Component id="jtfNameDepartment" max="32767" attributes="0"/>
-                                      </Group>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                                      <Component id="Name" min="-2" pref="37" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jtfDepartmentID" pref="135" max="32767" attributes="0"/>
+                                      <Component id="jtfNameDepartment" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -139,16 +127,9 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtfLocation" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtfTime" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtfURL" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtfDay" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -186,7 +167,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Course Onsite"/>
+                    <Property name="text" type="java.lang.String" value="Course Online"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -226,27 +207,10 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Location"/>
+            <Property name="text" type="java.lang.String" value="URL"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jtfLocation">
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel4">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Days"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jtfDay">
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel5">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Time"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jtfTime">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfTimeActionPerformed"/>
-          </Events>
+        <Component class="javax.swing.JTextField" name="jtfURL">
         </Component>
         <Component class="javax.swing.JLabel" name="Name">
           <Properties>

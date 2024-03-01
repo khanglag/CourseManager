@@ -37,6 +37,7 @@ public class CourseOnline extends javax.swing.JPanel {
         TableActionEvent event = new TableActionEvent() {
             @Override
             public void onEdit(int i) {
+                System.out.println("Edit");
                 int id = Integer.parseInt(jTable1.getModel().getValueAt(i, 0).toString());
                 String title = jTable1.getModel().getValueAt(i, 1).toString();
                 int credit = Integer.parseInt(jTable1.getModel().getValueAt(i, 2).toString());
@@ -58,7 +59,7 @@ public class CourseOnline extends javax.swing.JPanel {
                 
                int id = Integer.parseInt(jTable1.getModel().getValueAt(row, 0).toString());
                 try {
-                    if(courseBLL.delete(id)==1){
+                    if(courseBLL.deleteCourseOnline(id)==1){
                         JOptionPane.showMessageDialog(jPanel1, "Success");
                     }else
                         JOptionPane.showMessageDialog(jPanel1, "Fail");
@@ -74,8 +75,24 @@ public class CourseOnline extends javax.swing.JPanel {
             }
 
             @Override
-            public void onView(int row) {
-                 System.out.println("View");
+            public void onView(int i) {
+                int id = Integer.parseInt(jTable1.getModel().getValueAt(i, 0).toString());
+                String title = jTable1.getModel().getValueAt(i, 1).toString();
+                int credit = Integer.parseInt(jTable1.getModel().getValueAt(i, 2).toString());
+                int deid = Integer.parseInt(jTable1.getModel().getValueAt(i, 3).toString());
+                String url = jTable1.getModel().getValueAt(i, 4).toString();
+
+                
+                OnlineCourse o = new OnlineCourse(id,title,credit,deid,url);
+                
+               CourseOnlineRead r;
+                try {
+                    r = new CourseOnlineRead(new javax.swing.JFrame(), o);
+                    r.setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(CourseOnsite.class.getName()).log(Level.SEVERE, null, ex);
+                }
+               
             }
         };
         jTable1.getColumnModel().getColumn(5).setCellRenderer(new TableActionCellRender());
@@ -152,7 +169,7 @@ public class CourseOnline extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 545, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jtfFind, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -168,24 +185,18 @@ public class CourseOnline extends javax.swing.JPanel {
                     .addComponent(jtfFind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFind))
                 .addGap(38, 38, 38)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

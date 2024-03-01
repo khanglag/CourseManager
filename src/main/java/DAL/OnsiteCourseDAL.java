@@ -74,12 +74,6 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
         return p.executeUpdate();
     }
 
-    public int deleteOnsite(int CourseID) throws SQLException {
-        String sql = "DELETE FROM onsitecourse WHERE CourseID = ?";
-        PreparedStatement p = OnsiteCourseDAL.getConnection().prepareStatement(sql);
-        p.setInt(1, CourseID);
-        return p.executeUpdate();
-    }
 
     public int delete(int CourseID) throws SQLException {
         String sql = "DELETE FROM onsitecourse WHERE CourseID = ? AND NOT EXISTS (SELECT 1 FROM course LEFT JOIN studentgrade ON course.CourseID = studentgrade.CourseID LEFT JOIN courseinstructor ON course.CourseID = courseinstructor.CourseID WHERE onsitecourse.CourseID = course.CourseID AND (studentgrade.CourseID IS NOT NULL OR courseinstructor.CourseID IS NOT NULL));";
