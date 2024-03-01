@@ -147,9 +147,13 @@ public class CourseBLL {
         return tempList;
     }
     
-    public int delete(int id) throws SQLException{
-        //return dAL.delete(id);
-        return 1;
+    public int deleteCourseOnline(int id) throws SQLException{
+        
+        return onlDal.delete(id);
+    }
+    public int deleteCourseOnsite(int id) throws SQLException{
+        
+        return onsiteDal.delete(id);
     }
 
     public static boolean isNumeric(String str) {

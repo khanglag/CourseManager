@@ -36,6 +36,7 @@ public class CourseManager extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -75,8 +76,8 @@ public class CourseManager extends javax.swing.JPanel {
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE,
                                         javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
-                                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 378,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)));
+                                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 378,
+                                        Short.MAX_VALUE)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

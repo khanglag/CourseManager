@@ -4,7 +4,9 @@
  */
 package GUI.forms.course;
 
+import GUI.forms.course.*;
 import BLL.DTO.Department;
+import BLL.DTO.OnlineCourse;
 import BLL.DTO.OnsiteCourse;
 import BLL.DTO.Person;
 import BLL.DepartmentBLL;
@@ -17,36 +19,36 @@ import java.util.ArrayList;
  *
  * @author khang
  */
-public class CourseOnsiteRead extends javax.swing.JDialog {
+public class CourseOnlineRead extends javax.swing.JDialog {
 
     /**
      * Creates new form CourseOnsiteRead
      */
-    OnsiteCourse o = new OnsiteCourse();
+    OnlineCourse o = new OnlineCourse();
     DepartmentBLL deBLL = new DepartmentBLL();
     Department de = new Department();
     PersonBLL peBLL = new PersonBLL();
     Person pe = new Person();
     ArrayList<Department> list = new ArrayList<Department>();
             
-    public CourseOnsiteRead(java.awt.Frame parent, OnsiteCourse o) throws SQLException {
+    public CourseOnlineRead(java.awt.Frame parent, OnlineCourse o) throws SQLException {
         super(parent, true);
         initComponents();
         jtfID.setText(String.valueOf(o.getCourseID()));
         jtfCredits.setText(String.valueOf(o.getCredits()));
         jtfDepartmentID.setText(String.valueOf(o.getDepartmentId()));
         jtfTitle.setText(o.getTitle());
-        jtfLocation.setText(o.getLocation());
-        jtfDay.setText(o.getDays());
-        jtfTime.setText(TimeToStringConverter.timeToString(o.getTime()));
+        jtfURL.setText(o.getUrl());
         pe = peBLL.findPerson(o.getCourseID());
         if(pe!=null){
             jtfIDP.setText(String.valueOf(pe.getPersonID()));
             jtfNameP.setText(pe.getFirstName() + " " + pe.getLastName());
         }
+        
         list = deBLL.finDepartments(String.valueOf(o.getDepartmentId()));
         de = list.get(0);
         jtfNameDepartment.setText(de.getName());
+        
         
     }
 
@@ -72,11 +74,7 @@ public class CourseOnsiteRead extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         jtfDepartmentID = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jtfLocation = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jtfDay = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jtfTime = new javax.swing.JTextField();
+        jtfURL = new javax.swing.JTextField();
         Name = new javax.swing.JLabel();
         jtfNameDepartment = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -93,7 +91,7 @@ public class CourseOnsiteRead extends javax.swing.JDialog {
         jPanel2.setLayout(new java.awt.BorderLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Course Onsite");
+        jLabel1.setText("Course Online");
         jPanel3.add(jLabel1);
 
         jPanel2.add(jPanel3, java.awt.BorderLayout.CENTER);
@@ -108,17 +106,7 @@ public class CourseOnsiteRead extends javax.swing.JDialog {
 
         jLabel8.setText("Department ID");
 
-        jLabel3.setText("Location");
-
-        jLabel4.setText("Days");
-
-        jLabel5.setText("Time");
-
-        jtfTime.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfTimeActionPerformed(evt);
-            }
-        });
+        jLabel3.setText("URL");
 
         Name.setText("Name ");
 
@@ -168,31 +156,24 @@ public class CourseOnsiteRead extends javax.swing.JDialog {
                             .addComponent(jLabel10)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtfDay, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                                    .addComponent(jtfLocation, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                                    .addComponent(jtfURL, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
                                     .addComponent(jtfIDP)
                                     .addComponent(jtfNameP))))
                         .addGap(61, 61, 61)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnClose)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                                .addComponent(jtfTime, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btnClose)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel8)
-                                        .addComponent(Name, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jtfDepartmentID, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                                        .addComponent(jtfNameDepartment))))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(Name, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jtfDepartmentID, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                                    .addComponent(jtfNameDepartment)))))
                     .addComponent(jLabel11))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
@@ -223,14 +204,8 @@ public class CourseOnsiteRead extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jtfLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jtfTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jtfDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jtfURL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -253,17 +228,11 @@ public class CourseOnsiteRead extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jtfTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfTimeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfTimeActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         // TODO add your handling code here:
@@ -285,8 +254,6 @@ public class CourseOnsiteRead extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -295,14 +262,12 @@ public class CourseOnsiteRead extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField jtfCredits;
-    private javax.swing.JTextField jtfDay;
     private javax.swing.JTextField jtfDepartmentID;
     private javax.swing.JTextField jtfID;
     private javax.swing.JTextField jtfIDP;
-    private javax.swing.JTextField jtfLocation;
     private javax.swing.JTextField jtfNameDepartment;
     private javax.swing.JTextField jtfNameP;
-    private javax.swing.JTextField jtfTime;
     private javax.swing.JTextField jtfTitle;
+    private javax.swing.JTextField jtfURL;
     // End of variables declaration//GEN-END:variables
 }

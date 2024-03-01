@@ -25,7 +25,7 @@ public class ActionButton extends JButton {
         setContentAreaFilled(false);
         setFocusPainted(false); // Không vẽ khung khi focus vào nút
         setBorderPainted(false); // Không vẽ viền của nút
-        // setBorder(new EmptyBorder(3, 3, 3, 3));
+        setBorder(new EmptyBorder(3, 3, 3, 3));
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {

@@ -58,12 +58,7 @@ public class OnlineCourseDAL extends MyDatabaseManager {
         return p.executeUpdate();
     }
 
-    public int deleteCourse(int CourseID) throws SQLException {
-        String sql = "DELETE FROM onlinecourse WHERE CourseID =?";
-        PreparedStatement p = OnlineCourseDAL.getConnection().prepareStatement(sql);
-        p.setInt(1, CourseID);
-        return p.executeUpdate();
-    }
+    
 
     public int delete(int CourseID) throws SQLException {
         String sql = "DELETE FROM onlinecourse WHERE CourseID = ? AND NOT EXISTS (SELECT 1 FROM course LEFT JOIN studentgrade ON course.CourseID = studentgrade.CourseID LEFT JOIN courseinstructor ON course.CourseID = courseinstructor.CourseID WHERE onlinecourse.CourseID = course.CourseID AND (studentgrade.CourseID IS NOT NULL OR courseinstructor.CourseID IS NOT NULL));";
