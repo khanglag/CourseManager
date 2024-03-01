@@ -80,8 +80,26 @@ public class CourseOnsite extends javax.swing.JPanel {
             }
 
             @Override
-            public void onView(int row) {
-                 System.out.println("View");
+            public void onView(int i) {
+                int id = Integer.parseInt(jTable1.getModel().getValueAt(i, 0).toString());
+                String title = jTable1.getModel().getValueAt(i, 1).toString();
+                int credit = Integer.parseInt(jTable1.getModel().getValueAt(i, 2).toString());
+                int deid = Integer.parseInt(jTable1.getModel().getValueAt(i, 3).toString());
+                String location = jTable1.getModel().getValueAt(i, 4).toString();
+                String day = jTable1.getModel().getValueAt(i, 5).toString();
+
+                LocalTime t = StringToLocalTimeConverter.stringToLocalTime(jTable1.getModel().getValueAt(i, 6).toString());
+
+                OnsiteCourse o = new OnsiteCourse(id,title,credit,deid,location,day,t);
+                
+               CourseOnsiteRead r;
+                try {
+                    r = new CourseOnsiteRead(new javax.swing.JFrame(), o);
+                    r.setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(CourseOnsite.class.getName()).log(Level.SEVERE, null, ex);
+                }
+               
             }
         };
         jTable1.getColumnModel().getColumn(7).setCellRenderer(new TableActionCellRender());
