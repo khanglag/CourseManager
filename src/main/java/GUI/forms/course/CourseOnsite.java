@@ -62,20 +62,25 @@ public class CourseOnsite extends javax.swing.JPanel {
 
             @Override
             public void onDelete(int row) {
-               int id = Integer.parseInt(jTable1.getModel().getValueAt(row, 0).toString());
-                try {
-                    if(courseBLL.deleteCourseOnsite(id)==1){
-                        JOptionPane.showMessageDialog(jPanel1, "Success");
-                    }else
-                        JOptionPane.showMessageDialog(jPanel1, "Fail");
-                } catch (SQLException ex) {
-                    Logger.getLogger(CourseOnline.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                courseBLL = new CourseBLL();
-                try {
-                    LoadData();
-                } catch (SQLException ex) {
-                    Logger.getLogger(CourseOnline.class.getName()).log(Level.SEVERE, null, ex);
+                int choice = JOptionPane.showConfirmDialog(new MainFrame(), "Are you sure you want to delete?", "Delete Confirmation", JOptionPane.YES_NO_OPTION);
+                if (choice == JOptionPane.YES_OPTION) {
+                // Perform delete operation
+                
+                    int id = Integer.parseInt(jTable1.getModel().getValueAt(row, 0).toString());
+                     try {
+                         if(courseBLL.deleteCourseOnsite(id)==1){
+                             JOptionPane.showMessageDialog(jPanel1, "Success");
+                         }else
+                             JOptionPane.showMessageDialog(jPanel1, "Fail");
+                     } catch (SQLException ex) {
+                         Logger.getLogger(CourseOnline.class.getName()).log(Level.SEVERE, null, ex);
+                     }
+                     courseBLL = new CourseBLL();
+                     try {
+                         LoadData();
+                     } catch (SQLException ex) {
+                         Logger.getLogger(CourseOnline.class.getName()).log(Level.SEVERE, null, ex);
+                     }
                 }
             }
 
