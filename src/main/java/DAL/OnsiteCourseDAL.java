@@ -81,6 +81,13 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
         return p.executeUpdate();
     }
 
+    public int delete(int CourseID) throws SQLException {
+        String sql = "DELETE FROM onsitecourse WHERE CourseID = ? AND NOT EXISTS (SELECT 1 FROM course LEFT JOIN studentgrade ON course.CourseID = studentgrade.CourseID LEFT JOIN courseinstructor ON course.CourseID = courseinstructor.CourseID WHERE onsitecourse.CourseID = course.CourseID AND (studentgrade.CourseID IS NOT NULL OR courseinstructor.CourseID IS NOT NULL));";
+        PreparedStatement p = OnlineCourseDAL.getConnection().prepareStatement(sql);
+        p.setInt(1, CourseID);
+        return p.executeUpdate();
+    }
+
     public ArrayList<OnsiteCourse> findOnsite(String Location, String Days, LocalTime Time) throws SQLException {
         ArrayList<OnsiteCourse> list = new ArrayList<>();
         String sql = "SELECT * FROM onsitecourses WHERE Location LIKE ? OR Days LIKE ? OR Time = ?";
@@ -211,5 +218,19 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
         return p.executeUpdate();
     }
 
+    public static void main(String[] args) {
+        OnsiteCourseDAL dal = new OnsiteCourseDAL();
+        OnsiteCourse o = new OnsiteCourse(4062,"121 Smith","MWHF",LocalTime.now());
+        try {
+            int r = dal.delete(4062);
+            if( r > 0) 
+                System.out.println("Success");
+            else 
+                System.out.println("fail");
+        } catch (SQLException e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+    }
 
 }
