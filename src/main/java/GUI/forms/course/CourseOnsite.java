@@ -150,8 +150,9 @@ public class CourseOnsite extends javax.swing.JPanel {
         jTable1.setRowHeight(40);
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(7).setMinWidth(120);
-            jTable1.getColumnModel().getColumn(7).setPreferredWidth(120);
+            jTable1.getColumnModel().getColumn(7).setMinWidth(160);
+            jTable1.getColumnModel().getColumn(7).setPreferredWidth(160);
+            jTable1.getColumnModel().getColumn(7).setMaxWidth(160);
         }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

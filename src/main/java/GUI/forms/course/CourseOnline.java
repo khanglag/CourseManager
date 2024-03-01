@@ -134,8 +134,9 @@ public class CourseOnline extends javax.swing.JPanel {
         jTable1.setRowHeight(40);
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(5).setMinWidth(120);
-            jTable1.getColumnModel().getColumn(5).setPreferredWidth(120);
+            jTable1.getColumnModel().getColumn(5).setMinWidth(160);
+            jTable1.getColumnModel().getColumn(5).setPreferredWidth(160);
+            jTable1.getColumnModel().getColumn(5).setMaxWidth(160);
         }
 
         jtfFind.setBorder(javax.swing.BorderFactory.createTitledBorder("Find:"));
