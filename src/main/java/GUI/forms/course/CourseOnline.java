@@ -55,7 +55,22 @@ public class CourseOnline extends javax.swing.JPanel {
 
             @Override
             public void onDelete(int row) {
-               System.out.println("Delete");
+                
+               int id = Integer.parseInt(jTable1.getModel().getValueAt(row, 0).toString());
+                try {
+                    if(courseBLL.delete(id)==1){
+                        JOptionPane.showMessageDialog(jPanel1, "Success");
+                    }else
+                        JOptionPane.showMessageDialog(jPanel1, "Fail");
+                } catch (SQLException ex) {
+                    Logger.getLogger(CourseOnline.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                courseBLL = new CourseBLL();
+                try {
+                    LoadData();
+                } catch (SQLException ex) {
+                    Logger.getLogger(CourseOnline.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
             @Override
@@ -119,8 +134,9 @@ public class CourseOnline extends javax.swing.JPanel {
         jTable1.setRowHeight(40);
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(5).setMinWidth(120);
-            jTable1.getColumnModel().getColumn(5).setPreferredWidth(120);
+            jTable1.getColumnModel().getColumn(5).setMinWidth(160);
+            jTable1.getColumnModel().getColumn(5).setPreferredWidth(160);
+            jTable1.getColumnModel().getColumn(5).setMaxWidth(160);
         }
 
         jtfFind.setBorder(javax.swing.BorderFactory.createTitledBorder("Find:"));

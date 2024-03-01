@@ -62,12 +62,44 @@ public class CourseOnsite extends javax.swing.JPanel {
 
             @Override
             public void onDelete(int row) {
-               System.out.println("Delete");
+               int id = Integer.parseInt(jTable1.getModel().getValueAt(row, 0).toString());
+                try {
+                    if(courseBLL.delete(id)==1){
+                        JOptionPane.showMessageDialog(jPanel1, "Success");
+                    }else
+                        JOptionPane.showMessageDialog(jPanel1, "Fail");
+                } catch (SQLException ex) {
+                    Logger.getLogger(CourseOnline.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                courseBLL = new CourseBLL();
+                try {
+                    LoadData();
+                } catch (SQLException ex) {
+                    Logger.getLogger(CourseOnline.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
             @Override
-            public void onView(int row) {
-                 System.out.println("View");
+            public void onView(int i) {
+                int id = Integer.parseInt(jTable1.getModel().getValueAt(i, 0).toString());
+                String title = jTable1.getModel().getValueAt(i, 1).toString();
+                int credit = Integer.parseInt(jTable1.getModel().getValueAt(i, 2).toString());
+                int deid = Integer.parseInt(jTable1.getModel().getValueAt(i, 3).toString());
+                String location = jTable1.getModel().getValueAt(i, 4).toString();
+                String day = jTable1.getModel().getValueAt(i, 5).toString();
+
+                LocalTime t = StringToLocalTimeConverter.stringToLocalTime(jTable1.getModel().getValueAt(i, 6).toString());
+
+                OnsiteCourse o = new OnsiteCourse(id,title,credit,deid,location,day,t);
+                
+               CourseOnsiteRead r;
+                try {
+                    r = new CourseOnsiteRead(new javax.swing.JFrame(), o);
+                    r.setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(CourseOnsite.class.getName()).log(Level.SEVERE, null, ex);
+                }
+               
             }
         };
         jTable1.getColumnModel().getColumn(7).setCellRenderer(new TableActionCellRender());
@@ -136,8 +168,9 @@ public class CourseOnsite extends javax.swing.JPanel {
         jTable1.setRowHeight(40);
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(7).setMinWidth(120);
-            jTable1.getColumnModel().getColumn(7).setPreferredWidth(120);
+            jTable1.getColumnModel().getColumn(7).setMinWidth(160);
+            jTable1.getColumnModel().getColumn(7).setPreferredWidth(160);
+            jTable1.getColumnModel().getColumn(7).setMaxWidth(160);
         }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

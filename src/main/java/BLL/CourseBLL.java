@@ -146,6 +146,11 @@ public class CourseBLL {
 
         return tempList;
     }
+    
+    public int delete(int id) throws SQLException{
+        //return dAL.delete(id);
+        return 1;
+    }
 
     public static boolean isNumeric(String str) {
         if (str == null || str.length() == 0) {

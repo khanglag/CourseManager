@@ -18,6 +18,12 @@ public class Person {
         this.EnrollmentDate = EnrollmentDate;
     }
 
+    public Person(int PersonID, String LastName, String FirstName) {
+        this.PersonID = PersonID;
+        this.LastName = LastName;
+        this.FirstName = FirstName;
+    }
+
     public int getPersonID() {
         return this.PersonID;
     }

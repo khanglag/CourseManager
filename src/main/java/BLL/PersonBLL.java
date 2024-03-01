@@ -50,6 +50,11 @@ public class PersonBLL {
         return perList;
     }
 
+    public Person findPerson(int ID) throws SQLException{
+        Person p = personDAL.findPersonR(ID);
+        return p;
+    }
+    
     public static boolean isNumeric(String str) {
         if (str == null || str.length() == 0) {
             return false;
