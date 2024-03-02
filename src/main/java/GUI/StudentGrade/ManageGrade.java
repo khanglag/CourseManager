@@ -29,7 +29,7 @@ public class ManageGrade extends javax.swing.JPanel {
      */
     StudentGradeBLL SGbll = new StudentGradeBLL();
     ArrayList<StudentGrade> studentGrades = new ArrayList<StudentGrade>();
-   // ArrayList<StudentGrade> updateGrades = new ArrayList<StudentGrade>();
+    // ArrayList<StudentGrade> updateGrades = new ArrayList<StudentGrade>();
     CourseBLL Cbll = new CourseBLL();
     ArrayList<Course> courses = new ArrayList<Course>();
 
@@ -257,13 +257,13 @@ public class ManageGrade extends javax.swing.JPanel {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-          DefaultTableModel model = (DefaultTableModel) jTableManageGrade.getModel();
+        DefaultTableModel model = (DefaultTableModel) jTableManageGrade.getModel();
         for (int i = 0; i < model.getRowCount(); i++) {
-           int enrollmentID = (int) jTableManageGrade.getValueAt(i, 0);
-                int courseId = (int) jTableManageGrade.getValueAt(i, 1);
-                int studentID = (int) jTableManageGrade.getValueAt(i, 3);
-                double grade = (double) jTableManageGrade.getValueAt(i, 4);
-                StudentGrade sg = new StudentGrade(enrollmentID, courseId, studentID, grade);
+            int enrollmentID = (int) jTableManageGrade.getValueAt(i, 0);
+            int courseId = (int) jTableManageGrade.getValueAt(i, 1);
+            int studentID = (int) jTableManageGrade.getValueAt(i, 3);
+            double grade = (double) jTableManageGrade.getValueAt(i, 4);
+            StudentGrade sg = new StudentGrade(enrollmentID, courseId, studentID, grade);
             try {
                 SGbll.updateGrade(sg);
             } catch (SQLException ex) {
@@ -271,7 +271,7 @@ public class ManageGrade extends javax.swing.JPanel {
             }
         }
         JOptionPane.showMessageDialog(null, "Update grade to success!");
-        
+
         try {
             LoadData(0);
             return;
