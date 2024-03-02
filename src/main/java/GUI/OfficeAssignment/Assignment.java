@@ -481,7 +481,7 @@ public class Assignment extends javax.swing.JPanel {
                 int instructorID = Integer.parseInt(instructorIDStr);
                 OfficeAssignment oa = new OfficeAssignment(instructorID, location, timestamp);
                 CourseInstructor ci = new CourseInstructor(courseID, instructorID);
-                System.out.println("Du lieu moi:   " + oa);
+           
                 officeAssignments = OAbll.findAssignments(instructorID);
                 if (officeAssignments.isEmpty()) {
                     OAbll.addAssignment(oa);

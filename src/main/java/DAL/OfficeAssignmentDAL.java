@@ -60,10 +60,11 @@ public class OfficeAssignmentDAL extends MyDatabaseManager {
     }
 
     public int updateAssignment(OfficeAssignment assignment) throws SQLException {
-        String sql = "UPDATE  officeassignment SET Location = ? WHERE InstructorID = ?";
+        String sql = "UPDATE  officeassignment SET Location = ?,Timestamp = ? WHERE InstructorID = ?";
         PreparedStatement p = OfficeAssignmentDAL.getConnection().prepareStatement(sql);
         p.setString(1, assignment.getLocation());
-        p.setInt(2, assignment.getInstructorID());
+        p.setTimestamp(2, assignment.getTimeStamp());
+        p.setInt(3, assignment.getInstructorID());
         return p.executeUpdate();
     }
 
