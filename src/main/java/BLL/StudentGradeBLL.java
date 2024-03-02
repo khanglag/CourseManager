@@ -5,7 +5,7 @@
 package BLL;
 
 import DAL.StudentGradeDAL;
-import DTO.StudentGrade;
+import BLL.DTO.StudentGrade;
 import java.sql.SQLException;
 import java.util.ArrayList;
 

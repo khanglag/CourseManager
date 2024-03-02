@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.PreparedStatement;
-import DTO.Person;
+import BLL.DTO.Person;
 
 public class PersonDAL extends MyDatabaseManager {
 
@@ -27,7 +27,7 @@ public class PersonDAL extends MyDatabaseManager {
                 persons.add(person);
             }
         }
-        //  closeConnect();
+        // closeConnect();
         return persons;
     }
 
@@ -55,8 +55,8 @@ public class PersonDAL extends MyDatabaseManager {
         PreparedStatement p = PersonDAL.getConnection().prepareStatement(sql);
         p.setString(1, person.getLastName());
         p.setString(2, person.getFirstName());
-//        p.setDate(3, new java.sql.Date(person.getHireDate().getTime()));
-//        p.setDate(4, new java.sql.Date(person.getEnrollmentDate().getTime()));
+        // p.setDate(3, new java.sql.Date(person.getHireDate().getTime()));
+        // p.setDate(4, new java.sql.Date(person.getEnrollmentDate().getTime()));
         if (person.getHireDate() == null) {
             p.setNull(3, java.sql.Types.DATE);
         } else {
@@ -125,8 +125,26 @@ public class PersonDAL extends MyDatabaseManager {
                 list.add(person);
             }
         }
-        //    closeConnect();
+        // closeConnect();
         return list;
+    }
+
+    public Person findPersonR(int courseID) throws SQLException {
+        Person person = null;
+        String sql = "SELECT person.PersonID, person.Lastname, person.Firstname FROM person, courseinstructor, course WHERE Course.CourseID = ? and person.PersonID=courseinstructor.PersonID AND courseinstructor.CourseID=Course.CourseID";
+        PreparedStatement p = PersonDAL.getConnection().prepareStatement(sql);
+        p.setInt(1, courseID);
+        ResultSet rs = p.executeQuery();
+        if (rs != null) {
+            while (rs.next()) {
+                person = new Person(
+                        rs.getInt("PersonID"),
+                        rs.getString("LastName"),
+                        rs.getString("FirstName"));
+                return person;
+            }
+        }
+        return person;
     }
 
 }

@@ -6,10 +6,15 @@ package GUI.StudentGrade;
 
 import BLL.CourseBLL;
 import BLL.StudentGradeBLL;
+
 import DTO.Course;
 import DTO.Person;
 import DTO.StudentGrade;
 import java.awt.event.KeyEvent;
+
+import BLL.DTO.StudentGrade;
+
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;

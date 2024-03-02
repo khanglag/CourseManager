@@ -7,9 +7,9 @@ package BLL;
 import DAL.CourseDAL;
 import DAL.OnlineCourseDAL;
 import DAL.OnsiteCourseDAL;
-import DTO.Course;
-import DTO.OnlineCourse;
-import DTO.OnsiteCourse;
+import BLL.DTO.Course;
+import BLL.DTO.OnlineCourse;
+import BLL.DTO.OnsiteCourse;
 import java.sql.SQLException;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -145,6 +145,15 @@ public class CourseBLL {
             tempList = onlDal.findOnlineCourses(searchTerm);
 
         return tempList;
+    }
+    
+    public int deleteCourseOnline(int id) throws SQLException{
+        
+        return onlDal.delete(id);
+    }
+    public int deleteCourseOnsite(int id) throws SQLException{
+        
+        return onsiteDal.delete(id);
     }
 
     public static boolean isNumeric(String str) {

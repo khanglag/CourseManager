@@ -1,6 +1,6 @@
 package DAL;
 
-import DTO.StudentGrade;
+import BLL.DTO.StudentGrade;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -1,4 +1,4 @@
-package DTO;
+package BLL.DTO;
 
 public class CourseInstructor {
     private int CourseID, PersonID;

@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import DAL.DepartmentDAL;
-import DTO.Department;
+import BLL.DTO.Department;
 
 /**
  *

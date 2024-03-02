@@ -5,7 +5,7 @@
 package BLL;
 
 import DAL.CourseInstructorDAL;
-import DTO.CourseInstructor;
+import BLL.DTO.CourseInstructor;
 import java.sql.SQLException;
 import java.util.ArrayList;
 

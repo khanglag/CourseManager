@@ -1,4 +1,4 @@
-package DTO;
+package BLL.DTO;
 
 import java.util.Date;
 
@@ -16,6 +16,12 @@ public class Person {
         this.FirstName = FirstName;
         this.HireDate = HireDate;
         this.EnrollmentDate = EnrollmentDate;
+    }
+
+    public Person(int PersonID, String LastName, String FirstName) {
+        this.PersonID = PersonID;
+        this.LastName = LastName;
+        this.FirstName = FirstName;
     }
 
     public int getPersonID() {

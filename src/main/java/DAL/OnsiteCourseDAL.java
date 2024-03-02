@@ -1,12 +1,12 @@
 package DAL;
 
-import DTO.OnlineCourse;
+import BLL.DTO.OnlineCourse;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import DTO.OnsiteCourse;
+import BLL.DTO.OnsiteCourse;
 import java.time.LocalTime;
 
 public class OnsiteCourseDAL extends MyDatabaseManager {
@@ -74,9 +74,10 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
         return p.executeUpdate();
     }
 
-    public int deleteOnsite(int CourseID) throws SQLException {
-        String sql = "DELETE FROM onsitecourse WHERE CourseID = ?";
-        PreparedStatement p = OnsiteCourseDAL.getConnection().prepareStatement(sql);
+
+    public int delete(int CourseID) throws SQLException {
+        String sql = "DELETE FROM onsitecourse WHERE CourseID = ? AND NOT EXISTS (SELECT 1 FROM course LEFT JOIN studentgrade ON course.CourseID = studentgrade.CourseID LEFT JOIN courseinstructor ON course.CourseID = courseinstructor.CourseID WHERE onsitecourse.CourseID = course.CourseID AND (studentgrade.CourseID IS NOT NULL OR courseinstructor.CourseID IS NOT NULL));";
+        PreparedStatement p = OnlineCourseDAL.getConnection().prepareStatement(sql);
         p.setInt(1, CourseID);
         return p.executeUpdate();
     }
@@ -211,5 +212,19 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
         return p.executeUpdate();
     }
 
+    public static void main(String[] args) {
+        OnsiteCourseDAL dal = new OnsiteCourseDAL();
+        OnsiteCourse o = new OnsiteCourse(4062,"121 Smith","MWHF",LocalTime.now());
+        try {
+            int r = dal.delete(4062);
+            if( r > 0) 
+                System.out.println("Success");
+            else 
+                System.out.println("fail");
+        } catch (SQLException e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+    }
 
 }
