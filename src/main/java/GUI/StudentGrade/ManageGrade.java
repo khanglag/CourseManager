@@ -114,16 +114,8 @@ public class ManageGrade extends javax.swing.JPanel {
             }
         });
         jTableManageGrade.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableManageGradeMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jTableManageGradeMouseEntered(evt);
-            }
-        });
-        jTableManageGrade.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTableManageGradeKeyPressed(evt);
             }
         });
         jScrollPane1.setViewportView(jTableManageGrade);
@@ -277,44 +269,10 @@ public class ManageGrade extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnSaveActionPerformed
 
-    private void jTableManageGradeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableManageGradeMouseClicked
-        // TODO add your handling code here:
-//        if (evt.getClickCount() == 1) { // Đảm bảo rằng đó là một lần click đơn, bạn có thể thay đổi số click cần thiết
-//            int selectedRow = jTableManageGrade.getSelectedRow();
-//            if (selectedRow != -1) {
-//                int enrollmentID = (int) jTableManageGrade.getValueAt(selectedRow, 0);
-//                int courseId = (int) jTableManageGrade.getValueAt(selectedRow, 1);
-//                int studentID = (int) jTableManageGrade.getValueAt(selectedRow, 3);
-//                double grade = (double) jTableManageGrade.getValueAt(selectedRow, 4);
-//                StudentGrade sg = new StudentGrade(enrollmentID, courseId, studentID, grade);
-//                updateGrades.add(sg);
-//                System.out.println(updateGrades);
-//                System.out.println("----------------------------");
-//            }
-//        }
-    }//GEN-LAST:event_jTableManageGradeMouseClicked
-
     private void jTableManageGradeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableManageGradeMouseEntered
         // TODO add your handling code here:
 
     }//GEN-LAST:event_jTableManageGradeMouseEntered
-
-    private void jTableManageGradeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTableManageGradeKeyPressed
-        // TODO add your handling code here:
-//        if (evt.getKeyCode() == KeyEvent.VK_ENTER) { // Đảm bảo rằng đó là một lần click đơn, bạn có thể thay đổi số click cần thiết
-//            int selectedRow = jTableManageGrade.getSelectedRow();
-//            if (selectedRow != -1) {
-//                int enrollmentID = (int) jTableManageGrade.getValueAt(selectedRow, 0);
-//                int courseId = (int) jTableManageGrade.getValueAt(selectedRow, 1);
-//                int studentID = (int) jTableManageGrade.getValueAt(selectedRow, 3);
-//                double grade = (double) jTableManageGrade.getValueAt(selectedRow, 4);
-//                StudentGrade sg = new StudentGrade(enrollmentID, courseId, studentID, grade);
-//                updateGrades.add(sg);
-//                System.out.println(updateGrades);
-//                System.out.println("----------------------------");
-//            }
-//        }
-    }//GEN-LAST:event_jTableManageGradeKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

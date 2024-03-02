@@ -5,13 +5,10 @@
 package GUI.Person;
 
 import BLL.PersonBLL;
-import BLL.DTO.OnlineCourse;
 import BLL.DTO.Person;
 import GUI.course.CourseOnsite;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
@@ -175,8 +172,8 @@ public class AddUser extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -233,10 +230,8 @@ public class AddUser extends javax.swing.JPanel {
         // TODO add your handling code here:
         String firstName = txtFirstName.getText();
         String lastName = txtLastName.getText();
-
         LocalDateTime currentDateTime = LocalDateTime.now();
         Date date = java.sql.Timestamp.valueOf(currentDateTime);
-
         if (firstName.equals("") || lastName.equals("")) {
             JOptionPane.showMessageDialog(null, "Please fill first-name, last-name!!");
             return;
@@ -269,19 +264,19 @@ public class AddUser extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         JFrame chooseCourseOnline = new JFrame("Online Courses");
-        chooseCourseOnline.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Đóng cửa sổ khi thoát
+        chooseCourseOnline.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
         try {
-            chooseCourseOnline.getContentPane().add(new ChooseOnlineCourse()); // Thêm ListCourses vào JFrame
+            chooseCourseOnline.getContentPane().add(new ChooseOnlineCourse());
         } catch (SQLException ex) {
             Logger.getLogger(AddUser.class.getName()).log(Level.SEVERE, null, ex);
         }
         chooseCourseOnline.pack();
-        chooseCourseOnline.setLocationRelativeTo(null); // Hiển thị JFrame ở giữa màn hình
+        chooseCourseOnline.setLocationRelativeTo(null); 
         chooseCourseOnline.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
-        // TODO add your handling code here:
+
         DefaultTableModel model;
         model = (DefaultTableModel) jTablePersons.getModel();
         model.setRowCount(0);
@@ -290,27 +285,25 @@ public class AddUser extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(CourseOnsite.class.getName()).log(Level.SEVERE, null, ex);
         }
-     
         for (Person on : persons) {
             model.addRow(new Object[]{
                on.getPersonID(), on.getFirstName(), on.getLastName(), on.getHireDate(), on.getEnrollmentDate()
             });
-            jTablePersons.setModel(model);
-           
+            jTablePersons.setModel(model);  
         }
     }//GEN-LAST:event_btnFindActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         JFrame chooseCourseOnline = new JFrame("Onsite Courses");
-        chooseCourseOnline.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Đóng cửa sổ khi thoát
+        chooseCourseOnline.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
         try {
-            chooseCourseOnline.getContentPane().add(new ChooseOnsiteCourse()); // Thêm ListCourses vào JFrame
+            chooseCourseOnline.getContentPane().add(new ChooseOnsiteCourse()); 
         } catch (SQLException ex) {
             Logger.getLogger(AddUser.class.getName()).log(Level.SEVERE, null, ex);
         }
         chooseCourseOnline.pack();
-        chooseCourseOnline.setLocationRelativeTo(null); // Hiển thị JFrame ở giữa màn hình
+        chooseCourseOnline.setLocationRelativeTo(null); 
         chooseCourseOnline.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 

@@ -84,8 +84,8 @@ public class Assignment extends javax.swing.JPanel {
             OfficeAssignment oa = officeAssignments.get(i);
             int courseID = CIbll.findByPersonID(oa.getInstructorID()).get(0).getCourseID();
             String title = Cbll.findCourse(String.valueOf(courseID)).get(0).getTitle();
-            model.addRow(new Object[]{courseID, title, oa.getInstructorID(), Pbll.findPerson(String.valueOf(oa.getInstructorID())).get(0).getFirstName(), oa.getLocation(), oa.getTimeStamp()});
-
+            firstName = Pbll.findPerson(String.valueOf(oa.getInstructorID())).get(0).getFirstName();
+            model.addRow(new Object[]{courseID, title, oa.getInstructorID(), firstName, oa.getLocation(), oa.getTimeStamp()});
         }
     }
 
@@ -404,7 +404,6 @@ public class Assignment extends javax.swing.JPanel {
             return;
         }
         try {
-            // TODO add your handling code here:
             CourseInstructor CI = new CourseInstructor(Integer.parseInt(txtCourseID.getText()), Integer.parseInt(txtInstructorID.getText()));
             OAbll.deleteAssignment(Integer.parseInt(txtInstructorID.getText()));
             CIbll.deleteInstructor(CI);
@@ -467,7 +466,6 @@ public class Assignment extends javax.swing.JPanel {
         String location = txtLocation.getText();
         String ts = txtTimestamp.getText();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
         if (courseIDStr.isEmpty() || instructorIDStr.isEmpty() || location.isEmpty() || ts.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please fill in all information");
             return;
@@ -480,7 +478,6 @@ public class Assignment extends javax.swing.JPanel {
                 int instructorID = Integer.parseInt(instructorIDStr);
                 OfficeAssignment oa = new OfficeAssignment(instructorID, location, timestamp);
                 CourseInstructor ci = new CourseInstructor(courseID, instructorID);
-           
                 officeAssignments = OAbll.findAssignments(instructorID);
                 if (officeAssignments.isEmpty()) {
                     OAbll.addAssignment(oa);
@@ -491,9 +488,7 @@ public class Assignment extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Fail! Instructor assigned before");
                     return;
                 }
-
             } catch (NumberFormatException e) {
-                // Handle the case when parsing fails
                 System.out.println("Invalid input for Course ID or Instructor ID. Please enter valid integers.");
             } catch (SQLException ex) {
                 Logger.getLogger(Assignment.class.getName()).log(Level.SEVERE, null, ex);
@@ -502,8 +497,6 @@ public class Assignment extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please fill yyyy-MM-dd HH:mm:ss");
             return;
         }
-
-
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
@@ -512,12 +505,11 @@ public class Assignment extends javax.swing.JPanel {
         this.txtInstructorID.setText("");
         this.txtLocation.setText("");
         this.txtTimestamp.setText("yyyy-mm-dd hh:mm:ss");
-
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void jtableAssignmentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtableAssignmentMouseClicked
         // TODO add your handling code here:
-        if (evt.getClickCount() == 1) { // Đảm bảo rằng đó là một lần click đơn, bạn có thể thay đổi số click cần thiết
+        if (evt.getClickCount() == 1) {
             int selectedRow = jtableAssignment.getSelectedRow();
             if (selectedRow != -1) {
                 Object courseID = jtableAssignment.getValueAt(selectedRow, 0);
@@ -528,7 +520,6 @@ public class Assignment extends javax.swing.JPanel {
                 txtCourseID.setText(String.valueOf(courseID));
                 txtLocation.setText(String.valueOf(location));
                 txtTimestamp.setText(String.valueOf(timestamp));
-
             }
         }
     }//GEN-LAST:event_jtableAssignmentMouseClicked
@@ -550,18 +541,13 @@ public class Assignment extends javax.swing.JPanel {
             try {
                 int courseID = Integer.parseInt(courseIDStr);
                 int instructorID = Integer.parseInt(instructorIDStr);
-               
                 OfficeAssignment oa = new OfficeAssignment(instructorID, location, timestamp);
                 CourseInstructor ci = new CourseInstructor(courseID, instructorID);
-                    
                 System.out.println(oa);
                 OAbll.updateAssignment(oa);
-//                CIbll.up(ci);
-
                 JOptionPane.showMessageDialog(null, "Success!");
                 loadDataAssignment();
             } catch (NumberFormatException e) {
-                // Handle the case when parsing fails
                 System.out.println("Invalid input for Course ID or Instructor ID. Please enter valid integers.");
             }
         } catch (ParseException e) {
@@ -570,7 +556,6 @@ public class Assignment extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(Assignment.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }//GEN-LAST:event_btnUpdateActionPerformed
 
 
