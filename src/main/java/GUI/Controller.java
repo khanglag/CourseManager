@@ -103,7 +103,7 @@ public class Controller {
                 case "CourseInstructor":
                     //node =  new CourseInstructor();
                     break;
-                case "Grade":
+                case "StudentGrade":
                 {
                     try {
                         node = new ManageGrade();

@@ -25,12 +25,9 @@ import javax.swing.table.DefaultTableModel;
 public class ChooseOnsiteCourse extends javax.swing.JPanel {
 
     CourseBLL courseBLL = new CourseBLL();
-
     ArrayList<OnsiteCourse> list = new ArrayList<OnsiteCourse>();
-
     PersonBLL Pbll = new PersonBLL();
     ArrayList<Person> person = new ArrayList<Person>();
-
     StudentGradeBLL SGbll = new StudentGradeBLL();
     ArrayList<StudentGrade> studentGrades = new ArrayList<StudentGrade>();
     DefaultTableModel model;
@@ -44,14 +41,12 @@ public class ChooseOnsiteCourse extends javax.swing.JPanel {
         model = (DefaultTableModel) jTableOnsiteCourses.getModel();
         model.setRowCount(0);
         list = courseBLL.getOnsiteCourses();
-
         for (OnsiteCourse on : list) {
             model.addRow(new Object[]{
                 on.getCourseID(), on.getTitle(), on.getCredits(), on.getDepartmentId(), on.getLocation(), on.getDays(), on.getTime()
             });
             jTableOnsiteCourses.setModel(model);
         }
-
     }
 
     @SuppressWarnings("unchecked")
@@ -165,14 +160,12 @@ public class ChooseOnsiteCourse extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(CourseOnsite.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         for (OnsiteCourse on : list) {
             model.addRow(new Object[]{
                 on.getCourseID(), on.getTitle(), on.getCredits(), on.getDepartmentId(), on.getLocation(), on.getDays(), on.getTime()
             });
             jTableOnsiteCourses.setModel(model);
         }
-
     }//GEN-LAST:event_btnFindActionPerformed
 
     private void btnJoinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJoinActionPerformed
@@ -182,34 +175,32 @@ public class ChooseOnsiteCourse extends javax.swing.JPanel {
         if (studentID.equals("") || courseID.equals("")) {
             JOptionPane.showMessageDialog(null, "Please fill all infomation!!!!");
             return;
-        } else {
-            try {
-                person = Pbll.findPerson(studentID);
-
-                if (person.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "StudentID is not exist!!");
-                    return;
-                }
-                if (person.get(0).getEnrollmentDate() == null) {
-                    JOptionPane.showMessageDialog(null, "StudentID is not exist!!");
-                    return;
-                } else {
-                    StudentGrade sg = new StudentGrade(1, Integer.parseInt(courseID), Integer.parseInt(studentID), 0.0);
-                    studentGrades = SGbll.findGrades(Integer.parseInt(courseID));
-                    for (int i = 0; i < studentGrades.size(); i++) {
-                        StudentGrade s = studentGrades.get(i);
-                        if ((sg.getCourseID() == s.getCourseID()) && (sg.getStudentID() == s.getStudentID())) {
-                            JOptionPane.showMessageDialog(null, "Fail! Student joined class before");
-                            return;
-                        }
-                    }
-                    SGbll.addGrade(sg);
-                    JOptionPane.showMessageDialog(null, "Join course success!!");
-                    return;
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(ChooseOnlineCourse.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            person = Pbll.findPerson(studentID);
+            if (person.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "StudentID is not exist!!");
+                return;
             }
+            if (person.get(0).getEnrollmentDate() == null) {
+                JOptionPane.showMessageDialog(null, "StudentID is not exist!!");
+                return;
+            } else {
+                StudentGrade sg = new StudentGrade(1, Integer.parseInt(courseID), Integer.parseInt(studentID), 0.0);
+                studentGrades = SGbll.findGrades(Integer.parseInt(courseID));
+                for (int i = 0; i < studentGrades.size(); i++) {
+                    StudentGrade s = studentGrades.get(i);
+                    if ((sg.getCourseID() == s.getCourseID()) && (sg.getStudentID() == s.getStudentID())) {
+                        JOptionPane.showMessageDialog(null, "Fail! Student joined class before");
+                        return;
+                    }
+                }
+                SGbll.addGrade(sg);
+                JOptionPane.showMessageDialog(null, "Join course success!!");
+                return;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ChooseOnlineCourse.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnJoinActionPerformed
 
@@ -221,11 +212,8 @@ public class ChooseOnsiteCourse extends javax.swing.JPanel {
                 Object courseID = jTableOnsiteCourses.getValueAt(selectedRow, 0);
 
                 txtCourseID.setText(String.valueOf(courseID));
-
             }
         }
-
-
     }//GEN-LAST:event_jTableOnsiteCoursesMouseClicked
 
 
