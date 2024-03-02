@@ -1,3 +1,5 @@
+package GUI.course;
+
  // // Đặt nút ở phía bên phải
         // gbc.gridx = 1; // Đặt vị trí theo cột
         // gbc.anchor = GridBagConstraints.LINE_END; // Đặt vị trí theo phía cuối

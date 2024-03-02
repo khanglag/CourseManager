@@ -69,18 +69,19 @@ public class DepartmentDAL extends MyDatabaseManager {
         return p.executeUpdate();
     }
 
-    public int deleteDepartment(int DepartmentID) throws SQLException {
-        String sql = "DELETE FROM department WHERE DepartmentID = ?";
-        PreparedStatement p = DepartmentDAL.getConnection().prepareStatement(sql);
-        p.setInt(1, DepartmentID);
-        return p.executeUpdate();
-    }
+   
     public int getN() throws SQLException {
-        
-        String sql = "Select departmentid from department order by departmentid desc limit 1";
+        String sql = "SELECT departmentid FROM department ORDER BY departmentid DESC LIMIT 1";
         PreparedStatement p = DepartmentDAL.getConnection().prepareStatement(sql);
-     
-        return p.executeUpdate();
+        ResultSet rs = p.executeQuery();
+
+        int departmentId = 0; // Khởi tạo biến để lưu trữ departmentId
+
+        // Kiểm tra xem có dữ liệu trả về không
+        if (rs.next()) {
+            departmentId = rs.getInt("departmentid"); // Lấy giá trị departmentid từ kết quả truy vấn
+        }
+        return departmentId;
     }
 
     public ArrayList<Department> findDepartments(int DepartmentID) throws SQLException {
@@ -124,63 +125,6 @@ public class DepartmentDAL extends MyDatabaseManager {
         return list;
     }
 
-    public ArrayList<Department> findDepartments(int DepartmentID, String Name) throws SQLException {
-        ArrayList<Department> list = new ArrayList<>();
-        String sql = "SELECT * FROM department WHERE DepartmentID = ? OR Name LIKE ? OR Administrator = ?";
-        PreparedStatement p = DepartmentDAL.getConnection().prepareStatement(sql);
-        p.setInt(1, DepartmentID);
-        p.setString(2, "%" + Name + "%");
-        ResultSet rs = p.executeQuery();
-        if (rs != null) {
-            while (rs.next()) {
-                Department department = new Department(
-                        rs.getInt("DepartmentID"),
-                        rs.getString("Name"),
-                        rs.getDouble("Budget"),
-                        rs.getDate("StartDate"),
-                        rs.getInt("Administrator"));
-                list.add(department);
-
-            }
-
-        }
-        return list;
-    }
-
-    // public static void main(String[] args) {
-    // DepartmentDAL d = new DepartmentDAL();
-    // Department dal = new Department(5,"ABC",10000, new Date(),7);
-    // // try {
-    // // int rowsAffected = d.deleteDepartment(5);
-    // // if (rowsAffected > 0) {
-    // // System.out.println("Course added successfully.");
-    // // } else {
-    // // System.out.println("Failed to add course.");
-    // // }
-    // // } catch (SQLException ex) {
-    // // ex.printStackTrace();
-    // // }
-    // // try {
-    // // ArrayList<Department> courses = d.readDepartments();
-    // // for (Department course : courses) {
-    // // System.out.println(course.toString());
-    // // }
-    // // } catch (SQLException ex) {
-    // // ex.printStackTrace();
-    // // }
-    // try {
-    // ArrayList<Department> result = d.findDepartments(-1,"E",-1);
-    // if (result != null) {
-    // System.out.println("Number of courses found: " + result.size());
-
-    // for (Department course : result) {
-    // System.out.println(course.toString());
-    // }
-    // } else {
-    // System.out.println("No courses found.");
-    // }
-    // } catch (SQLException e) {
-    // e.printStackTrace();
-    // }
-    // }
+    
+    
 }

@@ -7,7 +7,7 @@ package GUI.Person;
 import BLL.PersonBLL;
 import BLL.DTO.OnlineCourse;
 import BLL.DTO.Person;
-import GUI.forms.course.CourseOnsite;
+import GUI.course.CourseOnsite;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
