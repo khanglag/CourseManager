@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="32eccac8-c09c-40d1-97b3-d68359c5c7e4" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/BLL/CourseInstructorBLL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BLL/CourseInstructorBLL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BLL/DepartmentBLL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BLL/DepartmentBLL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BLL/Filetestcuadikhang.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BLL/OfficeAssignmentBLL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BLL/OfficeAssignmentBLL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BLL/PersonBLL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BLL/PersonBLL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BLL/StudentGradeBLL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BLL/StudentGradeBLL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BLL/t.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAL/CourseDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAL/CourseDAL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAL/CourseInstructorDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAL/CourseInstructorDAL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAL/DepartmentDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAL/DepartmentDAL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAL/MyDatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAL/MyDatabaseManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAL/OfficeAssignmentDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAL/OfficeAssignmentDAL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAL/OnlineCourseDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAL/OnlineCourseDAL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAL/OnsiteCourseDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAL/OnsiteCourseDAL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAL/PersonDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAL/PersonDAL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAL/StudentGradeDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAL/StudentGradeDAL.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="2d8Lgk5InvJj7DRqKzlm5JSFrQR" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "last_opened_file_path": "D:/Github/CourseManager",
+    "settings.editor.selected.configurable": "AndroidSdkUpdater"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="32eccac8-c09c-40d1-97b3-d68359c5c7e4" name="Changes" comment="" />
+      <created>1709384871882</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1709384871882</updated>
+    </task>
+    <servers />
+  </component>
+</project>
