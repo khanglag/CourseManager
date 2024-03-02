@@ -7,17 +7,10 @@ package GUI.StudentGrade;
 import BLL.CourseBLL;
 import BLL.StudentGradeBLL;
 
-import DTO.Course;
-import DTO.Person;
-import DTO.StudentGrade;
-import java.awt.event.KeyEvent;
-
-import BLL.DTO.StudentGrade;
-
-
+import BLL.DTO.Course;
+import  BLL.DTO.StudentGrade;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -29,9 +22,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ManageGrade extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ManagerGrade
-     */
+  
     StudentGradeBLL SGbll = new StudentGradeBLL();
     ArrayList<StudentGrade> studentGrades = new ArrayList<StudentGrade>();
     // ArrayList<StudentGrade> updateGrades = new ArrayList<StudentGrade>();
@@ -45,7 +36,7 @@ public class ManageGrade extends javax.swing.JPanel {
     }
 
     public void LoadData(int index) throws SQLException {
-        DefaultTableModel model = (DefaultTableModel) jTableManageGrade.getModel();
+       DefaultTableModel model = (DefaultTableModel) jTableManageGrade.getModel();
         model.setRowCount(0);
         ArrayList<Course> cID = new ArrayList<Course>();
         if (index == 0) {
