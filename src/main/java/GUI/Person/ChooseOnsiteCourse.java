@@ -10,7 +10,7 @@ import BLL.StudentGradeBLL;
 import BLL.DTO.OnsiteCourse;
 import BLL.DTO.Person;
 import BLL.DTO.StudentGrade;
-import GUI.forms.course.CourseOnsite;
+import GUI.course.CourseOnsite;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;

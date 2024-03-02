@@ -15,44 +15,6 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
         // super();
     }
 
-    public ArrayList<OnsiteCourse> readList() throws SQLException {
-        ArrayList<OnsiteCourse> onsiteList = new ArrayList<>();
-        String sql = "SELECT * FROM onsitecourse";
-        ResultSet rs = OnsiteCourseDAL.doReadQuery(sql);
-        if (rs != null) {
-            while (rs.next()) {
-                OnsiteCourse onsite = new OnsiteCourse(
-                        rs.getInt("CourseID"),
-                        rs.getString("Location"),
-                        rs.getString("Days"),
-                        rs.getTime("Time").toLocalTime());
-                onsiteList.add(onsite);
-
-            }
-        }
-
-        return onsiteList;
-    }
-
-    
-    public OnsiteCourse getOnsiteCourse(int CourseID) throws SQLException {
-        String sql = "SELECT * FROM onsitecourse WHERE CourseID = ? ";
-        PreparedStatement p = OnsiteCourseDAL.getConnection().prepareStatement(sql);
-        p.setInt(1, CourseID);
-        ResultSet rs = p.executeQuery();
-        OnsiteCourse onsite = new OnsiteCourse();
-        if (rs != null) {
-            while (rs.next()) {
-                onsite.setCourseID(rs.getInt("CourseID"));
-                onsite.setLocation(rs.getString("Location"));
-                onsite.setDays(rs.getString("Days"));
-                onsite.setTime(rs.getTime("Time").toLocalTime());
-
-            }
-        }
-
-        return onsite;
-    }
 
     public int addOnsite(OnsiteCourse onsite) throws SQLException {
         String sql = "INSERT onsitecourse (CourseID, Location, Days, Time) VALUES (?,?,?,?) ";
@@ -82,29 +44,6 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
         return p.executeUpdate();
     }
 
-    public ArrayList<OnsiteCourse> findOnsite(String Location, String Days, LocalTime Time) throws SQLException {
-        ArrayList<OnsiteCourse> list = new ArrayList<>();
-        String sql = "SELECT * FROM onsitecourses WHERE Location LIKE ? OR Days LIKE ? OR Time = ?";
-        PreparedStatement p = OnsiteCourseDAL.getConnection().prepareStatement(sql);
-        p.setString(1, "%" + Location + "%");
-        p.setString(2, "%" + Days + "%");
-        p.setTime(3, java.sql.Time.valueOf(Time));
-        ResultSet rs = p.executeQuery();
-        if (rs != null) {
-            while (rs.next()) {
-                OnsiteCourse onsite = new OnsiteCourse(
-                        rs.getInt("CourseID"),
-                        rs.getString("Location"),
-                        rs.getString("Days"),
-                        rs.getTime("Time").toLocalTime());
-                list.add(onsite);
-
-            }
-        }
-
-        return list;
-
-    }
 
     public ArrayList<OnsiteCourse> getOnsiteCourses() throws SQLException {
 
@@ -212,19 +151,5 @@ public class OnsiteCourseDAL extends MyDatabaseManager {
         return p.executeUpdate();
     }
 
-    public static void main(String[] args) {
-        OnsiteCourseDAL dal = new OnsiteCourseDAL();
-        OnsiteCourse o = new OnsiteCourse(4062,"121 Smith","MWHF",LocalTime.now());
-        try {
-            int r = dal.delete(4062);
-            if( r > 0) 
-                System.out.println("Success");
-            else 
-                System.out.println("fail");
-        } catch (SQLException e) {
-            // TODO: handle exception
-            e.printStackTrace();
-        }
-    }
 
 }

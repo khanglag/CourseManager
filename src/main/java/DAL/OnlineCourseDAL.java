@@ -11,37 +11,6 @@ public class OnlineCourseDAL extends MyDatabaseManager {
         OnlineCourseDAL.connectDB();
     }
 
-    public ArrayList<OnlineCourse> readOnlineCourses() throws SQLException {
-        ArrayList<OnlineCourse> courses = new ArrayList<>();
-        String sql = "SELECT * FROM onlinecourse ";
-        ResultSet rs = OnlineCourseDAL.doReadQuery(sql);
-        if (rs != null) {
-            while (rs.next()) {
-                OnlineCourse course = new OnlineCourse(
-                        rs.getInt("CourseID"),
-                        rs.getString("url"));
-                courses.add(course);
-            }
-        }
-
-        return courses;
-    }
-
-    public OnlineCourse getOnlineCourse(int CourseID) throws Exception {
-        String sql = "SELECT * FROM onlinecourse WHERE CourseID =?";
-        PreparedStatement p = OnlineCourseDAL.getConnection().prepareStatement(sql);
-        p.setInt(1, CourseID);
-        ResultSet rs = p.executeQuery();
-        OnlineCourse course = new OnlineCourse();
-        if (rs != null) {
-            while (rs.next()) {
-                course.setCourseID(rs.getInt("CourseID"));
-                course.setUrl(rs.getString("url"));
-            }
-        }
-        return course;
-    }
-
     public int addCourse(OnlineCourse course) throws SQLException {
         String sql = "INSERT onlinecourse (CourseID,url) VALUES (?,?)";
         PreparedStatement p = OnlineCourseDAL.getConnection().prepareStatement(sql);
@@ -170,19 +139,6 @@ public class OnlineCourseDAL extends MyDatabaseManager {
         return p.executeUpdate();
     }
 
-    public static void main(String[] args) {
-        OnlineCourseDAL dal = new OnlineCourseDAL();
-        OnlineCourse d = new OnlineCourse(3141,"ABC");
-        try {
-            int rowsAffected = dal.delete(3141);
-            if (rowsAffected > 0) {
-                System.out.println("Course added successfully.");
-            } else {
-                System.out.println("Failed to add course.");
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
+   
 
 }

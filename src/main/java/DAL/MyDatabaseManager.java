@@ -69,9 +69,5 @@ public class MyDatabaseManager {
         }
     }
 
-    // test connection
-    public static void main(String[] args) {
-        MyDatabaseManager.connectDB();
-
-    }
+    
 }

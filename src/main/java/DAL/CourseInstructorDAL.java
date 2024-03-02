@@ -109,37 +109,4 @@ public class CourseInstructorDAL extends MyDatabaseManager {
         return list;
     }
 
-    public static void main(String[] args) {
-        CourseInstructorDAL c = new CourseInstructorDAL();
-        CourseInstructor in = new CourseInstructor(4061, 18);
-        CourseInstructor up = new CourseInstructor(4061, 20);
-        // try {
-        // int rowsAffected = c.updateInstructor(up, 4061, 18);
-        // if (rowsAffected > 0) {
-        // System.out.println("Course added successfully.");
-        // } else {
-        // System.out.println("Failed to add course.");
-        // }
-        // } catch (SQLException ex) {
-        // ex.printStackTrace();
-        // }
-        try {
-            ArrayList<CourseInstructor> result = c.findByPersonID(20);
-            if (result != null) {
-                System.out.println("Number of courses found: " + result.size());
-
-                for (CourseInstructor course : result) {
-                    System.out.println("Course ID: " + course.getCourseID());
-                    System.out.println("Person ID: " + course.getPersonID());
-
-                    System.out.println();
-                }
-            } else {
-                System.out.println("No courses found.");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-    }
 }

@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 import DAL.DepartmentDAL;
 import BLL.DTO.Department;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -33,16 +35,14 @@ public class DepartmentBLL {
         return dpmDAL.addDepartment(dpm);
     }
     public int getN() throws SQLException{
-        return dpmDAL.getN();
+        int i =dpmDAL.getN();
+        return i;
     }
 
     public int updateDepartment(Department dpm) throws SQLException {
         return dpmDAL.updateDepartment(dpm);
     }
 
-    public int deleteDepartment(int DepartmentID) throws SQLException {
-        return dpmDAL.deleteDepartment(DepartmentID);
-    }
 
     public ArrayList<Department> finDepartments(String str) throws SQLException {
         ArrayList<Department> list = new ArrayList<Department>();
@@ -66,4 +66,5 @@ public class DepartmentBLL {
         }
         return true;
     }
+  
 }

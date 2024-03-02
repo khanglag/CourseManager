@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package GUI.forms.department;
+package GUI.department;
 
 import BLL.DepartmentBLL;
 import BLL.DTO.Department;
@@ -171,32 +171,31 @@ public class Add extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(rootPane, "Please input");
         }else{
             int n=0;
-        try {
-            n = departmentBLL.getN();
-            n++;
-        } catch (SQLException ex) {
-            Logger.getLogger(Add.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Date date = null;
-        try {
-            date = StringToDateConverter.stringToDate(jtfStartDate.getText());
-        } catch (ParseException ex) {
-            Logger.getLogger(Add.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Department department = new Department(n,jtfName.getText(),Double.parseDouble(jtfBudget.getText()),date,Integer.parseInt(jtfAd.getText()));
-        if(jtfAd.getText().equals("")|| jtfBudget.getText().equals("")||
-                jtfName.getText().equals("")||jtfStartDate.equals(""))
-            JOptionPane.showMessageDialog(rootPane, "Must be filled out");
-        else try {
-            if(departmentBLL.addDepartment(department)==1){
-                JOptionPane.showMessageDialog(rootPane, "Success");
-                this.dispose();
-            }else{
-                JOptionPane.showMessageDialog(rootPane, "Fail");
+            try {
+                n = departmentBLL.getN();
+                System.out.println(n);
+                n++;
+                System.out.println(n);
+            } catch (SQLException ex) {
+                Logger.getLogger(Add.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(Add.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            Date date = null;
+            try {
+                date = StringToDateConverter.stringToDate(jtfStartDate.getText());
+            } catch (ParseException ex) {
+                Logger.getLogger(Add.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Department department = new Department(n,jtfName.getText(),Double.parseDouble(jtfBudget.getText()),date,Integer.parseInt(jtfAd.getText()));
+            try {
+                if(departmentBLL.addDepartment(department)==1){
+                    JOptionPane.showMessageDialog(rootPane, "Success");
+                    this.dispose();
+                }else{
+                    JOptionPane.showMessageDialog(rootPane, "Fail");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Add.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
     }//GEN-LAST:event_btnAddActionPerformed
