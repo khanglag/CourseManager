@@ -3,7 +3,6 @@ package GUI;
 import GUI.OfficeAssignment.Assignment;
 import GUI.Person.AddUser;
 import GUI.StudentGrade.ManageGrade;
-import GUI.course.CourseOnline;
 import GUI.course.CourseManager;
 import GUI.department.DepartmentForm;
 import java.awt.BorderLayout;
@@ -40,7 +39,7 @@ public class Controller {
         kindSelected = "Course";    
         root.removeAll();
         root.setLayout(new BorderLayout());
-        root.add(new CourseOnline());
+        root.add(new CourseManager());
         root.validate();
         root.repaint();
         
